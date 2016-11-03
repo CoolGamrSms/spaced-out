@@ -17,10 +17,8 @@ public class EngineerCameraController : MonoBehaviour {
         transform.RotateAround(transform.position, transform.right,  Input.GetAxis(verticalRight) * lookSpeed);
         xRot = transform.eulerAngles.x;
         xRot -= (xRot > 35) ? 360f: 0f; //Euler angles doesn't like negatives
-        print("before: " + xRot);
         xRot = Mathf.Clamp(xRot, -30f, 30f);
         xRot += (xRot < 0) ? 360f : 0f;
-        print("after: " + xRot);
-        transform.rotation = Quaternion.Euler(xRot, 0f, 0f);
+        transform.rotation = Quaternion.Euler(xRot, transform.eulerAngles.y, transform.eulerAngles.z);
 	}
 }
