@@ -16,7 +16,7 @@ public class ShipController : MonoBehaviour {
 	private string horizontalRight = "P_HR";
 	private string verticalLeft = "P_VL";
 	private string verticalRight = "P_VR";
-    
+	private string fire = "Fire";
     Vector3 vel;
 
 	private Rigidbody rb;
@@ -28,10 +28,11 @@ public class ShipController : MonoBehaviour {
 		horizontalRight += teamNum;
 		verticalLeft += teamNum;
 		verticalRight += teamNum;
+		fire += teamNum;
     }
 
     void Update() {
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetButtonDown(fire)) {
             Fire();
         }
     }
