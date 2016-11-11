@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Engineer
+  - Asteroid
+  - Ship
   layers:
   - Default
   - TransparentFX
