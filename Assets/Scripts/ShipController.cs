@@ -29,6 +29,12 @@ public class ShipController : MonoBehaviour {
 		verticalLeft += teamNum;
 		verticalRight += teamNum;
 		fire += teamNum;
+
+        //Team 1's engineer joystick is 1, while team 2 engineer joystick is 4
+        //Sets the interactable objects to react to correct joystick input
+        foreach (ObjectBase ob in GetComponentsInChildren<ObjectBase>()) {
+            ob.JoystickNum = 2 * teamNum;
+        }
     }
 
     void Update() {
