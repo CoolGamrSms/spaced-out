@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class HullBreach : ObjectBase {
@@ -8,22 +9,24 @@ public class HullBreach : ObjectBase {
     public float timeLimit = 50f;
 
     private string inputAxis;
-    private float timer = 0;
+    private Slider timer;
 	// Use this for initialization
 	void Start () {
         // inputAxis = "joystick " + GetComponent<ObjectBase>().JoystickNum + " button 2";
         this.enabled = false;
         inputAxis = "joystick 1 button 2";
+        timer = GetComponentInChildren<Slider>();
+        timer.maxValue = timeLimit;
 	}
 	
 	// Only enabled when Engineer in range
 	void FixedUpdate () {
         if (Input.GetKey(inputAxis)) {
-            timer += Time.deltaTime;
-            if (timer > timeLimit) {
+            timer.value += Time.deltaTime;
+            if (timer.value >= timeLimit) {
                 //fixed, remove negative effect on ship
                 print("fixed");
-                timer = 0;
+                timer.value = 0;
                 gameObject.SetActive(false);
             }
 
@@ -39,7 +42,7 @@ public class HullBreach : ObjectBase {
     void OnTriggerExit( Collider col) {
         if (col.gameObject.tag == "Engineer" && broken){
             this.enabled = false;
-            timer = 0;
+            timer.value = 0;
         }
     }
 }
