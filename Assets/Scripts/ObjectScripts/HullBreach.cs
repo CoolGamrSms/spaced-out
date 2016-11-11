@@ -4,8 +4,6 @@ using System.Collections;
 
 public class HullBreach : ObjectBase {
 
-    //Controlled by ship script
-    public bool broken = false;
     public float timeLimit = 50f;
 
     private string inputAxis;
@@ -27,22 +25,15 @@ public class HullBreach : ObjectBase {
                 //fixed, remove negative effect on ship
                 print("fixed");
                 timer.value = 0;
+                broken = false;
                 gameObject.SetActive(false);
             }
 
         }
 	}
 
-    void OnTriggerEnter( Collider col) {
-        if (col.gameObject.tag == "Engineer" && broken) {
-            this.enabled = true;
-        }
-    }
-
-    void OnTriggerExit( Collider col) {
-        if (col.gameObject.tag == "Engineer" && broken){
-            this.enabled = false;
-            timer.value = 0;
-        }
+    override protected void OnTriggerExit( Collider col) {
+        base.OnTriggerExit(col);
+        timer.value = 0;
     }
 }
