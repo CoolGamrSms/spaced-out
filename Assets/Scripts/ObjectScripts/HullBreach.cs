@@ -10,7 +10,7 @@ public class HullBreach : ObjectBase {
     private Slider timer;
 	// Use this for initialization
 	void Start () {
-        // inputAxis = "joystick " + GetComponent<ObjectBase>().JoystickNum + " button 2";
+        // inputAxis = "joystick " + joystickNum + " button 2";
         this.enabled = false;
         inputAxis = "joystick 1 button 2";
         timer = GetComponentInChildren<Slider>();

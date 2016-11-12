@@ -4,7 +4,7 @@ using System.Collections;
 public class ObjectBase : MonoBehaviour {
 
     //set by ship script
-    public int JoystickNum;
+    public int joystickNum;
     public bool broken = false;
 	// Use this for initialization
 	void Start () {
