@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class ButtonSequence : MonoBehaviour {
+public class ButtonSequence : FixingBase {
     string[] buttons = new string[4];
     GameObject[] buttonImages = new GameObject[4];
     Toggle[] toggles;
@@ -16,10 +16,13 @@ public class ButtonSequence : MonoBehaviour {
 
     float timer = 3f;
     public float timeLimit = 3f;
+
+    ObjectBase ob;
 	// Use this for initialization
 	
     void Start () {
-        joystickNum = transform.parent.GetComponent<ObjectBase>().joystickNum;
+        ob = GetComponentInParent<ObjectBase>();
+        joystickNum = ob.joystickNum;
 	 
         for (int i = 0; i < 4; ++i)
         {
@@ -27,7 +30,6 @@ public class ButtonSequence : MonoBehaviour {
             buttons[i] = "joystick " + joystickNum + " button " + i;
         }
         toggles = transform.GetComponentsInChildren<Toggle>();
-        this.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -37,12 +39,15 @@ public class ButtonSequence : MonoBehaviour {
         {
             pressedButton = 0;
         }
-        else if (Input.GetKeyDown(buttons[1])){
+        else if (Input.GetKeyDown(buttons[1]))
+        {
             pressedButton = 1;
-        }else if (Input.GetKeyDown(buttons[2]))
+        }
+        else if (Input.GetKeyDown(buttons[2]))
         {
             pressedButton = 2;
-        }else if (Input.GetKeyDown(buttons[3]))
+        }
+        else if (Input.GetKeyDown(buttons[3]))
         {
             pressedButton = 3;
         }
@@ -60,15 +65,14 @@ public class ButtonSequence : MonoBehaviour {
         if (numCorrect == correctRequired) {
             
             buttonImages[correctButton].SetActive(false);
-            GetComponentInParent<ObjectBase>().broken = false;
+            ob.Fixed();
             this.enabled = false;
         }
         timer += Time.deltaTime;
         pressedButton = -1;
 	}
 
-    void SetNextButton()
-    {
+    void SetNextButton(){
         buttonImages[correctButton].SetActive(false);
         correctButton = Random.Range(0, 100) % 4;
         buttonImages[correctButton].SetActive(true);
@@ -84,4 +88,5 @@ public class ButtonSequence : MonoBehaviour {
         timer = 0f;
 
     }
+
 }
