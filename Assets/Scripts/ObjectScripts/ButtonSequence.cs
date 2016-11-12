@@ -50,7 +50,6 @@ public class ButtonSequence : MonoBehaviour {
 
         if (pressedButton == correctButton)
         {
-            print(numCorrect);
             toggles[numCorrect].isOn = true;
             SetNextButton();
             ++numCorrect;
@@ -62,7 +61,7 @@ public class ButtonSequence : MonoBehaviour {
             
             buttonImages[correctButton].SetActive(false);
             GetComponentInParent<ObjectBase>().broken = false;
-           // this.enabled = false;
+            this.enabled = false;
         }
         timer += Time.deltaTime;
         pressedButton = -1;
