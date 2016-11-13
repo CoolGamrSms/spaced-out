@@ -11,15 +11,8 @@ public class ObjectBase : MonoBehaviour {
 	// Use this for initialization
 	virtual protected void Start () {
         fixScript = GetComponentInChildren<FixingBase>();
-        print(fixScript.name);
         fixScript.enabled = false;
         this.enabled = false;
-        print("hello");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
     virtual protected void OnTriggerEnter(Collider col)

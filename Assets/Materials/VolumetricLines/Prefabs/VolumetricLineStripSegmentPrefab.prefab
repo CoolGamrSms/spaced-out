@@ -75,18 +75,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 165150}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66196e0ca35219245b766bd363c0342f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0884dceb0d4308c4eb8bc763c8f8deae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dynamic: 0
   m_startPos: {x: 0, y: 0, z: 0}
   m_endPos: {x: 0, y: 0, z: 100}
-  m_setMaterialColor: 0
-  m_lineColor:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
+  m_setLinePropertiesAtStart: 0
+  m_lineColor: {r: 0, g: 0, b: 0, a: 0}
+  m_lineWidth: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
