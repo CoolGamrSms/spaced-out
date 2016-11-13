@@ -1619,6 +1619,10 @@ Prefab:
       propertyPath: m_ClearFlags
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013095758744, guid: 8ecaf1bf0cbdfb8439441a10dd48846b, type: 2}
+      propertyPath: m_TagString
+      value: Engineer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8ecaf1bf0cbdfb8439441a10dd48846b, type: 2}
   m_IsPrefabParent: 0
@@ -4622,8 +4626,8 @@ GameObject:
   - 54: {fileID: 1680986157}
   - 65: {fileID: 1680986154}
   m_Layer: 0
-  m_Name: Ship A
-  m_TagString: Untagged
+  m_Name: Ship 1
+  m_TagString: Ship1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4867,6 +4871,10 @@ Prefab:
       propertyPath: m_ClearFlags
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1000013095758744, guid: 8ecaf1bf0cbdfb8439441a10dd48846b, type: 2}
+      propertyPath: m_TagString
+      value: Engineer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8ecaf1bf0cbdfb8439441a10dd48846b, type: 2}
   m_IsPrefabParent: 0
@@ -5052,8 +5060,8 @@ GameObject:
   - 54: {fileID: 1887114465}
   - 65: {fileID: 1887114464}
   m_Layer: 0
-  m_Name: Ship B
-  m_TagString: Untagged
+  m_Name: Ship 2
+  m_TagString: Ship2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5098,7 +5106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   teamNum: 2
   speed: 5
-  bulletPrefab: {fileID: 1000012071163260, guid: d3b967c02d0e74f2abd8610f207874ec,
+  bulletPrefab: {fileID: 1000010040011328, guid: 27daa1649524f4ad6bc624007f99910f,
     type: 2}
   bulletSpawn: {fileID: 1887114469}
   bulletVel: 3
