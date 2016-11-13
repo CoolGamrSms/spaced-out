@@ -453,7 +453,7 @@ MonoBehaviour:
   speed: 5
   bulletPrefab: {fileID: 1000012071163260, guid: d3b967c02d0e74f2abd8610f207874ec,
     type: 2}
-  bulletSpawn: {fileID: 0}
+  bulletSpawn: {fileID: 343659701}
   bulletVel: 3
 --- !u!64 &343659707
 MeshCollider:
@@ -4098,7 +4098,7 @@ MonoBehaviour:
   speed: 5
   bulletPrefab: {fileID: 1000012071163260, guid: d3b967c02d0e74f2abd8610f207874ec,
     type: 2}
-  bulletSpawn: {fileID: 0}
+  bulletSpawn: {fileID: 1416815269}
   bulletVel: 3
 --- !u!64 &1416815275
 MeshCollider:
