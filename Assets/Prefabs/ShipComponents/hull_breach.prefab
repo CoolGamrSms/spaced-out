@@ -224,9 +224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b038217ebd666418f588ed74d0e33e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JoystickNum: 0
+  joystickNum: 0
   broken: 1
-  timeLimit: 3
+  fixScript: {fileID: 0}
 --- !u!114 &114000011773895428
 MonoBehaviour:
   m_ObjectHideFlags: 1
