@@ -11,6 +11,7 @@ TagManager:
   - Bullet2
   - Ship1
   - Ship2
+  - Button
   layers:
   - Default
   - TransparentFX
