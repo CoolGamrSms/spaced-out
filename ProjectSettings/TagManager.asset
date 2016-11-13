@@ -6,8 +6,11 @@ TagManager:
   tags:
   - Engineer
   - Asteroid
-  - Ship
   - ButtonImage
+  - Bullet1
+  - Bullet2
+  - Ship1
+  - Ship2
   layers:
   - Default
   - TransparentFX
