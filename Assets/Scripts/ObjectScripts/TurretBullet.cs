@@ -14,6 +14,6 @@ public class TurretBullet : MonoBehaviour {
 	}
 
     void OnCollisionEnter() {
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

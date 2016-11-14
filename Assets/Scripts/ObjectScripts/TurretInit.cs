@@ -25,7 +25,7 @@ public class TurretInit : MonoBehaviour {
             tc.horizontal = "E_HL" + turretScript.ec.teamNum;
             tc.vertical ="E_VL" + turretScript.ec.teamNum;
             tc.shootButton = "joystick " + turretScript.joystickNum + " button 0";
-
+			print (tc.shootButton);
             cam.rect = col.gameObject.GetComponentInChildren<Camera>().rect;
             Destroy(this);
         }
