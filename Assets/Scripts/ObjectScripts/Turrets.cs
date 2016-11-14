@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Turrets : ObjectBase {
@@ -21,6 +21,7 @@ public class Turrets : ObjectBase {
         cam = GetComponentInChildren<Camera>();
         cam.enabled = false;
         tc.enabled = false;
+        Health = turretHealth;
 	}
 	
 	// Update is called once per frame
@@ -37,4 +38,9 @@ public class Turrets : ObjectBase {
             cam.enabled = false;
         }
 	}
+
+    const int turretHealth = 3;
+    protected override void ResetHealth() {
+        Health = turretHealth;
+    }
 }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ObjectBase : MonoBehaviour {
@@ -39,5 +39,18 @@ public class ObjectBase : MonoBehaviour {
     public void Fixed() {
         broken = false;
         this.enabled = true;
+        ResetHealth();
+    }
+
+    public int Health { get; protected set; }
+
+    public void TakeDamage(int damage) {
+        Health -= damage;
+        if(Health <= 0) {
+            broken = true;
+            enabled = false;
+        }
+    }
+    protected virtual void ResetHealth() {
     }
 }
