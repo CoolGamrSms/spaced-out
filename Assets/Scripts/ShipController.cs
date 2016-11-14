@@ -53,7 +53,7 @@ public class ShipController : MonoBehaviour {
     void Fire() {
         var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
 
-        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletVel;
+        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * bulletVel);
 
         // destroy bullet
     }
