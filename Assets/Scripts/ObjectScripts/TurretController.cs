@@ -32,8 +32,6 @@ public class TurretController : MonoBehaviour {
                 bullet.transform.rotation = transform.rotation;
                 bullet.transform.position = pos.position;
             }
-			Debug.Log ("hello");
-
             timer = 0f;
         }
 
