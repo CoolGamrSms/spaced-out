@@ -44,20 +44,10 @@ public class ShipController : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        vel = new Vector3(Input.GetAxis(horiontalLeft) * speed, 0, Input.GetAxis(verticalLeft) * speed);
+		vel = new Vector3(Input.GetAxis(horiontalLeft) * speed, Input.GetAxis(verticalLeft) * speed, speed*2f);
         
-        if (GetArrowInput() && (vel != Vector3.zero)) {
-            transform.rotation = Quaternion.LookRotation(vel);
-        }
-        else {
-            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-        }
 
-        rb.velocity = new Vector3(vel.x, rb.velocity.y, vel.z);
-    }
-
-    bool GetArrowInput() {
-        return (Input.GetAxis(horiontalLeft) != 0) || (Input.GetAxis(verticalLeft) != 0);
+		transform.position += vel * Time.deltaTime;
     }
 
     void Fire() {
