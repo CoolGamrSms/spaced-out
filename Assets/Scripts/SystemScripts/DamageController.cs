@@ -11,12 +11,12 @@ public enum Systems {
 };
 
 public class SystemController : MonoBehaviour {
-    ObjectBase Hull;
-    ObjectBase Turret;
-    ObjectBase CommandCenter;
-    ObjectBase GravityGenerator;
-    ObjectBase Engine;
-    ObjectBase LifeSupport;
+    ShipSystem Hull;
+    ShipSystem Turret;
+    ShipSystem CommandCenter;
+    ShipSystem GravityGenerator;
+    ShipSystem Engine;
+    ShipSystem LifeSupport;
 
     MinMax mmHull;
     MinMax mmTurret;
@@ -33,7 +33,7 @@ public class SystemController : MonoBehaviour {
         mmEngine = new MinMax(5.0f, 20.0f);
         mmLifeSupport = new MinMax(0.0f, 5.0f);
 
-        foreach(ObjectBase ob in GetComponentsInChildren<ObjectBase>()) {
+        foreach(ShipSystem ob in GetComponentsInChildren<ShipSystem>()) {
             if (ob.gameObject.CompareTag(Systems.Hull.ToString())) {
                 Hull = ob;
             }
@@ -72,7 +72,7 @@ public class SystemController : MonoBehaviour {
                 break;
         }
 
-        ObjectBase baseHit = null;
+        ShipSystem baseHit = null;
         float systemToDamage = Random.Range(0.0f, 111.0f);
 
         if (mmHull.InRange(systemToDamage)) {

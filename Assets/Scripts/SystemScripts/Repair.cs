@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class FixingBase : MonoBehaviour {
+public class Repair : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

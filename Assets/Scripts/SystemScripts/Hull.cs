@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class HullBreach : ObjectBase {
+public class Hull : ShipSystem {
 	
 	// Only enabled when Engineer in range
 	void FixedUpdate () {
@@ -10,5 +10,4 @@ public class HullBreach : ObjectBase {
             gameObject.SetActive(false);
         }
 	}
-
 }

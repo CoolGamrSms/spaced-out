@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ShipController : MonoBehaviour {
@@ -32,7 +32,7 @@ public class ShipController : MonoBehaviour {
 
         //Team 1's engineer joystick is 1, while team 2 engineer joystick is 4
         //Sets the interactable objects to react to correct joystick input
-        foreach (ObjectBase ob in GetComponentsInChildren<ObjectBase>()) {
+        foreach (ShipSystem ob in GetComponentsInChildren<ShipSystem>()) {
 			if (teamNum == 1) {
 				ob.joystickNum = 1;
 			} else {
