@@ -7,19 +7,19 @@ public class ShipSystem : MonoBehaviour {
     //set by ship script
     public int joystickNum;
     public bool broken = false;
-    public Repair fixScript;
+    public Repair repairScript;
 
     // Use this for initialization
     virtual protected void Start() {
-        fixScript = GetComponentInChildren<Repair>();
-        fixScript.enabled = false;
+        repairScript = GetComponentInChildren<Repair>();
+        repairScript.enabled = false;
         enabled = false;
     }
 
     virtual protected void OnTriggerEnter(Collider col) {
         if (col.gameObject.CompareTag("Engineer")) {
             if (broken) {
-                fixScript.enabled = true;
+                repairScript.enabled = true;
             }
             else {
                 enabled = true;
@@ -42,10 +42,12 @@ public class ShipSystem : MonoBehaviour {
     public int health { get; protected set; }
 
     public void TakeDamage(int damage) {
+        if (health == 0)
+            return;
+
         health -= damage;
         if (health <= 0) {
             broken = true;
-            enabled = false;
         }
     }
     protected virtual void ResetHealth() { }

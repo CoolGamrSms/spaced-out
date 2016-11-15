@@ -8,11 +8,11 @@ public class ButtonHold : Repair {
 
     private string inputAxis;
     private Slider timer;
-    ShipSystem ob;
+    ShipSystem system;
     // Use this for initialization
     void Start() {
-        ob = GetComponentInParent<ShipSystem>();
-        inputAxis = "joystick " + ob.joystickNum + " button 2";
+        system = GetComponentInParent<ShipSystem>();
+        inputAxis = "joystick " + system.joystickNum + " button 2";
         timer = GetComponentInChildren<Slider>();
         timer.maxValue = timeLimit;
     }
@@ -23,7 +23,7 @@ public class ButtonHold : Repair {
             timer.value += Time.deltaTime;
             if (timer.value >= timeLimit) {
                 timer.value = 0;
-                ob.Fixed();
+                system.Fixed();
                 enabled = false;
             }
 

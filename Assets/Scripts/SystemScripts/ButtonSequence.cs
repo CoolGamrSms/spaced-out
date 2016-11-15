@@ -17,12 +17,12 @@ public class ButtonSequence : Repair {
     float timer = 3f;
     public float timeLimit = 3f;
 
-    ShipSystem ob;
+    ShipSystem system;
     // Use this for initialization
 
     void Start() {
-        ob = GetComponentInParent<ShipSystem>();
-        joystickNum = ob.joystickNum;
+        system = GetComponentInParent<ShipSystem>();
+        joystickNum = system.joystickNum;
 
         for (int i = 0; i < 4; ++i) {
             buttonImages[i] = transform.GetChild(i).gameObject;
@@ -60,7 +60,7 @@ public class ButtonSequence : Repair {
         if (numCorrect == correctRequired) {
 
             buttonImages[correctButton].SetActive(false);
-            ob.Fixed();
+            system.Fixed();
             enabled = false;
         }
         timer += Time.deltaTime;
