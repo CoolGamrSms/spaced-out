@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Turrets : ObjectBase {
+public class Turret : ShipSystem {
 
     string startButton;
     string backButton;
@@ -10,8 +10,9 @@ public class Turrets : ObjectBase {
     public EngineerController ec;
     TurretController tc;
     Camera cam;
-	// Use this for initialization
-    protected override void Start () {
+
+    // Use this for initialization
+    protected override void Start() {
         base.Start();
 
         startButton = "joystick " + joystickNum + " button 0";
@@ -21,26 +22,25 @@ public class Turrets : ObjectBase {
         cam = GetComponentInChildren<Camera>();
         cam.enabled = false;
         tc.enabled = false;
-        Health = turretHealth;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown(startButton))
-        {
+        health = turretHealth;
+    }
+
+    // Update is called once per frame
+    void Update() {
+        if (Input.GetKeyDown(startButton)) {
             ec.enabled = false;
             tc.enabled = true;
             cam.enabled = true;
         }
-        else if (Input.GetKeyDown(backButton)){
+        else if (Input.GetKeyDown(backButton)) {
             ec.enabled = true;
             tc.enabled = false;
             cam.enabled = false;
         }
-	}
+    }
 
     const int turretHealth = 3;
     protected override void ResetHealth() {
-        Health = turretHealth;
+        health = turretHealth;
     }
 }

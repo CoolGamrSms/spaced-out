@@ -38,8 +38,8 @@ GameObject:
   - 65: {fileID: 65000011244012228}
   - 114: {fileID: 114000011489714808}
   m_Layer: 0
-  m_Name: hull_breach
-  m_TagString: Untagged
+  m_Name: Hull
+  m_TagString: Hull
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
