@@ -246,7 +246,7 @@ GameObject:
   - 65: {fileID: 65000010826469772}
   m_Layer: 0
   m_Name: GravityGenerator
-  m_TagString: Untagged
+  m_TagString: GravityGenerator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -11,12 +11,12 @@ public enum Systems {
 };
 
 public class SystemController : MonoBehaviour {
-    ObjectBase Hull;
-    ObjectBase Turret;
-    ObjectBase CommandCenter;
-    ObjectBase GravityGenerator;
-    ObjectBase Engine;
-    ObjectBase LifeSupport;
+    ShipSystem Hull;
+    ShipSystem Turret;
+    ShipSystem CommandCenter;
+    ShipSystem GravityGenerator;
+    ShipSystem Engine;
+    ShipSystem LifeSupport;
 
     MinMax mmHull;
     MinMax mmTurret;
@@ -33,24 +33,24 @@ public class SystemController : MonoBehaviour {
         mmEngine = new MinMax(5.0f, 20.0f);
         mmLifeSupport = new MinMax(0.0f, 5.0f);
 
-        foreach(ObjectBase ob in GetComponentsInChildren<ObjectBase>()) {
-            if (ob.gameObject.CompareTag(Systems.Hull.ToString())) {
-                Hull = ob;
+        foreach (ShipSystem system in GetComponentsInChildren<ShipSystem>()) {
+            if (system.gameObject.CompareTag(Systems.Hull.ToString())) {
+                Hull = system;
             }
-            else if (ob.gameObject.CompareTag(Systems.Turret.ToString())) {
-                Turret = ob;
+            else if (system.gameObject.CompareTag(Systems.Turret.ToString())) {
+                Turret = system;
             }
-            else if (ob.gameObject.CompareTag(Systems.CommandCenter.ToString())) {
-                CommandCenter = ob;
+            else if (system.gameObject.CompareTag(Systems.CommandCenter.ToString())) {
+                CommandCenter = system;
             }
-            else if (ob.gameObject.CompareTag(Systems.GravityGenerator.ToString())) {
-                GravityGenerator = ob;
+            else if (system.gameObject.CompareTag(Systems.GravityGenerator.ToString())) {
+                GravityGenerator = system;
             }
-            else if (ob.gameObject.CompareTag(Systems.Engine.ToString())) {
-                Engine = ob;
+            else if (system.gameObject.CompareTag(Systems.Engine.ToString())) {
+                Engine = system;
             }
-            else if (ob.gameObject.CompareTag(Systems.LifeSupport.ToString())) {
-                LifeSupport = ob;
+            else if (system.gameObject.CompareTag(Systems.LifeSupport.ToString())) {
+                LifeSupport = system;
             }
         }
     }
@@ -58,7 +58,7 @@ public class SystemController : MonoBehaviour {
 
     void OnCollisionEnter(Collision col) {
         int damageDealt;
-        switch(col.gameObject.tag) {
+        switch (col.gameObject.tag) {
             case "Asteroid":
                 damageDealt = 2;
                 break;
@@ -72,7 +72,7 @@ public class SystemController : MonoBehaviour {
                 break;
         }
 
-        ObjectBase baseHit = null;
+        ShipSystem baseHit = null;
         float systemToDamage = Random.Range(0.0f, 111.0f);
 
         if (mmHull.InRange(systemToDamage)) {

@@ -12,6 +12,12 @@ TagManager:
   - Ship1
   - Ship2
   - Button
+  - Hull
+  - Turret
+  - CommandCenter
+  - GravityGenerator
+  - Engine
+  - LifeSupport
   layers:
   - Default
   - TransparentFX

@@ -6,6 +6,7 @@ public class EngineerController : MonoBehaviour {
     // Movement
     public int teamNum = 0;
     public float moveSpeed = 1f;
+	public float strafeSpeed = 1f;
     public float lookSpeed = 1f;
 
     private Vector3 moveDir;
@@ -28,8 +29,8 @@ public class EngineerController : MonoBehaviour {
     }
 
     void Update () {
-        moveDir = Input.GetAxis(horiontalLeft) * transform.right + Input.GetAxis(verticalLeft) * transform.forward;
-        rb.velocity = moveDir * moveSpeed;
+        moveDir = Input.GetAxis(horiontalLeft) * transform.right *strafeSpeed + Input.GetAxis(verticalLeft) * transform.forward * moveSpeed;
+		rb.velocity = moveDir;
 
         lookDir = Input.GetAxis(horizontalRight) * transform.up;
         rb.angularVelocity = lookDir * lookSpeed;

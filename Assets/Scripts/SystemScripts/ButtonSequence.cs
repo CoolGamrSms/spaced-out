@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class ButtonSequence : FixingBase {
+public class ButtonSequence : Repair {
     string[] buttons = new string[4];
     GameObject[] buttonImages = new GameObject[4];
     Toggle[] toggles;
@@ -17,70 +17,64 @@ public class ButtonSequence : FixingBase {
     float timer = 3f;
     public float timeLimit = 3f;
 
-    ObjectBase ob;
-	// Use this for initialization
-	
-    void Start () {
-        ob = GetComponentInParent<ObjectBase>();
-        joystickNum = ob.joystickNum;
-	 
-        for (int i = 0; i < 4; ++i)
-        {
+    ShipSystem system;
+    // Use this for initialization
+
+    void Start() {
+        system = GetComponentInParent<ShipSystem>();
+        joystickNum = system.joystickNum;
+
+        for (int i = 0; i < 4; ++i) {
             buttonImages[i] = transform.GetChild(i).gameObject;
             buttons[i] = "joystick " + joystickNum + " button " + i;
         }
         toggles = transform.GetComponentsInChildren<Toggle>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        
-        if (Input.GetKeyDown(buttons[0]))
-        {
+    }
+
+    // Update is called once per frame
+    void Update() {
+
+        if (Input.GetKeyDown(buttons[0])) {
             pressedButton = 0;
         }
-        else if (Input.GetKeyDown(buttons[1]))
-        {
+        else if (Input.GetKeyDown(buttons[1])) {
             pressedButton = 1;
         }
-        else if (Input.GetKeyDown(buttons[2]))
-        {
+        else if (Input.GetKeyDown(buttons[2])) {
             pressedButton = 2;
         }
-        else if (Input.GetKeyDown(buttons[3]))
-        {
+        else if (Input.GetKeyDown(buttons[3])) {
             pressedButton = 3;
         }
 
 
-        if (pressedButton == correctButton)
-        {
+        if (pressedButton == correctButton) {
             toggles[numCorrect].isOn = true;
             SetNextButton();
             ++numCorrect;
-        }else if (timer > timeLimit || (pressedButton != -1)) {
+        }
+        else if (timer > timeLimit || (pressedButton != -1)) {
             Reset();
         }
 
         if (numCorrect == correctRequired) {
-            
+
             buttonImages[correctButton].SetActive(false);
-            ob.Fixed();
-            this.enabled = false;
+            system.Fixed();
+            enabled = false;
         }
         timer += Time.deltaTime;
         pressedButton = -1;
-	}
+    }
 
-    void SetNextButton(){
+    void SetNextButton() {
         buttonImages[correctButton].SetActive(false);
         correctButton = Random.Range(0, 100) % 4;
         buttonImages[correctButton].SetActive(true);
     }
 
-    void Reset() { 
-        foreach (Toggle tog in toggles)
-        {
+    void Reset() {
+        foreach (Toggle tog in toggles) {
             tog.isOn = false;
         }
         SetNextButton();
@@ -88,5 +82,4 @@ public class ButtonSequence : FixingBase {
         timer = 0f;
 
     }
-
 }
