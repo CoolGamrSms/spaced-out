@@ -3,9 +3,17 @@ using System.Collections;
 
 public class ShipCameraController : MonoBehaviour {
 
-    public float rotationSpeed;
+    public float lerpSpeed;
+    public Vector3 followOffset;
 
     void FixedUpdate () {
-        transform.rotation = Quaternion.Lerp(transform.rotation, transform.parent.transform.rotation, Time.deltaTime * rotationSpeed);
+    	if (transform.name == "Ship Camera 1") {
+    		GameObject[] ship = GameObject.FindGameObjectsWithTag("Ship1");
+        	transform.position = Vector3.Lerp(transform.position, ship[0].transform.position, Time.deltaTime * lerpSpeed) + followOffset;
+    	}
+    	else if (transform.name == "Ship Camera 2") {
+    		GameObject[] ship = GameObject.FindGameObjectsWithTag("Ship2");
+        	transform.position = Vector3.Lerp(transform.position, ship[0].transform.position, Time.deltaTime * lerpSpeed) + followOffset;
+    	}
     }
 }

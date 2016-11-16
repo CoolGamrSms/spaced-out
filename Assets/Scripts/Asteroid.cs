@@ -7,18 +7,8 @@ public class Asteroid : MonoBehaviour {
 	public float minX;
 	public float maxX;
 
-	void Start () {
-	
-	}
-
 	void FixedUpdate () {
 		Move();
-	}
-
-	void OnCollisionEnter(Collision col) {
-		if (col.gameObject.tag == "Bullet1" || col.gameObject.tag == "Bullet2") {
-			transform.localScale -= new Vector3(1, 1, 1);
-		}
 	}
 
 	void Move() {
@@ -27,5 +17,11 @@ public class Asteroid : MonoBehaviour {
 		}
 
 		GetComponent<Rigidbody>().velocity = Quaternion.Euler(0, 0, 30) * Vector3.right * speed;
+	}
+
+	void OnCollisionEnter(Collision col) {
+		if (col.gameObject.tag == "Bullet1" || col.gameObject.tag == "Bullet2") {
+			transform.localScale -= new Vector3(1, 1, 1);
+		}
 	}
 }

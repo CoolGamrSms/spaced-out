@@ -146,10 +146,10 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 63999458}
-  m_LocalRotation: {x: 0.025374789, y: 0.26358476, z: 0.16850524, w: 0.9494657}
+  m_LocalRotation: {x: 0.028334953, y: 0.25777557, z: 0.1721541, w: 0.95032203}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: -2.306, y: 30.673002, z: 19.199001}
+  m_LocalEulerAnglesHint: {x: -2, y: 30, z: 20}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -180,7 +180,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1556329519}
-  m_RootOrder: 6
+  m_RootOrder: 4
 --- !u!1 &482166654
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +281,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011326011706, guid: 472bd6da8ee4f3f4e8d14902d06a9ca7, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4000011326011706, guid: 472bd6da8ee4f3f4e8d14902d06a9ca7, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -351,7 +351,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: eb6fcc679277b4270be1915ef4e8600f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 400
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: eb6fcc679277b4270be1915ef4e8600f, type: 3}
       propertyPath: m_LocalRotation.x
@@ -371,7 +371,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: eb6fcc679277b4270be1915ef4e8600f, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: eb6fcc679277b4270be1915ef4e8600f, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -383,15 +383,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: eb6fcc679277b4270be1915ef4e8600f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 50
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: eb6fcc679277b4270be1915ef4e8600f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 50
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: eb6fcc679277b4270be1915ef4e8600f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 50
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 6400000, guid: eb6fcc679277b4270be1915ef4e8600f, type: 3}
       propertyPath: m_Convex
@@ -447,7 +447,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1080584380}
-  m_RootOrder: 6
+  m_RootOrder: 4
 --- !u!1001 &967111612
 Prefab:
   m_ObjectHideFlags: 0
@@ -530,7 +530,7 @@ GameObject:
   - 81: {fileID: 993358996}
   - 114: {fileID: 993358995}
   m_Layer: 0
-  m_Name: Ship Camera
+  m_Name: Ship Camera 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -542,13 +542,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 993358993}
-  m_LocalRotation: {x: 0.5416752, y: 0.5416752, z: 0.4545195, w: 0.4545195}
-  m_LocalPosition: {x: -7.4, y: 0, z: 3}
-  m_LocalScale: {x: 0.15, y: 0.15000002, z: 0.15000002}
-  m_LocalEulerAnglesHint: {x: 0, y: 100, z: 90}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: -20, y: 15, z: -50}
+  m_LocalScale: {x: 0.75, y: 0.7500002, z: 0.7500002}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 1556329519}
-  m_RootOrder: 4
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
 --- !u!114 &993358995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,7 +560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d0630c865ff4a1b92a9eb131632172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 0
+  lerpSpeed: 5
+  followOffset: {x: 0, y: 1.5, z: -3.5}
 --- !u!81 &993358996
 AudioListener:
   m_ObjectHideFlags: 0
@@ -653,7 +654,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011326011706, guid: 472bd6da8ee4f3f4e8d14902d06a9ca7, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4000011326011706, guid: 472bd6da8ee4f3f4e8d14902d06a9ca7, type: 2}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -727,7 +728,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamNum: 2
-  speed: 15
+  speed: 10
   bulletPrefab: {fileID: 1000010040011328, guid: 27daa1649524f4ad6bc624007f99910f,
     type: 2}
   bulletSpawn: {fileID: 687018847}
@@ -817,7 +818,7 @@ GameObject:
   - 81: {fileID: 1533109024}
   - 114: {fileID: 1533109023}
   m_Layer: 0
-  m_Name: Ship Camera
+  m_Name: Ship Camera 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -829,13 +830,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1533109021}
-  m_LocalRotation: {x: 0.5416752, y: 0.5416752, z: 0.4545195, w: 0.4545195}
-  m_LocalPosition: {x: -7.4, y: 0, z: 3}
-  m_LocalScale: {x: 0.15, y: 0.15000002, z: 0.15000002}
-  m_LocalEulerAnglesHint: {x: 0, y: 100, z: 90}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalPosition: {x: 20, y: 15, z: -50}
+  m_LocalScale: {x: 0.75, y: 0.7500002, z: 0.7500002}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 1080584380}
-  m_RootOrder: 4
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
 --- !u!114 &1533109023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -847,7 +848,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d0630c865ff4a1b92a9eb131632172, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 0
+  lerpSpeed: 5
+  followOffset: {x: 0, y: 1.5, z: -3.5}
 --- !u!81 &1533109024
 AudioListener:
   m_ObjectHideFlags: 0
@@ -920,7 +922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamNum: 1
-  speed: 0
+  speed: 10
   bulletPrefab: {fileID: 1000012071163260, guid: d3b967c02d0e74f2abd8610f207874ec,
     type: 2}
   bulletSpawn: {fileID: 311423489}
@@ -1294,7 +1296,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012367718100, guid: cc0b4103189514f27a56694d088b54c4, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114000011996277186, guid: cc0b4103189514f27a56694d088b54c4,
         type: 2}
