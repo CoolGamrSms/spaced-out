@@ -3,13 +3,12 @@ using System.Collections;
 
 public class Turret : ShipSystem {
 
+	public EngineerController ec;
+	public TurretController tc;
+	public Camera cam;
+
     string startButton;
     string backButton;
-
-    //Set by TurretInit script
-    public EngineerController ec;
-    TurretController tc;
-    Camera cam;
 
     // Use this for initialization
     protected override void Start() {
@@ -18,10 +17,12 @@ public class Turret : ShipSystem {
         startButton = "joystick " + joystickNum + " button 0";
         backButton = "joystick " + joystickNum + " button 1";
 
-        tc = GetComponent<TurretController>();
-        cam = GetComponentInChildren<Camera>();
-        cam.enabled = false;
-        tc.enabled = false;
+		tc.horizontal = "E_HL" + ec.teamNum;
+		tc.vertical = "E_VL" + ec.teamNum;
+		tc.shootButton = "joystick " + joystickNum + " button 0";
+
+		cam.rect = ec.gameObject.GetComponentInChildren<Camera>().rect;
+
         health = turretHealth;
     }
 

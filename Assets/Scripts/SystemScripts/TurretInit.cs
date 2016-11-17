@@ -4,13 +4,11 @@ using System.Collections;
 public class TurretInit : MonoBehaviour {
 
     Turret turretScript;
-    TurretController tc;
-    Camera cam;
+    public TurretController tc;
+    public Camera cam;
     // Use this for initialization
     void Start() {
         turretScript = GetComponent<Turret>();
-        tc = GetComponent<TurretController>();
-        cam = GetComponentInChildren<Camera>();
     }
 
     // Update is called once per frame
@@ -25,8 +23,12 @@ public class TurretInit : MonoBehaviour {
             tc.horizontal = "E_HL" + turretScript.ec.teamNum;
             tc.vertical = "E_VL" + turretScript.ec.teamNum;
             tc.shootButton = "joystick " + turretScript.joystickNum + " button 0";
-            print(tc.shootButton);
+           	
+			turretScript.tc = tc;
+
             cam.rect = col.gameObject.GetComponentInChildren<Camera>().rect;
+			turretScript.cam = cam;
+
             Destroy(this);
         }
     }

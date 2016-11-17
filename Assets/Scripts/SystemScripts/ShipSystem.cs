@@ -38,7 +38,7 @@ public class ShipSystem : MonoBehaviour {
         enabled = true;
         ResetHealth();
     }
-
+		
     public int health { get; protected set; }
 
     public void TakeDamage(int damage) {
@@ -48,7 +48,9 @@ public class ShipSystem : MonoBehaviour {
         health -= damage;
         if (health <= 0) {
             broken = true;
+			repairScript.Broken ();
         }
     }
     protected virtual void ResetHealth() { }
+
 }

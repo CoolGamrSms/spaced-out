@@ -21,6 +21,7 @@ GameObject:
   - 4: {fileID: 4000014131713850}
   - 33: {fileID: 33000011064836092}
   - 23: {fileID: 23000010789683862}
+  - 64: {fileID: 64000013213311408}
   m_Layer: 0
   m_Name: Small Room
   m_TagString: Untagged
@@ -76,4 +77,16 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000010938525524}
+  m_Mesh: {fileID: 4300022, guid: 2e7ab62cd25cd4843be88f12d3a0ed2e, type: 3}
+--- !u!64 &64000013213311408
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000010938525524}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 0
   m_Mesh: {fileID: 4300022, guid: 2e7ab62cd25cd4843be88f12d3a0ed2e, type: 3}

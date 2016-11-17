@@ -73,6 +73,10 @@ public class ButtonSequence : Repair {
         buttonImages[correctButton].SetActive(true);
     }
 
+	override public void Broken ()
+	{
+	}
+
     void Reset() {
         foreach (Toggle tog in toggles) {
             tog.isOn = false;
