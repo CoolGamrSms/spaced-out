@@ -3,10 +3,17 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Hull : ShipSystem {
-    const int hullHealth = 1;
+	SpriteRenderer breachSprite;
+
+	const int hullHealth = 1;
+	ShipController sc;
+
     protected override void Start() {
         base.Start();
         health = hullHealth;
+		breachSprite = GetComponent<SpriteRenderer> ();
+		breachSprite.enabled = false;
+		sc = transform.parent.GetComponent<ShipController> ();
     }
 
     protected override void ResetHealth() {
@@ -16,7 +23,15 @@ public class Hull : ShipSystem {
     // Only enabled when Engineer in range
     void FixedUpdate() {
         if (!broken) {
-            gameObject.SetActive(false);
+			breachSprite.enabled = false;
+			sc.FixBreach ();
         }
     }
+
+	protected override void Break ()
+	{
+		base.Break ();
+		breachSprite.enabled = true;
+		sc.HullBreach ();
+	}
 }

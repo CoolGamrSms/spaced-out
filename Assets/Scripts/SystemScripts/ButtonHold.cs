@@ -8,6 +8,7 @@ public class ButtonHold : Repair {
 
     private string inputAxis;
     private Slider timer;
+	private Canvas canvas;
     ShipSystem system;
     // Use this for initialization
     void Start() {
@@ -15,6 +16,8 @@ public class ButtonHold : Repair {
         inputAxis = "joystick " + system.joystickNum + " button 2";
         timer = GetComponentInChildren<Slider>();
         timer.maxValue = timeLimit;
+		canvas = GetComponent<Canvas> ();
+		canvas.enabled = false;
     }
 
     // Only enabled when Engineer in range
@@ -32,4 +35,10 @@ public class ButtonHold : Repair {
             timer.value = 0f;
         }
     }
+
+	public override void SetBroken ()
+	{
+		canvas.enabled = true;
+	}
+		
 }

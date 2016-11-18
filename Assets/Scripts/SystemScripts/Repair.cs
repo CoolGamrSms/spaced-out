@@ -13,6 +13,6 @@ public class Repair : MonoBehaviour {
 	
 	}
 
-	virtual public void Broken(){}
+	virtual public void SetBroken (){}
 
 }
