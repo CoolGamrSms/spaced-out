@@ -7,7 +7,7 @@ public class ShipSystem : MonoBehaviour {
     //set by ship script
     public int joystickNum;
     public bool broken = false;
-    public Repair repairScript;
+    Repair repairScript;
 
     // Use this for initialization
     virtual protected void Start() {
@@ -38,6 +38,10 @@ public class ShipSystem : MonoBehaviour {
         enabled = true;
         ResetHealth();
     }
+
+	virtual protected void Break(){
+		broken = true;
+	}
 		
     public int health { get; protected set; }
 
@@ -47,8 +51,8 @@ public class ShipSystem : MonoBehaviour {
 
         health -= damage;
         if (health <= 0) {
-            broken = true;
-			repairScript.Broken ();
+			Break();
+			repairScript.SetBroken ();
         }
     }
     protected virtual void ResetHealth() { }

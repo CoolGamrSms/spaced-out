@@ -28,11 +28,11 @@ public class ShipController : MonoBehaviour {
 
         //Team 1's engineer joystick is 1, while team 2 engineer joystick is 4
         //Sets the interactable objects to react to correct joystick input
-        foreach (ShipSystem ob in GetComponentsInChildren<ShipSystem>()) {
+        foreach (ShipSystem system in GetComponentsInChildren<ShipSystem>()) {
 			if (teamNum == 1) {
-				ob.joystickNum = 1;
+				system.joystickNum = 1;
 			} else {
-				ob.joystickNum = 4;
+				system.joystickNum = 4;
 			}
         }
     }
@@ -58,4 +58,12 @@ public class ShipController : MonoBehaviour {
 
 		Destroy(bullet, 2.0f);
     }
+
+	public void HullBreach(){
+		speed *= .9f;
+	}
+
+	public void FixBreach(){
+		speed *= 1.1f;
+	}
 }

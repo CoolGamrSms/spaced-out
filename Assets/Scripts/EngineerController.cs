@@ -35,4 +35,16 @@ public class EngineerController : MonoBehaviour {
         lookDir = Input.GetAxis(horizontalRight) * transform.up;
         rb.angularVelocity = lookDir * lookSpeed;
     }
+
+	public void LoseGravity(){
+		rb.useGravity = false;
+		moveSpeed *= .5f;
+		strafeSpeed *= .5f;
+	}
+
+	public void ResumeGravity(){
+		rb.useGravity = true;
+		moveSpeed *= 2f;
+		strafeSpeed *= 2f;
+	}
 }
