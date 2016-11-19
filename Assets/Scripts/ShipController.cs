@@ -19,11 +19,7 @@ public class ShipController : MonoBehaviour {
 	private string fire = "Fire";
     Vector3 vel;
 
-	private Rigidbody rb;
-
     void Start () {
-        rb = GetComponent<Rigidbody>();
-
 		horiontalLeft += teamNum;
 		horizontalRight += teamNum;
 		verticalLeft += teamNum;
@@ -48,16 +44,18 @@ public class ShipController : MonoBehaviour {
     }
 
     void FixedUpdate() {
-		vel = new Vector3(Input.GetAxis(horiontalLeft) * speed, Input.GetAxis(verticalLeft) * speed, speed*2f);
-        
+		vel = new Vector3(Input.GetAxis(horiontalLeft) * speed, Input.GetAxis(verticalLeft) * speed, speed * 0.5f);
 
 		transform.position += vel * Time.deltaTime;
+
+		transform.rotation = Quaternion.Euler((Input.GetAxis(verticalLeft) * 5) -90, (Input.GetAxis(horiontalLeft) * 5) -90, 0);
     }
 
     void Fire() {
         var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
 
-bullet.GetComponent<Rigidbody> ().AddForce (transform.forward * bulletVel, ForceMode.Impulse);
-        // destroy bullet
+		bullet.GetComponent<Rigidbody>().AddForce(transform.forward * bulletVel, ForceMode.Impulse);
+
+		Destroy(bullet, 2.0f);
     }
 }
