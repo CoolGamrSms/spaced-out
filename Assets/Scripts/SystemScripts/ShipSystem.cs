@@ -6,7 +6,7 @@ public class ShipSystem : MonoBehaviour {
 
     //set by ship script
     public int joystickNum;
-    public bool broken = false;
+    public bool broken { get; private set; }
     Repair repairScript;
 
     // Use this for initialization
@@ -14,6 +14,7 @@ public class ShipSystem : MonoBehaviour {
         repairScript = GetComponentInChildren<Repair>();
         repairScript.enabled = false;
         enabled = false;
+        broken = false;
     }
 
     virtual protected void OnTriggerEnter(Collider col) {
@@ -49,12 +50,15 @@ public class ShipSystem : MonoBehaviour {
         if (health == 0)
             return;
 
+        if (health - damage < 0)
+            damage = 0;
+
         health -= damage;
         if (health <= 0) {
 			Break();
 			repairScript.SetBroken ();
         }
     }
-    protected virtual void ResetHealth() { }
 
+    protected virtual void ResetHealth() { }
 }
