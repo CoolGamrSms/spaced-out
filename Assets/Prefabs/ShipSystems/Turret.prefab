@@ -934,6 +934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa582accce95df49a6d10990b2d48c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNumber: 1
   correctRequired: 3
   timeLimit: 2
 --- !u!114 &114000013314208120
@@ -1184,9 +1185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9150c633298d3b4aa2b41068a22a42f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystickNum: 1
-  broken: 0
-  repairScript: {fileID: 0}
+  playerNumber: 1
   ec: {fileID: 0}
   tc: {fileID: 0}
   cam: {fileID: 0}

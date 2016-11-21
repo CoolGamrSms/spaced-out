@@ -920,9 +920,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 471198366e4f2534fa165fd8a602656b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystickNum: 1
-  broken: 0
-  repairScript: {fileID: 0}
+  playerNumber: 1
+  ec: {fileID: 0}
 --- !u!114 &114000014205112124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -934,6 +933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa582accce95df49a6d10990b2d48c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNumber: 1
   correctRequired: 3
   timeLimit: 2
 --- !u!114 &114000014209165826

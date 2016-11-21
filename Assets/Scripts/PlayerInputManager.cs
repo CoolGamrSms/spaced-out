@@ -14,10 +14,6 @@ public class PlayerInputManager : MonoBehaviour {
     }
     public List<InputDevice> controllers { get; private set; }
 
-    // Use this for initialization
-    void Start() {
-        controllers = new List<InputDevice>();
-    }
 
     // Update is called once per frame
     void FixedUpdate() {
@@ -43,5 +39,6 @@ public class PlayerInputManager : MonoBehaviour {
         }
         else
             Instance = this;
+        controllers = new List<InputDevice>();
     }
 }
