@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
@@ -6,7 +6,7 @@ using System.Collections;
 public class Start : MonoBehaviour {
 
 	public void StartGame() {
-		SceneManager.LoadScene("scene_0");
+		SceneManager.LoadScene("RaceScene");
 	}
 
 	public void Instructions() {
