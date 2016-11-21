@@ -1,69 +1,53 @@
 using UnityEngine;
 using System.Collections;
+using InControl;
 
 public class ShipController : MonoBehaviour {
 
-	public int teamNum = 0;
-	public float speed;
+    public int playerNumber;
+    InputDevice sController;
+
+    public float speed;
 
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
     public float bulletVel;
 
-	private Vector3 moveDir;
-	private Vector3 lookDir;
-	private string horiontalLeft = "P_HL";
-	private string horizontalRight = "P_HR";
-	private string verticalLeft = "P_VL";
-	private string verticalRight = "P_VR";
-	private string fire = "Fire";
+    private Vector3 moveDir;
+    private Vector3 lookDir;
     Vector3 vel;
 
-    void Start () {
-		horiontalLeft += teamNum;
-		horizontalRight += teamNum;
-		verticalLeft += teamNum;
-		verticalRight += teamNum;
-		fire += teamNum;
-
-        //Team 1's engineer joystick is 1, while team 2 engineer joystick is 4
-        //Sets the interactable objects to react to correct joystick input
-        foreach (ShipSystem system in GetComponentsInChildren<ShipSystem>()) {
-			if (teamNum == 1) {
-				system.joystickNum = 1;
-			} else {
-				system.joystickNum = 4;
-			}
-        }
+    void Awake() {
+        sController = PlayerInputManager.Instance.controllers[playerNumber];
     }
 
     void Update() {
-        if (Input.GetButtonDown(fire)) {
+        if (sController.Action1.WasPressed) {
             Fire();
         }
     }
 
     void FixedUpdate() {
-		vel = new Vector3(Input.GetAxis(horiontalLeft) * speed, Input.GetAxis(verticalLeft) * speed, speed * 0.5f);
+        vel = new Vector3(sController.LeftStickX.Value * speed, sController.LeftStickY.Value * speed, speed * 0.5f);
 
-		transform.position += vel * Time.deltaTime;
+        transform.position += vel * Time.deltaTime;
 
-		transform.rotation = Quaternion.Euler((Input.GetAxis(verticalLeft) * 5) -90, (Input.GetAxis(horiontalLeft) * 5) -90, 0);
+        transform.rotation = Quaternion.Euler((sController.LeftStickY.Value * 5) - 90, (sController.LeftStickX.Value * 5) - 90, 0);
     }
 
     void Fire() {
         var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
 
-		bullet.GetComponent<Rigidbody>().AddForce(transform.forward * bulletVel, ForceMode.Impulse);
+        bullet.GetComponent<Rigidbody>().AddForce(transform.forward * bulletVel, ForceMode.Impulse);
 
-		Destroy(bullet, 2.0f);
+        Destroy(bullet, 2.0f);
     }
 
-	public void HullBreach(){
-		speed *= .9f;
-	}
+    public void HullBreach() {
+        speed *= .9f;
+    }
 
-	public void FixBreach(){
-		speed *= 1.1f;
-	}
+    public void FixBreach() {
+        speed *= 1.1f;
+    }
 }

@@ -1,17 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using InControl;
 
-public class TurretController : MonoBehaviour {
+
+public class TurretController : Engineer {
 
     public GameObject pBullet;
 
     float timer = 1f;
     public float cooldownLimit = 1f;
-
-    public string horizontal;
-    public string vertical;
-    public string shootButton;
     List<Transform> bulletSpawns = new List<Transform>();
 
     // Use this for initialization
@@ -25,8 +24,8 @@ public class TurretController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
-        if (Input.GetKey(shootButton) && timer > cooldownLimit) {
+    void FixedUpdate() {
+        if (eController.Action1.WasPressed && timer > cooldownLimit) {
             foreach (Transform pos in bulletSpawns) {
                 GameObject bullet = Instantiate(pBullet);
                 bullet.transform.rotation = transform.rotation;
@@ -35,7 +34,7 @@ public class TurretController : MonoBehaviour {
             timer = 0f;
         }
 
-        transform.RotateAround(transform.position, transform.up, Input.GetAxis(horizontal));
+        transform.RotateAround(transform.position, transform.up, eController.LeftStickX.Value);
 
         timer += Time.deltaTime;
     }

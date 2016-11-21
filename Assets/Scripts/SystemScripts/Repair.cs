@@ -1,18 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class Repair : MonoBehaviour {
+public class Repair : Engineer {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-	virtual public void SetBroken (){}
+    virtual public void SetBroken() { }
 
 }

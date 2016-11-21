@@ -1,18 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using InControl;
 
 public class ButtonSequence : Repair {
-    string[] buttons = new string[4];
-    GameObject[] buttonImages = new GameObject[4];
+    InputControl[] buttons = new InputControl[4];
+
     Toggle[] toggles;
+    GameObject[] buttonImages = new GameObject[4];
 
     int numCorrect = 0;
     public int correctRequired = 3;
 
     int pressedButton = -1;
-    int correctButton = 0;
-    int joystickNum;
+    int correctButton = 0; 
 
     float timer = 3f;
     public float timeLimit = 3f;
@@ -22,31 +23,32 @@ public class ButtonSequence : Repair {
 
     void Start() {
         system = GetComponentInParent<ShipSystem>();
-        joystickNum = system.joystickNum;
+        buttons[0] = eController.Action1;
+        buttons[1] = eController.Action2;
+        buttons[2] = eController.Action3;
+        buttons[3] = eController.Action4;
 
         for (int i = 0; i < 4; ++i) {
             buttonImages[i] = transform.GetChild(i).gameObject;
-            buttons[i] = "joystick " + joystickNum + " button " + i;
         }
         toggles = transform.GetComponentsInChildren<Toggle>();
     }
 
     // Update is called once per frame
-    void Update() {
-
-        if (Input.GetKeyDown(buttons[0])) {
+    void FixedUpdate() {
+   
+        if (eController.Action1.WasPressed) {
             pressedButton = 0;
         }
-        else if (Input.GetKeyDown(buttons[1])) {
+        else if (eController.Action2.WasPressed) {
             pressedButton = 1;
         }
-        else if (Input.GetKeyDown(buttons[2])) {
+        else if (eController.Action3.WasPressed) {
             pressedButton = 2;
         }
-        else if (Input.GetKeyDown(buttons[3])) {
+        else if (eController.Action4.WasPressed) {
             pressedButton = 3;
         }
-
 
         if (pressedButton == correctButton) {
             toggles[numCorrect].isOn = true;
@@ -58,7 +60,6 @@ public class ButtonSequence : Repair {
         }
 
         if (numCorrect == correctRequired) {
-
             buttonImages[correctButton].SetActive(false);
             system.Fixed();
             enabled = false;
@@ -83,7 +84,6 @@ public class ButtonSequence : Repair {
         SetNextButton();
         numCorrect = 0;
         timer = 0f;
-
     }
 
 	void TurnTogglesOff(){

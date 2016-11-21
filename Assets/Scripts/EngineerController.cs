@@ -1,50 +1,42 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using InControl;
 
-public class EngineerController : MonoBehaviour {
-    
+public class EngineerController : Engineer {
     // Movement
-    public int teamNum = 0;
     public float moveSpeed = 1f;
-	public float strafeSpeed = 1f;
+    public float strafeSpeed = 1f;
     public float lookSpeed = 1f;
 
     private Vector3 moveDir;
     private Vector3 lookDir;
     private Rigidbody rb;
-    private string horiontalLeft = "E_HL";
-    private string horizontalRight = "E_HR";
-    private string verticalLeft = "E_VL";
-    private string verticalRight = "E_VR";
 
-    void Start () {
+    void Start() {
         rb = GetComponent<Rigidbody>();
-
-        horiontalLeft += teamNum;
-        horizontalRight += teamNum;
-        verticalLeft += teamNum;
-        verticalRight += teamNum;
-
-        transform.GetChild(0).GetComponent<EngineerCameraController>().verticalRight = verticalRight;
     }
 
-    void Update () {
-        moveDir = Input.GetAxis(horiontalLeft) * transform.right *strafeSpeed + Input.GetAxis(verticalLeft) * transform.forward * moveSpeed;
-		rb.velocity = moveDir;
+    void FixedUpdate() {
+        moveDir = eController.LeftStickX.Value * transform.right * strafeSpeed + eController.LeftStickY.Value * transform.forward * moveSpeed;
+        rb.velocity = moveDir;
 
-        lookDir = Input.GetAxis(horizontalRight) * transform.up;
+        lookDir = eController.RightStickX.Value * transform.up;
         rb.angularVelocity = lookDir * lookSpeed;
     }
 
-	public void LoseGravity(){
-		rb.useGravity = false;
-		moveSpeed *= .5f;
-		strafeSpeed *= .5f;
-	}
+    public void LoseGravity() {
+        rb.useGravity = false;
+        moveSpeed *= .5f;
+        strafeSpeed *= .5f;
+    }
 
-	public void ResumeGravity(){
-		rb.useGravity = true;
-		moveSpeed *= 2f;
-		strafeSpeed *= 2f;
-	}
+    public void ResumeGravity() {
+        rb.useGravity = true;
+        moveSpeed *= 2f;
+        strafeSpeed *= 2f;
+    }
 }
+//Mass:1 Drag:10 Speed:1.5
+//float strafe = Input.GetAxisRaw("Horizontal") * speed;
+//float translation = Input.GetAxisRaw("Vertical") * speed;
+//rb.AddRelativeForce(strafe, 0, translation, ForceMode.VelocityChange);

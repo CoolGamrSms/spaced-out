@@ -2,12 +2,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class ShipSystem : MonoBehaviour {
+public class ShipSystem : Engineer {
 
-    //set by ship script
-    public int joystickNum;
-    public bool broken { get; private set; }
     Repair repairScript;
+    public bool broken { get; private set; }
 
     // Use this for initialization
     virtual protected void Start() {
@@ -40,10 +38,10 @@ public class ShipSystem : MonoBehaviour {
         ResetHealth();
     }
 
-	virtual protected void Break(){
-		broken = true;
-	}
-		
+    virtual protected void Break() {
+        broken = true;
+    }
+
     public int health { get; protected set; }
 
     public void TakeDamage(int damage) {
@@ -55,8 +53,8 @@ public class ShipSystem : MonoBehaviour {
 
         health -= damage;
         if (health <= 0) {
-			Break();
-			repairScript.SetBroken ();
+            Break();
+            repairScript.SetBroken();
         }
     }
 

@@ -683,11 +683,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede7e62fcf0a59445addbb77ba8520a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNumber: 0
   pBullet: {fileID: 1000013300093652, guid: d066bbdf12c3aaa48b64e13bf179e199, type: 2}
   cooldownLimit: 1
-  horizontal: 
-  vertical: 
-  shootButton: 
 --- !u!65 &537888047
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1318,6 +1316,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114000011887904786, guid: 946e666958ebc6f4caf6e067decfd51e,
+        type: 2}
+      propertyPath: playerNumber
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000011537712652, guid: 946e666958ebc6f4caf6e067decfd51e,
+        type: 2}
+      propertyPath: playerNumber
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 946e666958ebc6f4caf6e067decfd51e, type: 2}
   m_IsPrefabParent: 0
@@ -1578,7 +1586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17914d60144654850a42f14b3f641815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamNum: 2
+  playerNumber: 2
   speed: 10
   bulletPrefab: {fileID: 1000010040011328, guid: 27daa1649524f4ad6bc624007f99910f,
     type: 2}
@@ -2865,7 +2873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17914d60144654850a42f14b3f641815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamNum: 1
+  playerNumber: 0
   speed: 10
   bulletPrefab: {fileID: 1000012071163260, guid: d3b967c02d0e74f2abd8610f207874ec,
     type: 2}

@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459d3251fe55f4c01893d7536edc0c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNumber: 1
   lookSpeed: 1
   verticalRight: 
 --- !u!114 &114000011887904786
@@ -213,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9352f9b8d44f340368b17ab99247eaba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamNum: 1
+  playerNumber: 0
   moveSpeed: 5
   strafeSpeed: 3
   lookSpeed: 3

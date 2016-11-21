@@ -11,24 +11,12 @@ public class TurretInit : MonoBehaviour {
         turretScript = GetComponent<Turret>();
     }
 
-    // Update is called once per frame
-    void Update() {
-
-    }
-
     void OnTriggerEnter(Collider col) {
-        if (col.gameObject.tag == "Engineer") {
+        if (col.gameObject.CompareTag("Engineer")) {
             turretScript.ec = col.gameObject.GetComponent<EngineerController>();
-
-            tc.horizontal = "E_HL" + turretScript.ec.teamNum;
-            tc.vertical = "E_VL" + turretScript.ec.teamNum;
-            tc.shootButton = "joystick " + turretScript.joystickNum + " button 0";
-           	
-			turretScript.tc = tc;
-
+            turretScript.tc = tc;
             cam.rect = col.gameObject.GetComponentInChildren<Camera>().rect;
-			turretScript.cam = cam;
-
+            turretScript.cam = cam;
             Destroy(this);
         }
     }
