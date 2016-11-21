@@ -9,9 +9,6 @@ public class ShipController : MonoBehaviour {
 
     public float speed;
 
-    public GameObject bulletPrefab;
-    public Transform bulletSpawn;
-    public float bulletVel;
     public float rollBack;
     public float rollAngle;
     public float turnSpeed;
@@ -31,13 +28,6 @@ public class ShipController : MonoBehaviour {
 
     }
 
-    void Update() {
-        if (sController.Action1.WasPressed) {
-            Fire();
-        }
-    }
-
-
     void FixedUpdate()
     {
         rb.AddRelativeTorque (sController.LeftStickY.Value * turnSpeed,0, 0); // W key or the up arrow to turn upwards, S or the down arrow to turn downwards. 
@@ -50,13 +40,6 @@ public class ShipController : MonoBehaviour {
         transform.rotation = rot;
     }
 
-    void Fire() {
-        var bullet = (GameObject)Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
-
-        bullet.GetComponent<Rigidbody>().AddForce(transform.forward * bulletVel, ForceMode.Impulse);
-
-        Destroy(bullet, 2.0f);
-    }
 
     public void HullBreach() {
         speed *= .9f;
