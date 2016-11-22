@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public enum Systems {
@@ -10,7 +10,7 @@ public enum Systems {
     LifeSupport,
 };
 
-public class SystemController : MonoBehaviour {
+public class DamageController : MonoBehaviour {
     ShipSystem[] systems;
 
     void Start() {
@@ -36,7 +36,7 @@ public class SystemController : MonoBehaviour {
         }
 
         //Deal damage to the first thing that is not broken
-        foreach(ShipSystem ss in systems.Shuffle()) {
+        foreach (ShipSystem ss in systems.Shuffle()) {
             if (!ss.broken) {
                 ss.TakeDamage(damageDealt);
                 return;
