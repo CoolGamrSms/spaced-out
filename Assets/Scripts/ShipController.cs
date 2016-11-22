@@ -8,6 +8,7 @@ public class ShipController : MonoBehaviour {
     InputDevice sController;
 
     public float speed;
+	float maxSpeed;
 
     public GameObject bulletPrefab;
     public Transform bulletSpawn;
@@ -26,7 +27,7 @@ public class ShipController : MonoBehaviour {
     }
 
     void Start () {
-
+		maxSpeed = speed;
         rb = GetComponent<Rigidbody>();
 
     }
@@ -65,4 +66,12 @@ public class ShipController : MonoBehaviour {
     public void FixBreach() {
         speed *= 1.1f;
     }
+
+	public void BreakEngine(){
+		speed = 0f;
+	}
+
+	public void FixEngine(){
+		speed = maxSpeed;
+	}
 }

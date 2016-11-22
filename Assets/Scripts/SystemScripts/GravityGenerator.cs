@@ -14,16 +14,10 @@ public class GravityGenerator : ShipSystem {
     }
 
     protected override void ResetHealth() {
+		rb.useGravity = true;
+		enabled = false;
+		ec.ResumeGravity ();
         health = generatorHealth;
-    }
-
-    // Update is called once per frame
-    void FixedUpdate() {
-        if (!broken) {
-            rb.useGravity = true;
-            enabled = false;
-			ec.ResumeGravity ();
-        }
     }
 
 	protected override void Break ()
