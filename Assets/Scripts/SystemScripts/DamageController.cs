@@ -11,10 +11,11 @@ public enum Systems {
 };
 
 public class DamageController : MonoBehaviour {
-    ShipSystem[] systems;
+	public GameObject shipInterior;
 
+	ShipSystem[] systems;
     void Start() {
-        systems = GetComponentsInChildren<ShipSystem>();
+        systems = shipInterior.GetComponentsInChildren<ShipSystem>();
     }
 
     void OnCollisionEnter(Collision col) {

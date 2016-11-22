@@ -21,7 +21,7 @@ public class Turret : ShipSystem {
 
     // Update is called once per frame
     void FixedUpdate() {
-        if (eController.CommandWasPressed) {
+        if (eController.Action1.WasPressed) {
             if (!turretEngaged) {
                 turretEngaged = true;
                 ec.enabled = false;

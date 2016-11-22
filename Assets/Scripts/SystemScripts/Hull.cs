@@ -6,14 +6,14 @@ public class Hull : ShipSystem {
 	SpriteRenderer breachSprite;
 
 	const int hullHealth = 2;
-	ShipController sc;
+	public ShipController sc;
 
     protected override void Start() {
         base.Start();
         health = hullHealth;
 		breachSprite = GetComponent<SpriteRenderer> ();
 		breachSprite.enabled = false;
-		sc = transform.parent.GetComponent<ShipController> ();
+		//sc = transform.parent.GetComponent<ShipController> ();
     }
 
     protected override void ResetHealth() {
