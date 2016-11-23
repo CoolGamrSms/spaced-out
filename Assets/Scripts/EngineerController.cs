@@ -17,11 +17,16 @@ public class EngineerController : Engineer {
     }
 
     void FixedUpdate() {
-        moveDir = eController.LeftStickX.Value * transform.right * strafeSpeed + eController.LeftStickY.Value * transform.forward * moveSpeed;
-        rb.velocity = moveDir;
-
-        lookDir = eController.RightStickX.Value * transform.up;
-        rb.angularVelocity = lookDir * lookSpeed;
+        CharacterController cc = GetComponent<CharacterController>();
+        transform.RotateAround(transform.position, Vector3.up, eController.RightStickX.Value * lookSpeed);
+        transform.Rotate(-eController.RightStickY.Value * lookSpeed, 0, 0);
+        Vector3 speed = eController.LeftStickX.Value * transform.right * strafeSpeed + eController.LeftStickY.Value * transform.forward * moveSpeed;
+        float xRot = transform.eulerAngles.x;
+        xRot -= (xRot > 35) ? 360f : 0f; // Euler angles doesn't like negatives
+        xRot = Mathf.Clamp(xRot, -30f, 30f);
+        xRot += (xRot < 0) ? 360f : 0f;
+        transform.rotation = Quaternion.Euler(xRot, transform.eulerAngles.y, transform.eulerAngles.z);
+        cc.SimpleMove(speed);
     }
 
     public void LoseGravity() {
