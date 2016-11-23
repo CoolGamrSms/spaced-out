@@ -5,7 +5,7 @@ using InControl;
 using UnityEngine.SceneManagement;
 
 public class PlayerInputManager : MonoBehaviour {
-
+    bool gameStarted = false;
 
     public int numPlayers {
         get {
@@ -17,8 +17,8 @@ public class PlayerInputManager : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate() {
-        if (InputManager.ActiveDevice.CommandWasPressed) {
-            if (numPlayers < 0) return;
+        if (InputManager.ActiveDevice.CommandWasPressed && !gameStarted) {
+            gameStarted = true;
             SceneManager.LoadScene("RaceScene");
         }
         if (InputManager.ActiveDevice.Action1.WasPressed) {
