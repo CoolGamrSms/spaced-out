@@ -17,16 +17,25 @@ public class PlayerInputManager : MonoBehaviour {
 
     // Update is called once per frame
     void FixedUpdate() {
-        if (InputManager.ActiveDevice.CommandWasPressed && !gameStarted) {
+        if (ActiveDevice.CommandWasPressed && !gameStarted) {
             gameStarted = true;
             SceneManager.LoadScene("RaceScene");
         }
-        if (InputManager.ActiveDevice.Action1.WasPressed) {
+        if (ActiveDevice.Action1.WasPressed && !gameStarted) {
             foreach (InputDevice controller in controllers) {
-                if (controller == InputManager.ActiveDevice)
+                if (controller == ActiveDevice)
                     return;
             }
-            controllers.Add(InputManager.ActiveDevice);
+            controllers.Add(ActiveDevice);
+        }
+        if (ActiveDevice.RightBumper.IsPressed && ActiveDevice.LeftBumper.IsPressed) {
+#if UNITY_EDITOR
+            // Application.Quit() does not work in the editor so
+            // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
         }
     }
 
@@ -40,5 +49,11 @@ public class PlayerInputManager : MonoBehaviour {
         else
             Instance = this;
         controllers = new List<InputDevice>();
+    }
+
+    InputDevice ActiveDevice {
+        get {
+            return InputManager.ActiveDevice;
+        }
     }
 }
