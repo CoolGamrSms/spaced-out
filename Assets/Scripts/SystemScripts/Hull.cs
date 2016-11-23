@@ -9,9 +9,9 @@ public class Hull : ShipSystem {
 	public ShipController sc;
 
     protected override void Start() {
+        breachSprite = GetComponent<SpriteRenderer>();
         base.Start();
         health = hullHealth;
-		breachSprite = GetComponent<SpriteRenderer> ();
 		breachSprite.enabled = false;
 		//sc = transform.parent.GetComponent<ShipController> ();
     }
@@ -31,6 +31,7 @@ public class Hull : ShipSystem {
 	protected override void Break ()
 	{
 		base.Break ();
+        Debug.Log("Hull breached");
 		breachSprite.enabled = true;
 		sc.HullBreach ();
 	}

@@ -18,6 +18,14 @@ public class DamageController : MonoBehaviour {
         systems = shipInterior.GetComponentsInChildren<ShipSystem>();
     }
 
+    //For testing
+    public void BreakAll()
+    {
+        foreach (ShipSystem ss in systems)
+            while (!ss.broken)
+                ss.TakeDamage(1);
+    }
+
     void OnCollisionEnter(Collision col) {
         int damageDealt;
         switch (col.gameObject.tag) {

@@ -8,9 +8,9 @@ public class GravityGenerator : ShipSystem {
 
 	const int generatorHealth = 3;
     protected override void Start() {
+        rb = GetComponent<Rigidbody>();
         base.Start();
         health = generatorHealth;
-		rb = GetComponent<Rigidbody> ();
     }
 
     protected override void ResetHealth() {

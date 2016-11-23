@@ -16,13 +16,13 @@ public class ButtonHold : Repair {
         system = GetComponentInParent<ShipSystem>();
         timer = GetComponentInChildren<Slider>();
         timer.maxValue = timeLimit;
-        canvas = GetComponent<Canvas>();
+        canvas = GetComponentInChildren<Canvas>();
         canvas.enabled = false;
     }
 
     // Only enabled when Engineer in range
     void FixedUpdate() {
-        if (eController.Action2.WasPressed) {
+        if (eController.Action2.IsPressed) {
             timer.value += Time.deltaTime;
             if (timer.value >= timeLimit) {
                 timer.value = 0;
