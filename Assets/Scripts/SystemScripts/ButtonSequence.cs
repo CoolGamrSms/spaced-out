@@ -21,7 +21,7 @@ public class ButtonSequence : Repair {
     ShipSystem system;
     // Use this for initialization
 
-    void Start() {
+    public void Start() {
         system = GetComponentInParent<ShipSystem>();
         buttons[0] = eController.Action1;
         buttons[1] = eController.Action2;
@@ -32,6 +32,7 @@ public class ButtonSequence : Repair {
             buttonImages[i] = transform.GetChild(i).gameObject;
         }
         toggles = transform.GetComponentsInChildren<Toggle>();
+        print(transform.parent.name + "'s num toggles: " + toggles.Length);
     }
 
     // Update is called once per frame
@@ -77,6 +78,7 @@ public class ButtonSequence : Repair {
 	override public void SetBroken ()
 	{
 		TurnTogglesOff ();
+        Debug.Log("breaking: " + transform.parent.name);
 	}
 
     void Reset() {

@@ -14,6 +14,7 @@ public class ShipSystem : Engineer {
         repairScript.enabled = false;
         enabled = false;
         broken = false;
+
     }
 
     virtual protected void OnTriggerEnter(Collider col) {
@@ -54,6 +55,7 @@ public class ShipSystem : Engineer {
 
         health -= damage;
         if (health <= 0) {
+            Debug.Log(gameObject.name);
             Break();
             repairScript.SetBroken();
         }

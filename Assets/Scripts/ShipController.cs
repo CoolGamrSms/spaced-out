@@ -47,11 +47,11 @@ public class ShipController : MonoBehaviour {
 
 
     public void HullBreach() {
-        speed *= .9f;
+        speed -= maxSpeed*.1f;
     }
 
     public void FixBreach() {
-        speed *= 1.1f;
+        speed += maxSpeed*.1f;
     }
 
 	public void BreakEngine(){

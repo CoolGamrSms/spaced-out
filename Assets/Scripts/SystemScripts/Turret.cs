@@ -14,9 +14,9 @@ public class Turret : ShipSystem {
 
     // Use this for initialization
     protected override void Start() {
-        base.Start();
         health = turretHealth;
         cam.rect = ec.gameObject.GetComponentInChildren<Camera>().rect;
+        base.Start();
     }
 
     // Update is called once per frame
@@ -32,6 +32,7 @@ public class Turret : ShipSystem {
                 ec.enabled = true;
                 tc.enabled = false;
                 cam.enabled = false;
+                turretEngaged = false;
             }
         }
     }
