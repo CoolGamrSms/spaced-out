@@ -4,8 +4,6 @@ using System.Collections;
 using InControl;
 
 public class ButtonSequence : Repair {
-    InputControl[] buttons = new InputControl[4];
-
     Toggle[] toggles;
     GameObject[] buttonImages = new GameObject[4];
 
@@ -23,10 +21,6 @@ public class ButtonSequence : Repair {
 
     public void Start() {
         system = GetComponentInParent<ShipSystem>();
-        buttons[0] = eController.Action1;
-        buttons[1] = eController.Action2;
-        buttons[2] = eController.Action3;
-        buttons[3] = eController.Action4;
 
         for (int i = 0; i < 4; ++i) {
             buttonImages[i] = transform.GetChild(i).gameObject;
