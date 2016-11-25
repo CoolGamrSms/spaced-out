@@ -14,6 +14,7 @@ public class Engine : ShipSystem {
 	protected override void Break ()
 	{
 		base.Break ();
+		//turn off particle system? visual indication of broken
 		sc.BreakEngine ();
 	}
 

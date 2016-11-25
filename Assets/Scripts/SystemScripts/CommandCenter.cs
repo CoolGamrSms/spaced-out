@@ -9,6 +9,13 @@ public class CommandCenter : ShipSystem {
         health = commandHealth;
     }
 
+	protected override void Break ()
+	{
+		base.Break ();
+		//change material to all black for indication of broken
+		//reverse or remove pilot controls?
+	}
+
     protected override void ResetHealth() {
         health = commandHealth;
     }
