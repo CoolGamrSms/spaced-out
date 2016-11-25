@@ -4,8 +4,8 @@ using System.Collections;
 public class CommandCenter : ShipSystem {
     ShipController ship;
     const int commandHealth = 3;
-	public Material broken;
-	Material normal;
+	public Material brokenMat;
+	Material normalMat;
 	MeshRenderer mr;
     protected override void Start() {
         base.Start();
@@ -17,18 +17,19 @@ public class CommandCenter : ShipSystem {
         ship = GameObject.FindGameObjectWithTag(
             "Ship" + teamNumber.ToString()).GetComponent<ShipController>();
         health = commandHealth;
+
 		mr = GetComponent<MeshRenderer> ();
-		normal = mr.material;
+		normalMat = mr.material;
     }
 
     protected override void Break() {
         base.Break();
         ship.BreakCommandCenter();
-		mr.material = broken;
+		mr.material = brokenMat;
     }
     protected override void ResetHealth() {
         health = commandHealth;
         ship.FixedCommandCeneter();
-		mr.material = normal;
+		mr.material = normalMat;
     }
 }
