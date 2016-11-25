@@ -19,6 +19,8 @@ public class ShipController : MonoBehaviour {
     private Rigidbody rb;
     Vector3 vel;
 
+    bool commandCenterBroken = false;
+
     void Awake() {
         sController = PlayerInputManager.Instance.controllers[playerNumber];
     }
@@ -31,7 +33,10 @@ public class ShipController : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if(sController.DPadUp.WasPressed)
+        if (commandCenterBroken)
+            return;
+
+        if (sController.DPadUp.WasPressed)
         {
             gameObject.GetComponent<DamageController>().BreakAll();
         }
@@ -61,4 +66,12 @@ public class ShipController : MonoBehaviour {
 	public void FixEngine(){
 		speed = maxSpeed;
 	}
+
+    public void BreakCommandCenter() {
+        commandCenterBroken = true;
+    }
+
+    public void FixedCommandCeneter() {
+        commandCenterBroken = false;
+    }
 }
