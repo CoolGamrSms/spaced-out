@@ -38,12 +38,13 @@ public class TurretController : Engineer {
             }
             timer = 0f;
         }
+		timer += Time.deltaTime;
 
         if (sc.commandCenterBroken) return;
         transform.RotateAround(transform.position, transform.up, eController.LeftStickX.Value*turnRate);
         tilt.transform.RotateAround(tilt.transform.position, tilt.transform.right, -eController.LeftStickY.Value*tiltRate);
 		//print (eController.LeftStickX.Value);
 
-        timer += Time.deltaTime;
+
     }
 }
