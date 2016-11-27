@@ -9,11 +9,14 @@ public class PlayerInputManager : MonoBehaviour {
 
     public int numPlayers {
         get {
-            return controllers.Count;
+            // return controllers.Count;
+            return controllers.Length;
         }
     }
-    public List<InputDevice> controllers { get; private set; }
+    //public List<InputDevice> controllers { get; private set; }
 
+    public InputDevice[] controllers = new InputDevice[4];
+    //0 - pilot1, 1 - engineer1, 2-pilot2, 3-engineer2
 
     // Update is called once per frame
     void FixedUpdate() {
@@ -26,8 +29,42 @@ public class PlayerInputManager : MonoBehaviour {
                 if (controller == ActiveDevice)
                     return;
             }
-            controllers.Add(ActiveDevice);
+            controllers[0] = ActiveDevice;
         }
+
+        if (ActiveDevice.Action2.WasPressed && !gameStarted)
+        {
+            foreach (InputDevice controller in controllers)
+            {
+                if (controller == ActiveDevice)
+                    return;
+            }
+            controllers[1] = ActiveDevice;
+
+        }
+
+        if (ActiveDevice.Action3.WasPressed && !gameStarted)
+        {
+            foreach (InputDevice controller in controllers)
+            {
+                if (controller == ActiveDevice)
+                    return;
+            }
+            controllers[2] = ActiveDevice;
+
+        }
+
+        if (ActiveDevice.Action4.WasPressed && !gameStarted)
+        {
+            foreach (InputDevice controller in controllers)
+            {
+                if (controller == ActiveDevice)
+                    return;
+            }
+            controllers[3] = ActiveDevice;
+
+        }
+
         if (ActiveDevice.RightBumper.IsPressed && ActiveDevice.LeftBumper.IsPressed) {
 #if UNITY_EDITOR
             // Application.Quit() does not work in the editor so
@@ -48,7 +85,8 @@ public class PlayerInputManager : MonoBehaviour {
         }
         else
             Instance = this;
-        controllers = new List<InputDevice>();
+        //controllers = new List<InputDevice>();
+        controllers = new InputDevice[4];
     }
 
     InputDevice ActiveDevice {

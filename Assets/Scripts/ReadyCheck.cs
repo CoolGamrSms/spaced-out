@@ -7,7 +7,7 @@ public class ReadyCheck : MonoBehaviour {
     public GameObject player1;
     public GameObject player2;
     public GameObject player3;
-    public GameObject readyPanel;
+    //public GameObject readyPanel;
     Color readyGreen;
     Color readyBlue;
 
@@ -21,20 +21,20 @@ public class ReadyCheck : MonoBehaviour {
     float timeToReadyScreen = 2;
     // Update is called once per frame
     void Update() {
-        if(PlayerInputManager.Instance.numPlayers == 1)
-            player0.GetComponent<Image>().color = readyGreen;
-        if (PlayerInputManager.Instance.numPlayers == 2)
-            player1.GetComponent<Image>().color = readyGreen;
-        if (PlayerInputManager.Instance.numPlayers == 3)
-            player2.GetComponent<Image>().color = readyGreen;
-        if (PlayerInputManager.Instance.numPlayers == 4)
-            player3.GetComponent<Image>().color = readyGreen;
-        if(PlayerInputManager.Instance.numPlayers == 4) {
+        if(PlayerInputManager.Instance.controllers[0] != null)
+            player0.GetComponentInChildren<Image>().color = readyGreen;
+        if (PlayerInputManager.Instance.controllers[1] != null)
+            player1.GetComponentInChildren<Image>().color = readyGreen;
+        if (PlayerInputManager.Instance.controllers[2] != null)
+            player2.GetComponentInChildren<Image>().color = readyGreen;
+        if (PlayerInputManager.Instance.controllers[3] != null)
+            player3.GetComponentInChildren<Image>().color = readyGreen;
+        /*if(PlayerInputManager.Instance.numPlayers == 4) {
             timer += Time.deltaTime;
             if(timer >=timeToReadyScreen) {
-                readyPanel.GetComponent<Image>().color = readyBlue;
-                readyPanel.GetComponent<Text>().color = Color.black;
+               readyPanel.GetComponent<Image>().color = readyBlue;
+               readyPanel.GetComponent<Text>().color = Color.black;
             }
-        }
+        }*/
     }
 }
