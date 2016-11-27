@@ -1,12 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using InControl;
 
 public class ShipController : MonoBehaviour {
 
     public int playerNumber;
     InputDevice sController;
+
+	public GameObject pBullet;
+
+	float timer = 1f;
+	public float cooldownLimit = 1f;
+
+	List<Transform> bulletSpawns = new List<Transform>();
 
     public float speed;
 	float maxSpeed;
@@ -37,12 +45,29 @@ public class ShipController : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         hullDamage = 0f;
         commandCenterBroken = false;
+
+		for (int i = 0; i < transform.childCount; ++i) {
+			Transform child = transform.GetChild(i);
+			if (child.name == "BulletSpawnPoint") {
+				bulletSpawns.Add(child);
+			}
+		}
     }
 
     void FixedUpdate() {
         if (sController.DPadUp.WasPressed) {
             gameObject.GetComponent<DamageController>().BreakAll();
         }
+
+		if (sController.Action1.IsPressed && timer > cooldownLimit) {
+			foreach (Transform pos in bulletSpawns) {
+				GameObject bullet = Instantiate(pBullet);
+				bullet.transform.rotation = pos.rotation;
+				bullet.transform.position = pos.position;
+			}
+			timer = 0f;
+		}
+		timer += Time.deltaTime;
 
         rb.AddRelativeTorque(sController.LeftStickY.Value * turnSpeed, 0, 0); // W key or the up arrow to turn upwards, S or the down arrow to turn downwards. 
         rb.AddRelativeTorque(0, sController.LeftStickX.Value * turnSpeed, 0); // A or left arrow to turn left, D or right arrow to turn right. 
@@ -81,8 +106,8 @@ public class ShipController : MonoBehaviour {
 
     public void BreakCommandCenter() {
         commandCenterBroken = true;
-        rollAngle /= 2;
-        turnSpeed /= 2;
+        rollAngle /= 3;
+        turnSpeed /= 3;
 
 		warnings [1].SetActive(true);
 		StartCoroutine (RemoveWarning ( warnings [1]));

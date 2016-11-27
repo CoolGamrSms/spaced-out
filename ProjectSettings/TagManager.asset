@@ -18,6 +18,7 @@ TagManager:
   - GravityGenerator
   - Engine
   - LifeSupport
+  - Earth
   layers:
   - Default
   - TransparentFX
