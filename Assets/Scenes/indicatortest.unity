@@ -3124,10 +3124,6 @@ Prefab:
       value: 
       objectReference: {fileID: 1000013300093652, guid: 8a5fa9e19c395c941bf8db1d4f9e874c,
         type: 2}
-    - target: {fileID: 1000010333329280, guid: fcfc895851f36ec4d9031b0681026556, type: 2}
-      propertyPath: m_TagString
-      value: Ship2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fcfc895851f36ec4d9031b0681026556, type: 2}
   m_IsPrefabParent: 0
@@ -5832,10 +5828,6 @@ Prefab:
       value: 
       objectReference: {fileID: 1000013300093652, guid: d066bbdf12c3aaa48b64e13bf179e199,
         type: 2}
-    - target: {fileID: 1000010333329280, guid: fcfc895851f36ec4d9031b0681026556, type: 2}
-      propertyPath: m_TagString
-      value: Ship1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fcfc895851f36ec4d9031b0681026556, type: 2}
   m_IsPrefabParent: 0
