@@ -20,8 +20,7 @@ public class ShipController : MonoBehaviour {
     private Rigidbody rb;
     Vector3 vel;
 
-    public bool commandCenterBroken
-    {
+    public bool commandCenterBroken {
         get; private set;
     }
 
@@ -36,10 +35,8 @@ public class ShipController : MonoBehaviour {
         commandCenterBroken = false;
     }
 
-    void FixedUpdate()
-    {
-        if (sController.DPadUp.WasPressed)
-        {
+    void FixedUpdate() {
+        if (sController.DPadUp.WasPressed) {
             gameObject.GetComponent<DamageController>().BreakAll();
         }
 

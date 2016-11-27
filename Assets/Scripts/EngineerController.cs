@@ -14,15 +14,13 @@ public class EngineerController : Engineer {
     bool gravity = true;
     float gravityValue = 0f;
 
-    void Start() {
-
-    }
-
     void Update() {
         CharacterController cc = GetComponent<CharacterController>();
         transform.Rotate(-eController.RightStickY.Value * lookSpeed, eController.RightStickX.Value * lookSpeed, 0);
+        
         if (gravity) transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
         else transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, (sc.transform.rotation.eulerAngles.z) % 360);
+        
         if (cc.isGrounded || !gravity) gravityValue = 0f;
         else gravityValue -= 9.8f * Time.deltaTime;
 
