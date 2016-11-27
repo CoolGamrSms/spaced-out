@@ -7,6 +7,8 @@ public class Asteroid : MonoBehaviour {
 	public float minX;
 	public float maxX;
 
+	public bool flip = false;
+
 	void FixedUpdate () {
 		Move();
 	}
@@ -16,7 +18,12 @@ public class Asteroid : MonoBehaviour {
 			speed *= -1;
 		}
 
-		GetComponent<Rigidbody>().velocity = Quaternion.Euler(0, 0, 30) * Vector3.right * speed;
+		if (flip) {
+			GetComponent<Rigidbody>().velocity = Quaternion.Euler(0, 0, -30) * Vector3.right * speed;
+		}
+		else {
+			GetComponent<Rigidbody>().velocity = Quaternion.Euler(0, 0, 30) * Vector3.right * speed;
+		}
 	}
 
 	void OnCollisionEnter(Collision col) {

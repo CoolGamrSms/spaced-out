@@ -87,9 +87,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 4000012367718100}
-  - 54: {fileID: 54000012587393364}
   - 135: {fileID: 135000013403415342}
   - 114: {fileID: 114000011996277186}
+  - 54: {fileID: 54000014068178112}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Asteroid
@@ -130,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013827640002}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -50, y: 50, z: 200}
+  m_LocalPosition: {x: 30, y: 20, z: 125}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -310,7 +310,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011573846378}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54000012587393364
+--- !u!54 &54000014068178112
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -336,6 +336,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed2e48dde1dd42fb9ed1c8353b1aaf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 20
+  minX: -75
+  maxX: 75
+  flip: 0
 --- !u!135 &135000013403415342
 SphereCollider:
   m_ObjectHideFlags: 1
