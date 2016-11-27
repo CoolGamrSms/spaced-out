@@ -7382,7 +7382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNumber: 1
   correctRequired: 3
-  timeLimit: 0.5
+  timeLimit: 1
 --- !u!114 &114000012651989868
 MonoBehaviour:
   m_ObjectHideFlags: 1
