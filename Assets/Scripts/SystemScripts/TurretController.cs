@@ -47,5 +47,10 @@ public class TurretController : Engineer {
 
         transform.RotateAround(transform.position, transform.up, eController.LeftStickX.Value*turnRate);
         tilt.transform.RotateAround(tilt.transform.position, tilt.transform.right, -eController.LeftStickY.Value*tiltRate);
+
+		float xRot = transform.eulerAngles.x;
+		xRot -= (xRot > 35) ? 360f : 0f; // Euler angles doesn't like negatives
+		xRot = Mathf.Clamp(xRot, -30f, 30f);
+		xRot += (xRot < 0) ? 360f : 0f;
     }
 }
