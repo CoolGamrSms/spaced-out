@@ -19,6 +19,7 @@ TagManager:
   - Engine
   - LifeSupport
   - Earth
+  - Ring
   layers:
   - Default
   - TransparentFX
