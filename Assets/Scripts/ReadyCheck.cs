@@ -9,15 +9,10 @@ public class ReadyCheck : MonoBehaviour {
     public GameObject player3;
 
     Color readyGreen;
-    Color readyBlue;
 
     void Start() {
         readyGreen = new Color(0, 255 , 51, 255);
-        readyBlue = new Color(0, 12, 255, 255);
     }
-
-    float timer = 0;
-    float timeToReadyScreen = 2;
 
     void Update() {
         if(PlayerInputManager.Instance.controllers[0] != null)
