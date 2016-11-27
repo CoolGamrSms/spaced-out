@@ -233,7 +233,7 @@ GameObject:
   - 114: {fileID: 584074622}
   - 114: {fileID: 584074621}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Start
   m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -692,7 +692,7 @@ GameObject:
   - 114: {fileID: 1286952767}
   - 114: {fileID: 1286952766}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: Quit
   m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -877,7 +877,7 @@ GameObject:
   - 114: {fileID: 1787618139}
   - 114: {fileID: 1787618138}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Instructions
   m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1107,7 +1107,7 @@ MonoBehaviour:
   m_Script: {fileID: -619905303, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 584074619}
   m_sendNavigationEvents: 1
   m_DragThreshold: 5
 --- !u!4 &1998793090
