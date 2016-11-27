@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class CommandCenter : ShipSystem {
-    const int commandHealth = 3;
+    const int commandHealth = 5;
 	public Material brokenMat;
 	Material normalMat;
 	MeshRenderer mr;

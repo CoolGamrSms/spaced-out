@@ -5,7 +5,7 @@ using System.Collections;
 public class Hull : ShipSystem {
 	SpriteRenderer breachSprite;
     ParticleSystem particles;
-	const int hullHealth = 2;
+	const int hullHealth = 3;
     bool fixonce;
 
     protected override void Start() {

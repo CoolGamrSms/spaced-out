@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class Engine : ShipSystem {
-    const int engineHealth = 3;
+    const int engineHealth = 5;
     public Material m2;
     Material m;
 

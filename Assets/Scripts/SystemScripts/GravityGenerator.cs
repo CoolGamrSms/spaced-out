@@ -6,7 +6,7 @@ public class GravityGenerator : ShipSystem {
 	public EngineerController ec;
 	Rigidbody rb;
 
-	const int generatorHealth = 3;
+	const int generatorHealth = 5;
     protected override void Start() {
         rb = GetComponent<Rigidbody>();
         base.Start();
