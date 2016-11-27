@@ -7,10 +7,6 @@ public class EngineerCameraController : Engineer {
     public string verticalRight;
     float xRot;
 
-    void Start() {
-
-    }
-
     void FixedUpdate() {
         transform.RotateAround(transform.position, transform.right, -eController.RightStickY.Value * lookSpeed);
         xRot = transform.eulerAngles.x;

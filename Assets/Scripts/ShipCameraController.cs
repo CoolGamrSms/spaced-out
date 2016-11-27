@@ -8,8 +8,7 @@ public class ShipCameraController : MonoBehaviour {
     public GameObject ship;
     private float lerpActualSpeed;
 
-    void Start()
-    {
+    void Start() {
         lerpActualSpeed = 0f;
     }
 
