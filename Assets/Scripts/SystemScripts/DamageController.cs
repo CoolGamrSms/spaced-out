@@ -24,8 +24,11 @@ public class DamageController : MonoBehaviour {
     {
         Debug.LogWarning("Breaking all");
         foreach (ShipSystem ss in systems)
+        {
+            if (ss.unbreakable) continue;
             while (!ss.broken)
                 ss.TakeDamage(1);
+        }
     }
 
     void OnCollisionEnter(Collision col) {

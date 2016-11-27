@@ -10,6 +10,7 @@ public class ShipSystem : Engineer {
     public ShipController sc;
     public bool broken { get; private set; }
     public bool interacting { get; private set; }
+    public bool unbreakable;
 
     // Use this for initialization
     virtual protected void Start() {
@@ -19,11 +20,9 @@ public class ShipSystem : Engineer {
     }
 
     public void StartInteraction() {
-        Debug.Log("Interacting: "+name);
         interacting = true;
     }
     public void EndInteraction() {
-        Debug.Log("End Interaction: " + name);
         interacting = false;
     }
 
@@ -40,8 +39,7 @@ public class ShipSystem : Engineer {
     public int health { get; protected set; }
 
     public void TakeDamage(int damage) {
-        Debug.Log(name + " || Damage: " + damage.ToString() + " Health: " + health.ToString());
-        if (health == 0)
+        if (unbreakable || health == 0)
             return;
 
         health -= damage;

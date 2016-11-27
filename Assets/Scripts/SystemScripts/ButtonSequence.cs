@@ -27,7 +27,6 @@ public class ButtonSequence : Repair {
         }
         toggles = transform.GetComponentsInChildren<Toggle>();
         TurnTogglesOn();
-        print(transform.parent.name + "'s num toggles: " + toggles.Length);
     }
 
     // Update is called once per frame
@@ -63,7 +62,6 @@ public class ButtonSequence : Repair {
         else if (timer > timeLimit || (pressedButton != -1))
         {
             Reset();
-            Debug.Log("Reset");
         }
 
         if (numCorrect >= correctRequired)
@@ -80,7 +78,8 @@ public class ButtonSequence : Repair {
 
     void SetNextButton() {
         buttonImages[correctButton].SetActive(false);
-        correctButton = Random.Range(0, 100) % 4;
+        int prev = correctButton;
+        while(correctButton == prev) correctButton = Random.Range(0, 100) % 4;
         if(system.interacting) buttonImages[correctButton].SetActive(true);
     }
 

@@ -20,8 +20,6 @@ public class Hull : ShipSystem {
 
     protected override void ResetHealth() {
         health = hullHealth;
-        Debug.LogError(health);
-        Debug.LogError(broken);
     }
 
     // Only enabled when Engineer in range
@@ -38,7 +36,6 @@ public class Hull : ShipSystem {
 	{
 		base.Break ();
         fixonce = false;
-        Debug.Log("Hull breached");
 		breachSprite.enabled = true;
         particles.Play();
 		sc.HullBreach ();

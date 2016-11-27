@@ -10,6 +10,7 @@ public class EngineerController : Engineer {
 
     private Vector3 moveDir;
     private Vector3 lookDir;
+    public ShipController sc;
     GameObject interaction;
     bool gravity = true;
     float gravityValue = 0f;
@@ -20,8 +21,9 @@ public class EngineerController : Engineer {
 
     void Update() {
         CharacterController cc = GetComponent<CharacterController>();
-        transform.RotateAround(transform.position, Vector3.up, eController.RightStickX.Value * lookSpeed);
-        transform.Rotate(-eController.RightStickY.Value * lookSpeed, 0, 0);
+        transform.Rotate(-eController.RightStickY.Value * lookSpeed, eController.RightStickX.Value * lookSpeed, 0);
+        if (gravity) transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
+        else transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, (sc.transform.rotation.eulerAngles.z) % 360);
         if (cc.isGrounded || !gravity) gravityValue = 0f;
         else gravityValue -= 9.8f * Time.deltaTime;
 
@@ -70,7 +72,6 @@ public class EngineerController : Engineer {
     }
 
     public void LoseGravity() {
-        Debug.Log("Gravity lost");
         moveSpeed *= .5f;
         strafeSpeed *= .5f;
         gravity = false;
