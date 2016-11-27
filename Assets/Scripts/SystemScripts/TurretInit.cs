@@ -6,7 +6,7 @@ public class TurretInit : MonoBehaviour {
     Turret turretScript;
     public TurretController tc;
     public Camera cam;
-    // Use this for initialization
+
     void Start() {
         turretScript = GetComponent<Turret>();
     }
