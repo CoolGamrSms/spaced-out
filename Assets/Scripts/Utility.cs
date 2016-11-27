@@ -6,18 +6,9 @@ using System.Collections.Generic;
 
 public class Utility : MonoBehaviour {
 
-    // Use this for initialization
-    void Start() {
-
-    }
-
-    // Update is called once per frame
-    void FixedUpdate() {
-
-    }
 }
 
-//var shuffled = originalSequence.Shuffle();
+// var shuffled = originalSequence.Shuffle();
 public static class EnumerableExtensions {
     public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source) {
         return source.Shuffle(new System.Random());

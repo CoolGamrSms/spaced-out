@@ -3,7 +3,6 @@ using System.Collections;
 using InControl;
 
 public class EngineerController : Engineer {
-    // Movement
     public float moveSpeed = 1f;
     public float strafeSpeed = 1f;
     public float lookSpeed = 1f;
@@ -44,18 +43,20 @@ public class EngineerController : Engineer {
         transform.rotation = Quaternion.Euler(xRot, transform.eulerAngles.y, transform.eulerAngles.z);
         cc.Move(speed * Time.deltaTime);
     }
+
     void FixedUpdate() { 
-        //Interactions
         Debug.DrawRay(transform.position + Vector3.up * 0.75f, transform.forward * 4f, Color.red);
         RaycastHit hit;
+        
         if(Physics.Raycast(transform.position + Vector3.up * 0.75f, transform.forward, out hit, 4f)) {
             if (hit.collider.gameObject == interaction) return;
-            if(hit.collider.gameObject.GetComponent<ShipSystem>() != null) {
+            
+            if (hit.collider.gameObject.GetComponent<ShipSystem>() != null) {
                 if (interaction != null) {
                     interaction.GetComponent<ShipSystem>().EndInteraction();
                     interaction = null;
                 }
-               
+
                 interaction = hit.collider.gameObject;
                 interaction.GetComponent<ShipSystem>().StartInteraction();
             }
@@ -64,8 +65,7 @@ public class EngineerController : Engineer {
                 interaction = null;
             }
         }
-        else if(interaction != null)
-        {
+        else if(interaction != null) {
             interaction.GetComponent<ShipSystem>().EndInteraction();
             interaction = null;
         }

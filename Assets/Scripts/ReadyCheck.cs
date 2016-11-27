@@ -29,12 +29,5 @@ public class ReadyCheck : MonoBehaviour {
             player2.GetComponentInChildren<Image>().color = readyGreen;
         if (PlayerInputManager.Instance.controllers[3] != null)
             player3.GetComponentInChildren<Image>().color = readyGreen;
-        /*if(PlayerInputManager.Instance.numPlayers == 4) {
-            timer += Time.deltaTime;
-            if(timer >=timeToReadyScreen) {
-               readyPanel.GetComponent<Image>().color = readyBlue;
-               readyPanel.GetComponent<Text>().color = Color.black;
-            }
-        }*/
     }
 }
