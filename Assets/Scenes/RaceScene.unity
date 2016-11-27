@@ -3080,6 +3080,20 @@ Prefab:
       propertyPath: playerNumber
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114000013329806716, guid: fcfc895851f36ec4d9031b0681026556,
+        type: 2}
+      propertyPath: pBullet
+      value: 
+      objectReference: {fileID: 1000013300093652, guid: 8a5fa9e19c395c941bf8db1d4f9e874c,
+        type: 2}
+    - target: {fileID: 1000010333329280, guid: fcfc895851f36ec4d9031b0681026556, type: 2}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010084158010, guid: fcfc895851f36ec4d9031b0681026556, type: 2}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fcfc895851f36ec4d9031b0681026556, type: 2}
   m_IsPrefabParent: 0

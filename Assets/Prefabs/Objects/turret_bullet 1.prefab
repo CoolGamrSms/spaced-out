@@ -42,8 +42,8 @@ GameObject:
   - 136: {fileID: 136000013228835226}
   - 114: {fileID: 114000011885326712}
   m_Layer: 8
-  m_Name: turret_bullet
-  m_TagString: Untagged
+  m_Name: turret_bullet 1
+  m_TagString: Bullet1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -33,15 +33,17 @@ public class DamageController : MonoBehaviour {
 
     void OnCollisionEnter(Collision col) {
         int damageDealt;
+		Debug.Log ("SOMETHING WAS SHOT");
         switch (col.gameObject.tag) {
             case "Asteroid":
                 damageDealt = 2;
                 break;
 
-            case "Bullet":
-            case "Bullet1":
-            case "Bullet2":
-                damageDealt = 1;
+			case "Bullet":
+			case "Bullet1":
+			case "Bullet2":
+				damageDealt = 1;
+				Destroy (col.gameObject);
                 break;
 
             default:
