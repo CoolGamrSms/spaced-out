@@ -5545,14 +5545,6 @@ Prefab:
       propertyPath: m_Name
       value: Ship 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1000010084158010, guid: fcfc895851f36ec4d9031b0681026556, type: 2}
-      propertyPath: m_Name
-      value: Ship
-      objectReference: {fileID: 0}
-    - target: {fileID: 1000013378455148, guid: fcfc895851f36ec4d9031b0681026556, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fcfc895851f36ec4d9031b0681026556, type: 2}
   m_IsPrefabParent: 0
