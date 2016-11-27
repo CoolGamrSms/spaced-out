@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using InControl;
 
@@ -24,8 +25,11 @@ public class ShipController : MonoBehaviour {
         get; private set;
     }
 
+	GameObject[] warnings;
+
     void Awake() {
         sController = PlayerInputManager.Instance.controllers[playerNumber];
+		warnings = GetComponentInChildren<Canvas> ().GetComponentsInChildren<GameObject> ();
     }
 
     void Start () {
@@ -54,6 +58,8 @@ public class ShipController : MonoBehaviour {
 
     public void HullBreach() {
         hullDamage += maxSpeed*.1f;
+		warnings [0].SetActive(true);
+		StartCoroutine (RemoveWarning ( warnings [0]));
     }
 
     public void FixBreach() {
@@ -63,6 +69,9 @@ public class ShipController : MonoBehaviour {
 	public void BreakEngine(){
 		speed = maxSpeed * .5f;
         foreach(ParticleSystem ps in GetComponentsInChildren<ParticleSystem>()) ps.Stop();
+
+		warnings [3].SetActive(true);
+		StartCoroutine (RemoveWarning ( warnings [3]));
 	}
 
 	public void FixEngine(){
@@ -74,6 +83,9 @@ public class ShipController : MonoBehaviour {
         commandCenterBroken = true;
         rollAngle /= 2;
         turnSpeed /= 2;
+
+		warnings [1].SetActive(true);
+		StartCoroutine (RemoveWarning ( warnings [1]));
     }
 
     public void FixedCommandCeneter() {
@@ -81,4 +93,14 @@ public class ShipController : MonoBehaviour {
         rollAngle *= 3;
         turnSpeed *= 3;
     }
+
+	public void BreakGravityGenerator(){
+		warnings [2].SetActive(true);
+		StartCoroutine (RemoveWarning ( warnings [2]));
+	}
+
+	IEnumerator RemoveWarning(GameObject warning){
+		yield return new WaitForSeconds (2f);
+		warning.SetActive (false);
+	}
 }
