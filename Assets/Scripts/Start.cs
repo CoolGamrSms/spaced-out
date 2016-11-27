@@ -9,7 +9,7 @@ public class Start : MonoBehaviour {
     //Button[] buttons;
 
     void Awake() {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         //buttons = GetComponentsInChildren<Button>();
     }
 
