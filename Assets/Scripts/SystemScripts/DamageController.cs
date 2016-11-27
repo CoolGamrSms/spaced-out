@@ -14,13 +14,15 @@ public class DamageController : MonoBehaviour {
 	public GameObject shipInterior;
 
 	ShipSystem[] systems;
-    void Start() {
+    void Awake() {
         systems = shipInterior.GetComponentsInChildren<ShipSystem>();
+        foreach (ShipSystem ss in systems) ss.sc = GetComponent<ShipController>();
     }
 
     //For testing
     public void BreakAll()
     {
+        Debug.LogWarning("Breaking all");
         foreach (ShipSystem ss in systems)
             while (!ss.broken)
                 ss.TakeDamage(1);

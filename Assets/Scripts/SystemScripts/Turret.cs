@@ -21,7 +21,7 @@ public class Turret : ShipSystem {
 
     // Update is called once per frame
     void FixedUpdate() {
-        if (eController.Action1.WasPressed) {
+        /*if (eController.Action1.WasPressed) {
             if (!turretEngaged) {
                 turretEngaged = true;
                 ec.enabled = false;
@@ -34,7 +34,7 @@ public class Turret : ShipSystem {
                 cam.enabled = false;
                 turretEngaged = false;
             }
-        }
+        }*/
     }
 
     const int turretHealth = 3;

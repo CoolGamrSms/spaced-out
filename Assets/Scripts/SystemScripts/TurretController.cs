@@ -35,7 +35,7 @@ public class TurretController : Engineer {
         }
 
         transform.RotateAround(transform.position, transform.up, eController.LeftStickX.Value);
-		print (eController.LeftStickX.Value);
+		//print (eController.LeftStickX.Value);
 
         timer += Time.deltaTime;
     }

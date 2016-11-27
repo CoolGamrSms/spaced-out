@@ -10,6 +10,7 @@ public class ButtonHold : Repair {
     private Slider timer;
     private Canvas canvas;
     ShipSystem system;
+    bool fixing;
 
     // Use this for initialization
     void Start() {
@@ -22,12 +23,20 @@ public class ButtonHold : Repair {
 
     // Only enabled when Engineer in range
     void FixedUpdate() {
-        if (eController.Action2.IsPressed) {
+        canvas.enabled = system.interacting && system.broken;
+        if (system.interacting && eController.Action3.WasPressed) fixing = true;
+
+        if (fixing)
+        {
+            if (eController.Action3.WasReleased) fixing = false;
+            if (!system.interacting) fixing = false;
+        }
+
+        if (fixing && system.interacting) {
             timer.value += Time.deltaTime;
-            if (timer.value >= timeLimit) {
+            if (timer.value >= timeLimit && system.broken) {
                 timer.value = 0;
                 system.Fixed();
-                enabled = false;
             }
         }
         else {
@@ -36,6 +45,7 @@ public class ButtonHold : Repair {
     }
 
     public override void SetBroken() {
-        canvas.enabled = true;
+        timer.value = 0f;
+        fixing = false;
     }
 }

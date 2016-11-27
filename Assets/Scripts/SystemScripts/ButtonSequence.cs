@@ -7,7 +7,7 @@ public class ButtonSequence : Repair {
     Toggle[] toggles;
     GameObject[] buttonImages = new GameObject[4];
 
-    int numCorrect = 0;
+    int numCorrect = 3;
     public int correctRequired = 3;
 
     int pressedButton = -1;
@@ -26,13 +26,18 @@ public class ButtonSequence : Repair {
             buttonImages[i] = transform.GetChild(i).gameObject;
         }
         toggles = transform.GetComponentsInChildren<Toggle>();
+        TurnTogglesOn();
         print(transform.parent.name + "'s num toggles: " + toggles.Length);
     }
 
     // Update is called once per frame
     void FixedUpdate() {
-   
-        if (eController.Action1.WasPressed) {
+        if (!system.broken) return;
+        if (!system.interacting) {
+            pressedButton = -1;
+            buttonImages[correctButton].SetActive(false);
+        }
+        else if (eController.Action1.WasPressed) {
             pressedButton = 0;
         }
         else if (eController.Action2.WasPressed) {
@@ -44,35 +49,45 @@ public class ButtonSequence : Repair {
         else if (eController.Action4.WasPressed) {
             pressedButton = 3;
         }
+        if(system.interacting)
+        {
+            buttonImages[correctButton].SetActive(true);
+        }
 
         if (pressedButton == correctButton) {
             toggles[numCorrect].isOn = true;
             SetNextButton();
+            timer = 0f;
             ++numCorrect;
         }
-        else if (timer > timeLimit || (pressedButton != -1)) {
+        else if (timer > timeLimit || (pressedButton != -1))
+        {
             Reset();
+            Debug.Log("Reset");
         }
 
-        if (numCorrect == correctRequired) {
+        if (numCorrect >= correctRequired)
+        {
             buttonImages[correctButton].SetActive(false);
             system.Fixed();
-            enabled = false;
+            TurnTogglesOn();
         }
-        timer += Time.deltaTime;
+
+
+        if(numCorrect > 0) timer += Time.deltaTime;
         pressedButton = -1;
     }
 
     void SetNextButton() {
         buttonImages[correctButton].SetActive(false);
         correctButton = Random.Range(0, 100) % 4;
-        buttonImages[correctButton].SetActive(true);
+        if(system.interacting) buttonImages[correctButton].SetActive(true);
     }
 
 	override public void SetBroken ()
 	{
-		TurnTogglesOff ();
-        Debug.Log("breaking: " + transform.parent.name);
+		Reset ();
+        Debug.LogWarning("breaking: " + transform.parent.name);
 	}
 
     void Reset() {
@@ -87,4 +102,11 @@ public class ButtonSequence : Repair {
 			tog.isOn = false;
 		}
 	}
+    void TurnTogglesOn()
+    {
+        foreach (Toggle tog in toggles)
+        {
+            tog.isOn = true;
+        }
+    }
 }

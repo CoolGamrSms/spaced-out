@@ -3,27 +3,25 @@ using System.Collections;
 
 public class Engine : ShipSystem {
     const int engineHealth = 3;
-	ShipController sc;
-	ParticleSystem particles;
+    public Material m2;
+    Material m;
 
     protected override void Start() {
         base.Start();
         health = engineHealth;
-		sc = GetComponentInParent<ShipController> ();
-		particles = GetComponentInChildren<ParticleSystem> ();
+        m = GetComponent<Renderer>().material;
     }
 
 	protected override void Break ()
 	{
 		base.Break ();
 		sc.BreakEngine ();
-		particles.Stop ();
-
+        GetComponent<Renderer>().material = m2;
 	}
 
     protected override void ResetHealth() {
 		sc.FixEngine ();
         health = engineHealth;
-		particles.Play ();
+        GetComponent<Renderer>().material = m;
     }
 }

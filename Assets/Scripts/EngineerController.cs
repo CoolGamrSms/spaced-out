@@ -27,13 +27,13 @@ public class EngineerController : Engineer {
 
         Vector3 speed;
 
-        if (gravity) speed = eController.LeftStickX.Value * transform.right * strafeSpeed 
-                           + eController.LeftStickY.Value * Vector3.ProjectOnPlane(transform.forward, Vector3.up) * moveSpeed 
+        if (gravity) speed = eController.LeftStickX.Value * transform.right * strafeSpeed
+                           + eController.LeftStickY.Value * Vector3.ProjectOnPlane(transform.forward, Vector3.up) * moveSpeed
                            + Vector3.up * gravityValue;
 
-        else         speed = eController.LeftStickX.Value * transform.right * strafeSpeed
-                           + eController.LeftStickY.Value * transform.forward * moveSpeed
-                           + Vector3.up * gravityValue;
+        else speed = eController.LeftStickX.Value * transform.right * strafeSpeed
+                   + eController.LeftStickY.Value * transform.forward * moveSpeed
+                   + Vector3.up * gravityValue;
 
         float xRot = transform.eulerAngles.x;
         xRot -= (xRot > 35) ? 360f : 0f; // Euler angles doesn't like negatives
@@ -41,6 +41,32 @@ public class EngineerController : Engineer {
         xRot += (xRot < 0) ? 360f : 0f;
         transform.rotation = Quaternion.Euler(xRot, transform.eulerAngles.y, transform.eulerAngles.z);
         cc.Move(speed * Time.deltaTime);
+    }
+    void FixedUpdate() { 
+        //Interactions
+        Debug.DrawRay(transform.position + Vector3.up * 0.75f, transform.forward * 4f, Color.red);
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position + Vector3.up * 0.75f, transform.forward, out hit, 4f)) {
+            if (hit.collider.gameObject == interaction) return;
+            if(hit.collider.gameObject.GetComponent<ShipSystem>() != null) {
+                if (interaction != null) {
+                    interaction.GetComponent<ShipSystem>().EndInteraction();
+                    interaction = null;
+                }
+               
+                interaction = hit.collider.gameObject;
+                interaction.GetComponent<ShipSystem>().StartInteraction();
+            }
+            else if(interaction != null) {
+                interaction.GetComponent<ShipSystem>().EndInteraction();
+                interaction = null;
+            }
+        }
+        else if(interaction != null)
+        {
+            interaction.GetComponent<ShipSystem>().EndInteraction();
+            interaction = null;
+        }
     }
 
     public void LoseGravity() {

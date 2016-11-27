@@ -15,7 +15,6 @@ public class GravityGenerator : ShipSystem {
 
     protected override void ResetHealth() {
 		rb.useGravity = true;
-		enabled = false;
 		ec.ResumeGravity ();
         health = generatorHealth;
     }
