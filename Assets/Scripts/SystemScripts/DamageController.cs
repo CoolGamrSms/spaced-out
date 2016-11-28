@@ -23,7 +23,7 @@ public class DamageController : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider col) {
-        int damageDealt;
+        int damageDealt = 0;
         switch (col.gameObject.tag) {
             case "Bullet":
             case "Bullet1":
@@ -35,11 +35,11 @@ public class DamageController : MonoBehaviour {
                 damageDealt = 0;
                 break;
         }
-        systems.Shuffle().First<ShipSystem>().TakeDamage(damageDealt);
+        systems.Shuffle().First().TakeDamage(damageDealt);
     }
 
     void OnCollisionEnter(Collision col) {
-        int damageDealt;
+        int damageDealt = 0;
         switch (col.gameObject.tag) {
             case "Asteroid":
                 damageDealt = 2;
@@ -49,6 +49,6 @@ public class DamageController : MonoBehaviour {
                 damageDealt = 0;
                 break;
         }
-        systems.Shuffle().First<ShipSystem>().TakeDamage(damageDealt);
+        systems.Shuffle().First().TakeDamage(damageDealt);
     }
 }
