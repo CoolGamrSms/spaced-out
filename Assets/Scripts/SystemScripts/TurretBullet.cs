@@ -9,8 +9,9 @@ public class TurretBullet : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision col) {
-        if (col.gameObject.tag == "Asteroid" || col.gameObject.tag == "Earth") {
+        if (col.gameObject.tag == "Earth") {
             Destroy(gameObject);
         }
+        // col.gameObject.tag == "Asteroid" ||
     }
 }

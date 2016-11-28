@@ -39,10 +39,10 @@ public class Asteroid : MonoBehaviour {
 		GetComponent<Rigidbody>().velocity = Quaternion.Euler(randDirX, randDirY, randDirZ) * Vector3.right * speed;
 	}
 
-	void OnCollisionEnter(Collision col) {
+	void OnTriggerEnter(Collider col) {
 		if (col.gameObject.tag == "Bullet1" || col.gameObject.tag == "Bullet2") {
 			transform.localScale -= new Vector3(1, 1, 1);
-			// GetComponent<Rigidbody>().mass -= .1f;
+			GetComponent<Rigidbody>().mass -= .1f;
 
 			if (transform.localScale == Vector3.zero) {
 				Destroy(gameObject);
