@@ -40,7 +40,7 @@ public class DamageController : MonoBehaviour {
             case "Bullet":
             case "Bullet1":
             case "Bullet2":
-                damageDealt = 1;
+                damageDealt = 4;
                 Destroy(col.gameObject);
                 break;
 

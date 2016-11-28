@@ -16,10 +16,12 @@ public class TurretController : Engineer {
     public float tiltRate;
     List<Transform> bulletSpawns = new List<Transform>();
     ShipController sc;
+	float mypitch;
 
     void Start() {
         shoot = GetComponent<AudioSource>();
         sc = GetComponentInParent<ShipController>();
+		mypitch = shoot.pitch;
 
         for (int i = 0; i < transform.childCount; ++i) {
             Transform child = tilt.GetChild(i);
@@ -33,8 +35,9 @@ public class TurretController : Engineer {
     void FixedUpdate() {
         if (eController.Action1.IsPressed && timer > cooldownLimit) {
             foreach (Transform pos in bulletSpawns) {
+				shoot.pitch = mypitch + Random.Range (-0.1f, 0f);
                 shoot.Play();
-                eController.Vibrate(50.0f);
+                //eController.Vibrate(50.0f);
                 GameObject bullet = Instantiate(pBullet);
                 bullet.transform.rotation = pos.rotation;
                 bullet.transform.position = pos.position;

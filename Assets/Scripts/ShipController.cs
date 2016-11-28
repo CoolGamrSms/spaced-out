@@ -15,6 +15,7 @@ public class ShipController : MonoBehaviour {
     float timer = 1f;
     public float cooldownLimit = 1f;
     public float cooldownVibration = .3f;
+	float mypitch;
 
     List<Transform> bulletSpawns = new List<Transform>();
 
@@ -56,6 +57,7 @@ public class ShipController : MonoBehaviour {
         boost = false;
         shield = transform.FindChild("Shield").GetComponent<MeshRenderer>();
         shoot = GetComponent<AudioSource>();
+		mypitch = shoot.pitch;
         sController = PlayerInputManager.Instance.controllers[playerNumber];
         shield.enabled = false;
     }
@@ -113,8 +115,9 @@ public class ShipController : MonoBehaviour {
 
         //Fire
         if (sController.Action1.IsPressed && timer > cooldownLimit) {
+			shoot.pitch = mypitch + Random.Range (-0.1f, 0);
             shoot.Play();
-            sController.Vibrate(100.0f);
+            //sController.Vibrate(100.0f);
             foreach (Transform pos in bulletSpawns) {
                 GameObject bullet = Instantiate(pBullet);
                 bullet.transform.rotation = pos.rotation;
