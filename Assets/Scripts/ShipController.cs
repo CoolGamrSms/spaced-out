@@ -129,9 +129,9 @@ public class ShipController : MonoBehaviour {
         }
         timer += Time.deltaTime;
 
-        if (timer > cooldownVibration) {
-            sController.StopVibration();
-        }
+        //if (timer > cooldownVibration) {
+        //    sController.StopVibration();
+        //}
 
         rb.AddRelativeTorque(sController.LeftStickY.Value * turnSpeed, 0, 0); // W key or the up arrow to turn upwards, S or the down arrow to turn downwards. 
         rb.AddRelativeTorque(0, sController.LeftStickX.Value * turnSpeed, 0); // A or left arrow to turn left, D or right arrow to turn right. 
@@ -153,7 +153,7 @@ public class ShipController : MonoBehaviour {
 	}
 
     public void BreakVibration() {
-        sController.Vibrate(100.0f);
+        //sController.Vibrate(100.0f);
     }
 
     public void HullBreach() {

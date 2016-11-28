@@ -37,8 +37,8 @@ public class ShipSystem : Engineer {
         broken = true;
         repairScript.SetBroken();
         breakStuff.Play();
-        eController.Vibrate(100.0f);
-        sc.BreakVibration();
+        //eController.Vibrate(100.0f);
+        //sc.BreakVibration();
     }
 
     public int health { get; protected set; }
