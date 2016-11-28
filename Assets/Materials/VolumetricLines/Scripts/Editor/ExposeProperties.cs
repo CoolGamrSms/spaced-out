@@ -152,7 +152,7 @@ namespace VolumetricLines.Utils
 		
 		public static bool GetPropertyType(PropertyInfo info, out SerializedPropertyType propertyType)
 		{
-			Type type = info.PropertyType;
+			System.Type type = info.PropertyType;
 			propertyType = SerializedPropertyType.Generic;
 			if (type == typeof(int))
 				propertyType = SerializedPropertyType.Integer;
