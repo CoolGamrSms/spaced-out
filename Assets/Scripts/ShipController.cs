@@ -40,6 +40,8 @@ public class ShipController : MonoBehaviour {
     }
 
 	CanvasGroup[] warnings;
+	Queue<int> activeWarnings = new Queue<int>();
+
 	Slider powerbar;
 	int power = 50;
 	int maxPower = 100;
@@ -189,12 +191,20 @@ public class ShipController : MonoBehaviour {
     }
 
     void ShowWarning(int warningNum) {
-        warnings[warningNum].alpha = 1f;
+		if (activeWarnings.Count == 0) {
+			warnings [warningNum].alpha = 1f;
+		}
+		activeWarnings.Enqueue (warningNum);
         StartCoroutine(RemoveWarning(warningNum));
     }
 
     IEnumerator RemoveWarning(int warningNum) {
         yield return new WaitForSeconds(1.5f);
-        warnings[warningNum].alpha = 0f;
+		warnings[activeWarnings.Peek()].alpha = 0f;
+		activeWarnings.Dequeue ();
+		if (activeWarnings.Count != 0) {
+			warnings [activeWarnings.Peek ()].alpha = 1f;
+			StartCoroutine (RemoveWarning (activeWarnings.Peek ()));
+		}
     }
 }
