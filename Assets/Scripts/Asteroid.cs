@@ -4,26 +4,39 @@ using System.Collections;
 public class Asteroid : MonoBehaviour {
 
 	public float speed;
-	public float minX;
-	public float maxX;
+	public float radius;
+	Vector3 startPos;
 
-	public bool flip = false;
+	int randDirX;
+	int randDirY;
+	int randDirZ;
 
-	void FixedUpdate () {
+	void Awake() {
+		startPos = transform.position;
+		randDirX = Random.Range(0, 180);
+		randDirY = Random.Range(0, 180);
+		randDirZ = Random.Range(0, 180);
+	}
+
+	void FixedUpdate() {
 		Move();
 	}
 
 	void Move() {
-		if (transform.position.x < minX || transform.position.x > maxX) {
+		if (transform.position.x < startPos.x - radius || transform.position.x > startPos.x + radius) {
+			randDirX = Random.Range(0, 180);
+			speed *= -1;
+		}
+		else if (transform.position.y < startPos.y - radius || transform.position.y > startPos.y + radius) {
+			randDirY = Random.Range(0, 180);
+			speed *= -1;
+		}
+		else if (transform.position.z < startPos.z - radius || transform.position.z > startPos.z + radius) {
+			randDirZ = Random.Range(0, 180);
 			speed *= -1;
 		}
 
-		if (flip) {
-			GetComponent<Rigidbody>().velocity = Quaternion.Euler(0, 0, -30) * Vector3.right * speed;
-		}
-		else {
-			GetComponent<Rigidbody>().velocity = Quaternion.Euler(0, 0, 30) * Vector3.right * speed;
-		}
+		GetComponent<Rigidbody>().velocity = Quaternion.Euler(randDirX, randDirY, randDirZ) * Vector3.right * speed;
 	}
 
 	void OnCollisionEnter(Collision col) {

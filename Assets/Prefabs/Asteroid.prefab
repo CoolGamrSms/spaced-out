@@ -337,9 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  minX: -75
-  maxX: 75
-  flip: 0
+  radius: 50
 --- !u!135 &135000013403415342
 SphereCollider:
   m_ObjectHideFlags: 1
