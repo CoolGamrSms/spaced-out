@@ -8,7 +8,13 @@ public class ReadyCheck : MonoBehaviour {
     public GameObject player2;
     public GameObject player3;
 
+
+
     Color readyGreen;
+
+    void Awake() {
+        GameObject.Find("InControl").GetComponent<PlayerInputManager>().enabled = true;
+    }
 
     void Start() {
         readyGreen = new Color(0, 255 , 51, 255);

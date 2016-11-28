@@ -91,9 +91,9 @@ public class ShipController : MonoBehaviour {
         //Lerp power bar
         powerbar.value = Mathf.MoveTowards(powerbar.value, power, 1);
 
-        if (sController.DPadUp.WasPressed) {
-            gameObject.GetComponent<DamageController>().BreakAll();
-        }
+        // if (sController.DPadUp.WasPressed) {
+        //     gameObject.GetComponent<DamageController>().BreakAll();
+        // }
 
         //Shield
         if(sController.Action2.WasPressed && !shield.enabled && power >= 40)
