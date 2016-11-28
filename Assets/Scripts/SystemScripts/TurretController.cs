@@ -10,6 +10,7 @@ public class TurretController : Engineer {
 
     float timer = 1f;
     public float cooldownLimit = 1f;
+    public float cooldownVibration = .1f;
     public Transform tilt;
     public float turnRate;
     public float tiltRate;
@@ -19,10 +20,10 @@ public class TurretController : Engineer {
     void Start() {
         shoot = GetComponent<AudioSource>();
         sc = GetComponentInParent<ShipController>();
-        
+
         for (int i = 0; i < transform.childCount; ++i) {
             Transform child = tilt.GetChild(i);
-            
+
             if (child.name == "BulletSpawnPoint") {
                 bulletSpawns.Add(child);
             }
@@ -33,6 +34,7 @@ public class TurretController : Engineer {
         if (eController.Action1.IsPressed && timer > cooldownLimit) {
             foreach (Transform pos in bulletSpawns) {
                 shoot.Play();
+                eController.Vibrate(50.0f);
                 GameObject bullet = Instantiate(pBullet);
                 bullet.transform.rotation = pos.rotation;
                 bullet.transform.position = pos.position;
@@ -43,16 +45,19 @@ public class TurretController : Engineer {
             timer = 0f;
         }
 
-		timer += Time.deltaTime;
+        timer += Time.deltaTime;
+        if (timer > cooldownVibration) {
+            eController.StopVibration();
+        }
 
         if (sc.commandCenterBroken) return;
 
-        transform.RotateAround(transform.position, transform.up, eController.LeftStickX.Value*turnRate);
-        tilt.transform.RotateAround(tilt.transform.position, tilt.transform.right, -eController.LeftStickY.Value*tiltRate);
+        transform.RotateAround(transform.position, transform.up, eController.LeftStickX.Value * turnRate);
+        tilt.transform.RotateAround(tilt.transform.position, tilt.transform.right, -eController.LeftStickY.Value * tiltRate);
 
-		float xRot = transform.eulerAngles.x;
-		xRot -= (xRot > 35) ? 360f : 0f; // Euler angles doesn't like negatives
-		xRot = Mathf.Clamp(xRot, -30f, 30f);
-		xRot += (xRot < 0) ? 360f : 0f;
+        float xRot = transform.eulerAngles.x;
+        xRot -= (xRot > 35) ? 360f : 0f; // Euler angles doesn't like negatives
+        xRot = Mathf.Clamp(xRot, -30f, 30f);
+        xRot += (xRot < 0) ? 360f : 0f;
     }
 }
