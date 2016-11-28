@@ -4,6 +4,7 @@ using System.Collections;
 using System;
 
 public class ShipSystem : Engineer {
+    AudioSource breakStuff;
 
     Repair repairScript;
     [HideInInspector]
@@ -17,6 +18,7 @@ public class ShipSystem : Engineer {
         repairScript = GetComponentInChildren<Repair>();
         broken = false;
         interacting = false;
+        breakStuff = GetComponentInParent<AudioSource>();
     }
 
     public void StartInteraction() {
@@ -34,6 +36,7 @@ public class ShipSystem : Engineer {
     virtual protected void Break() {
         broken = true;
         repairScript.SetBroken();
+        breakStuff.Play();
     }
 
     public int health { get; protected set; }

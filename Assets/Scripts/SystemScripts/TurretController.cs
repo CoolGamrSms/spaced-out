@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using InControl;
 
 public class TurretController : Engineer {
-
+    AudioSource shoot;
     public GameObject pBullet;
 
     float timer = 1f;
@@ -17,6 +17,7 @@ public class TurretController : Engineer {
     ShipController sc;
 
     void Start() {
+        shoot = GetComponent<AudioSource>();
         sc = GetComponentInParent<ShipController>();
         
         for (int i = 0; i < transform.childCount; ++i) {
@@ -31,6 +32,7 @@ public class TurretController : Engineer {
     void FixedUpdate() {
         if (eController.Action1.IsPressed && timer > cooldownLimit) {
             foreach (Transform pos in bulletSpawns) {
+                shoot.Play();
                 GameObject bullet = Instantiate(pBullet);
                 bullet.transform.rotation = pos.rotation;
                 bullet.transform.position = pos.position;

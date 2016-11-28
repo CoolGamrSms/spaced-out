@@ -8,6 +8,7 @@ public class ShipController : MonoBehaviour {
 
     public int playerNumber;
     InputDevice sController;
+    AudioSource shoot;
 
 	public GameObject pBullet;
 
@@ -45,6 +46,7 @@ public class ShipController : MonoBehaviour {
 	}
 
     void Awake() {
+        shoot = GetComponent<AudioSource>();
         sController = PlayerInputManager.Instance.controllers[playerNumber];
     }
 
@@ -72,6 +74,7 @@ public class ShipController : MonoBehaviour {
         }
 
 		if (sController.Action1.IsPressed && timer > cooldownLimit) {
+            shoot.Play();
 			foreach (Transform pos in bulletSpawns) {
 				GameObject bullet = Instantiate(pBullet);
 				bullet.transform.rotation = pos.rotation;
