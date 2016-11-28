@@ -72,7 +72,7 @@ Material:
     - first:
         name: _Texture
       second:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 5c01c7a688abde146851695fa9dfebeb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -99,7 +99,7 @@ Material:
       second: 1
     - first:
         name: _Inside
-      second: 0
+      second: 1.28
     - first:
         name: _Metallic
       second: 0
@@ -114,7 +114,7 @@ Material:
       second: 0.02
     - first:
         name: _Rim
-      second: 1.2
+      second: 0.373
     - first:
         name: _SmoothnessTextureChannel
       second: 0
@@ -123,16 +123,16 @@ Material:
       second: 1
     - first:
         name: _Speed
-      second: 0.5
+      second: 0.83
     - first:
         name: _SrcBlend
       second: 1
     - first:
         name: _Strength
-      second: 1.5
+      second: 1.78
     - first:
         name: _Tile
-      second: 5
+      second: 3.23
     - first:
         name: _UVSec
       second: 0
@@ -142,7 +142,7 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0, g: 0.95862055, b: 1, a: 0.753}
+      second: {r: 0, g: 0.83448315, b: 1, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}

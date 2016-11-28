@@ -23,12 +23,25 @@ public class DamageController : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider col) {
+        if (GetComponent<ShipController>().shield.enabled)
+        {
+            if(col.gameObject.GetComponent<TurretBullet>() != null)
+            {
+                if (col.gameObject.GetComponent<TurretBullet>().bounce) return;
+                col.gameObject.GetComponent<TurretBullet>().bounce = true;
+                col.gameObject.GetComponent<TurretBullet>().speed *= -.7f;
+                col.transform.Rotate(col.transform.up, Random.Range(-30f, 30f));
+                col.transform.Rotate(col.transform.right, Random.Range(-30f, 30f));
+            }
+            return;
+        }
         int damageDealt;
         switch (col.gameObject.tag) {
             case "Bullet":
             case "Bullet1":
             case "Bullet2":
                 damageDealt = 1;
+                Destroy(col.gameObject);
                 break;
 
             default:
@@ -39,6 +52,7 @@ public class DamageController : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision col) {
+        if (GetComponent<ShipController>().shield.enabled) return;
         int damageDealt;
         switch (col.gameObject.tag) {
             case "Asteroid":
