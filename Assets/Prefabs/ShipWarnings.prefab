@@ -156,13 +156,14 @@ GameObject:
   - 224: {fileID: 224000012547037910}
   - 222: {fileID: 222000011889009216}
   - 114: {fileID: 114000013567615692}
+  - 225: {fileID: 225000010793696386}
   m_Layer: 5
   m_Name: Hullbreach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000011912084044
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,13 +174,14 @@ GameObject:
   - 224: {fileID: 224000010654286396}
   - 222: {fileID: 222000012401803960}
   - 114: {fileID: 114000013870377760}
+  - 225: {fileID: 225000010691789044}
   m_Layer: 5
   m_Name: GravityGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000012339656548
 GameObject:
   m_ObjectHideFlags: 1
@@ -240,13 +242,14 @@ GameObject:
   - 224: {fileID: 224000013806391882}
   - 222: {fileID: 222000012697236428}
   - 114: {fileID: 114000013812920708}
+  - 225: {fileID: 225000011769670068}
   m_Layer: 5
   m_Name: Engine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000013006612940
 GameObject:
   m_ObjectHideFlags: 1
@@ -323,13 +326,14 @@ GameObject:
   - 224: {fileID: 224000012472861340}
   - 222: {fileID: 222000013097347088}
   - 114: {fileID: 114000010357555436}
+  - 225: {fileID: 225000014001719506}
   m_Layer: 5
   m_Name: CommandCenter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &114000010108752184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1337,3 +1341,47 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &225000010691789044
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011912084044}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &225000010793696386
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011733107796}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &225000011769670068
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012739500518}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!225 &225000014001719506
+CanvasGroup:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000014260296110}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
