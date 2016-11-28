@@ -11,12 +11,8 @@ public class Start : MonoBehaviour {
 	}
 
     public void MainMenu() {
-        SceneManager.LoadScene("start");
+        SceneManager.LoadScene("Start");
     }
-
-	public void Instructions() {
-		SceneManager.LoadScene("Instructions");
-	}
 
 	public void Quit() {
 		Application.Quit();
