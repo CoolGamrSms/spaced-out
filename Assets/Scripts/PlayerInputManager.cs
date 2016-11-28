@@ -19,7 +19,7 @@ public class PlayerInputManager : MonoBehaviour {
     void FixedUpdate() {
         if (ActiveDevice.CommandWasPressed && !gameStarted) {
             gameStarted = true;
-            SceneManager.LoadScene("RaceScene");
+            SceneManager.LoadScene("Tutorial");
         }
         
         if (ActiveDevice.Action1.WasPressed && !gameStarted) {
