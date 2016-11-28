@@ -33,9 +33,16 @@ public class ShipController : MonoBehaviour {
         get; private set;
     }
 
-	public GameObject[] warnings;
+	CanvasGroup[] warnings;
 	Slider powerbar;
 	int powerup = 25;
+
+	enum EWarning {
+		Hullbreach,
+		CommandCenter,
+		GravityGenerator,
+		Engine
+	}
 
     void Awake() {
         sController = PlayerInputManager.Instance.controllers[playerNumber];
@@ -55,7 +62,8 @@ public class ShipController : MonoBehaviour {
 		}
 
 		powerbar = GetComponentInChildren<Slider> ();
-
+		warnings = GetComponentsInChildren<CanvasGroup> ();
+		print (warnings.Length);
     }
 
     void FixedUpdate() {
@@ -97,8 +105,7 @@ public class ShipController : MonoBehaviour {
 
     public void HullBreach() {
         hullDamage += maxSpeed*.1f;
-		warnings [0].SetActive(true);
-		StartCoroutine (RemoveWarning ( warnings [0]));
+		ShowWarning ((int)EWarning.Hullbreach);
     }
 
     public void FixBreach() {
@@ -107,15 +114,12 @@ public class ShipController : MonoBehaviour {
 
 	public void BreakEngine(){
 		speed = maxSpeed * .5f;
-        foreach(ParticleSystem ps in GetComponentsInChildren<ParticleSystem>()) ps.Stop();
 
-		warnings [3].SetActive(true);
-		StartCoroutine (RemoveWarning ( warnings [3]));
+		ShowWarning ((int)EWarning.Engine);
 	}
 
 	public void FixEngine(){
 		speed = maxSpeed;
-        foreach (ParticleSystem ps in GetComponentsInChildren<ParticleSystem>()) ps.Play();
     }
 
     public void BreakCommandCenter() {
@@ -123,8 +127,7 @@ public class ShipController : MonoBehaviour {
         rollAngle /= 3;
         turnSpeed /= 3;
 
-		warnings [1].SetActive(true);
-		StartCoroutine (RemoveWarning ( warnings [1]));
+		ShowWarning ((int)EWarning.CommandCenter);
     }
 
     public void FixedCommandCeneter() {
@@ -134,12 +137,16 @@ public class ShipController : MonoBehaviour {
     }
 
 	public void BreakGravityGenerator(){
-		warnings [2].SetActive(true);
-		StartCoroutine (RemoveWarning ( warnings [2]));
+		ShowWarning ((int)EWarning.GravityGenerator);
 	}
 
-	IEnumerator RemoveWarning(GameObject warning){
+	void ShowWarning(int warningNum){
+		warnings [warningNum].alpha = 1f;
+		StartCoroutine (RemoveWarning (warningNum));
+	}
+
+	IEnumerator RemoveWarning(int warningNum){
 		yield return new WaitForSeconds (1.5f);
-		warning.SetActive (false);
+		warnings[warningNum].alpha = 0f;
 	}
 }
