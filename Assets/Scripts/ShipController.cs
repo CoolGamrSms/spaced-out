@@ -33,11 +33,12 @@ public class ShipController : MonoBehaviour {
         get; private set;
     }
 
-	GameObject[] warnings;
+	public GameObject[] warnings;
+	Slider powerbar;
+	int powerup = 25;
 
     void Awake() {
         sController = PlayerInputManager.Instance.controllers[playerNumber];
-		warnings = GetComponentInChildren<Canvas> ().GetComponentsInChildren<GameObject> ();
     }
 
     void Start () {
@@ -52,6 +53,9 @@ public class ShipController : MonoBehaviour {
 				bulletSpawns.Add(child);
 			}
 		}
+
+		powerbar = GetComponentInChildren<Slider> ();
+
     }
 
     void FixedUpdate() {
@@ -80,6 +84,16 @@ public class ShipController : MonoBehaviour {
         transform.rotation = rot;
     }
 
+	void OnTriggerEnter(Collider coll){
+		print ("powering");
+		if (coll.CompareTag ("Ring")) {
+			if (powerbar.value + powerup <= powerbar.maxValue) {
+				powerbar.value += powerup;
+			} else {
+				powerbar.value = powerbar.maxValue;
+			}
+		}
+	}
 
     public void HullBreach() {
         hullDamage += maxSpeed*.1f;
@@ -125,7 +139,7 @@ public class ShipController : MonoBehaviour {
 	}
 
 	IEnumerator RemoveWarning(GameObject warning){
-		yield return new WaitForSeconds (2f);
+		yield return new WaitForSeconds (1.5f);
 		warning.SetActive (false);
 	}
 }
