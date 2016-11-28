@@ -42,9 +42,9 @@ public class Asteroid : MonoBehaviour {
 	void OnCollisionEnter(Collision col) {
 		if (col.gameObject.tag == "Bullet1" || col.gameObject.tag == "Bullet2") {
 			transform.localScale -= new Vector3(1, 1, 1);
-			GetComponent<Rigidbody>().mass -= .1f;
+			// GetComponent<Rigidbody>().mass -= .1f;
 
-			if (GetComponent<Collider>().bounds.size == Vector3.zero) {
+			if (transform.localScale == Vector3.zero) {
 				Destroy(gameObject);
 			}
 		}
