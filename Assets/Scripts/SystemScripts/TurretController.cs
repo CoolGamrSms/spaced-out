@@ -50,7 +50,7 @@ public class TurretController : Engineer {
 
         timer += Time.deltaTime;
         if (timer > cooldownVibration) {
-            eController.StopVibration();
+            //eController.StopVibration();
         }
 
         if (sc.commandCenterBroken) return;

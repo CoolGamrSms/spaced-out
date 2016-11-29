@@ -6,6 +6,10 @@ using InControl;
 
 public class Start : MonoBehaviour {
 
+	public void Awake() {
+		Cursor.visible = false;
+	}
+
 	public void StartGame() {
 		SceneManager.LoadScene("ReadyCheck");
 	}
