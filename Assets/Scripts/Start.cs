@@ -11,10 +11,12 @@ public class Start : MonoBehaviour {
 	}
 
 	public void StartGame() {
+		PlayerInputManager.Instance.Clear ();
 		SceneManager.LoadScene("ReadyCheck");
 	}
 
     public void MainMenu() {
+		PlayerInputManager.Instance.Clear ();
         SceneManager.LoadScene("Start");
     }
 

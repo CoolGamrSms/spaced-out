@@ -27,7 +27,6 @@ public class PlayerInputManager : MonoBehaviour {
                 if (controller == ActiveDevice)
                     return;
             }
-
             controllers[0] = ActiveDevice;
         }
 
@@ -90,4 +89,9 @@ public class PlayerInputManager : MonoBehaviour {
             return InputManager.ActiveDevice;
         }
     }
+
+	public void Clear(){
+		controllers = new InputDevice[4];
+		gameStarted = false;
+	}
 }

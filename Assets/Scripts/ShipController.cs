@@ -79,7 +79,6 @@ public class ShipController : MonoBehaviour {
 
         powerbar = GetComponentInChildren<Slider>();
         warnings = GetComponentsInChildren<CanvasGroup>();
-        print(warnings.Length);
     }
 
     void DisableShield()
@@ -196,7 +195,6 @@ public class ShipController : MonoBehaviour {
     void ShowWarning(int warningNum) {
 		if (activeWarnings.Count == 0) {
 			warnings [warningNum].alpha = 1f;
-			Debug.Log (warningNum);
 		}
 		activeWarnings.Enqueue (warningNum);
         StartCoroutine(RemoveWarning(warningNum));
