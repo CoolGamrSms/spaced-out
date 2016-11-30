@@ -14,13 +14,13 @@ public class ShipController : MonoBehaviour {
 
     float timer = 1f;
     public float cooldownLimit = 1f;
-    public float cooldownVibration = .3f;
+
     public float boostDur = 3f;
     public float boostSpeed = 15f;
 
     float boostVal;
 
-	float mypitch;
+    float mypitch;
 
     List<Transform> bulletSpawns = new List<Transform>();
 
@@ -58,10 +58,10 @@ public class ShipController : MonoBehaviour {
 	CanvasGroup warning;
 	Queue<string> activeWarnings = new Queue<string>();
 
-	Slider powerbar;
-	int power = 50;
-	int maxPower = 100;
-	int powerup = 25;
+    Slider powerbar;
+    int power = 50;
+    int maxPower = 100;
+    int powerup = 25;
 
     enum EWarning {
         Hullbreach,
@@ -77,7 +77,7 @@ public class ShipController : MonoBehaviour {
         superboost = false;
         shield = transform.FindChild("Shield").GetComponent<MeshRenderer>();
         shoot = GetComponent<AudioSource>();
-		mypitch = shoot.pitch;
+        mypitch = shoot.pitch;
         sController = PlayerInputManager.Instance.controllers[playerNumber];
         shield.enabled = false;
     }
@@ -100,8 +100,11 @@ public class ShipController : MonoBehaviour {
         warning = GetComponentInChildren<CanvasGroup>();
     }
 
-    public void StartBoost(bool sup)
-    {
+    void DisableShield() {
+        shield.enabled = false;
+    }
+
+    public void StartBoost() {
         boostTimer = boostDur;
         superboost = sup;
     }
@@ -123,8 +126,7 @@ public class ShipController : MonoBehaviour {
             }
         }
         //Handle rings
-        if(nextRing != null && Vector3.SqrMagnitude(transform.position - curRing.transform.position) > Vector3.SqrMagnitude(transform.position - nextRing.transform.position))
-        {
+        if (nextRing != null && Vector3.SqrMagnitude(transform.position - curRing.transform.position) > Vector3.SqrMagnitude(transform.position - nextRing.transform.position)) {
             curRing = nextRing;
             if (curRing.GetComponent<BoosterRing>() != null) nextRing = curRing.GetComponent<BoosterRing>().nextRing;
             else nextRing = null;
@@ -132,9 +134,9 @@ public class ShipController : MonoBehaviour {
         //Lerp power bar
         powerbar.value = Mathf.MoveTowards(powerbar.value, power, 1);
 
-        // if (sController.DPadUp.WasPressed) {
-        //     gameObject.GetComponent<DamageController>().BreakAll();
-        // }
+        //if (sController.DPadUp.WasPressed) {
+        //    gameObject.GetComponent<DamageController>().BreakAll();
+        //}
 
         //Shield
         if(sController.Action2.WasPressed && !commandCenterBroken)
@@ -143,8 +145,7 @@ public class ShipController : MonoBehaviour {
         }
 
         //Boost
-        if (boostTimer > 0)
-        {
+        if (boostTimer > 0) {
             boostTimer -= Time.deltaTime;
             boostVal += Time.deltaTime * boostSpeed;
             if (boostVal > boostSpeed) boostVal = boostSpeed;
@@ -166,7 +167,6 @@ public class ShipController : MonoBehaviour {
         if (sController.Action1.IsPressed && timer > cooldownLimit && !commandCenterBroken) {
 			shoot.pitch = mypitch + Random.Range (-0.1f, 0);
             shoot.Play();
-            //sController.Vibrate(100.0f);
             foreach (Transform pos in bulletSpawns) {
                 GameObject bullet = Instantiate(pBullet);
                 bullet.transform.rotation = pos.rotation;
@@ -175,10 +175,6 @@ public class ShipController : MonoBehaviour {
             timer = 0f;
         }
         timer += Time.deltaTime;
-
-        //if (timer > cooldownVibration) {
-        //    sController.StopVibration();
-        //}
 
         rb.AddRelativeTorque(sController.LeftStickY.Value * turnSpeed, 0, 0); // W key or the up arrow to turn upwards, S or the down arrow to turn downwards. 
         rb.AddRelativeTorque(0, sController.LeftStickX.Value * turnSpeed, 0); // A or left arrow to turn left, D or right arrow to turn right. 
@@ -189,12 +185,28 @@ public class ShipController : MonoBehaviour {
         q = Quaternion.Euler(q.eulerAngles.x, q.eulerAngles.y, -sController.LeftStickX.Value * rollAngle);
         Quaternion rot = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * rollBack);
         transform.rotation = rot;
+
+        HandleVibration();
     }
 
-	
 
+    bool isVibrating = false;
     public void BreakVibration() {
-        //sController.Vibrate(100.0f);
+        isVibrating = true;
+    }
+
+    float timerVibration = 0f;
+    float cooldownVibration = .5f;
+    void HandleVibration() {
+        if (isVibrating) {
+            sController.Vibrate(100.0f);
+            timerVibration += Time.deltaTime;
+        }
+        if (timerVibration > cooldownVibration) {
+            sController.StopVibration();
+            timerVibration = 0f;
+            isVibrating = false;
+        }
     }
 
     public void HullBreach() {
@@ -237,5 +249,7 @@ public class ShipController : MonoBehaviour {
 
     void ShowWarning(string msg) {
         activeWarnings.Enqueue(msg);
+        ShowWarning((int)EWarning.GravityGenerator);
     }
+
 }

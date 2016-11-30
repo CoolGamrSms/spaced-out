@@ -33,12 +33,31 @@ public class ShipSystem : Engineer {
         ResetHealth();
     }
 
+    void FixedUpdate() {
+        HandleVibration();
+    }
+
     virtual protected void Break() {
         broken = true;
         repairScript.SetBroken();
         breakStuff.Play();
-        //eController.Vibrate(100.0f);
-        //sc.BreakVibration();
+        isVibrating = true;
+        sc.BreakVibration();
+    }
+
+    bool isVibrating = false;
+    float timerVibration = 0f;
+    float cooldownVibration = .5f;
+    void HandleVibration() {
+        if (isVibrating) {
+            eController.Vibrate(100.0f);
+            timerVibration += Time.deltaTime;
+        }
+        if (timerVibration > cooldownVibration) {
+            eController.StopVibration();
+            timerVibration = 0f;
+            isVibrating = false;
+        }
     }
 
     public int health { get; protected set; }
@@ -55,5 +74,4 @@ public class ShipSystem : Engineer {
     }
 
     protected virtual void ResetHealth() { }
-
 }
