@@ -18,11 +18,7 @@ public class Hull : ShipSystem {
         fixonce = true;
     }
 
-    protected override void ResetHealth() {
-        health = hullHealth;
-    }
-
-    // Only enabled when Engineer in range
+    // Enabled when Engineer in range
     void FixedUpdate() {
         if (!broken && !fixonce) {
 			breachSprite.enabled = false;
@@ -32,12 +28,15 @@ public class Hull : ShipSystem {
         }
     }
 
-	protected override void Break ()
-	{
+	protected override void Break () {
 		base.Break ();
         fixonce = false;
 		breachSprite.enabled = true;
         particles.Play();
 		sc.HullBreach ();
 	}
+
+    protected override void ResetHealth() {
+        health = hullHealth;
+    }
 }
