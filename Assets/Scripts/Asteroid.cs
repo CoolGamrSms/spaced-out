@@ -6,6 +6,7 @@ public class Asteroid : MonoBehaviour {
 	public float speed;
 	public float radius;
 	Vector3 startPos;
+	public Vector3 target;
 
 	int randDirX;
 	int randDirY;
@@ -13,9 +14,12 @@ public class Asteroid : MonoBehaviour {
 
 	void Awake() {
 		startPos = transform.position;
-		randDirX = Random.Range(0, 180);
-		randDirY = Random.Range(0, 180);
-		randDirZ = Random.Range(0, 180);
+
+		updateTarget();
+	}
+
+	void updateTarget() {
+		target = startPos + (Random.insideUnitSphere * radius);
 	}
 
 	void FixedUpdate() {
@@ -23,20 +27,11 @@ public class Asteroid : MonoBehaviour {
 	}
 
 	void Move() {
-		if (transform.position.x < startPos.x - radius || transform.position.x > startPos.x + radius) {
-			randDirX = Random.Range(0, 180);
-			speed *= -1;
-		}
-		else if (transform.position.y < startPos.y - radius || transform.position.y > startPos.y + radius) {
-			randDirY = Random.Range(0, 180);
-			speed *= -1;
-		}
-		else if (transform.position.z < startPos.z - radius || transform.position.z > startPos.z + radius) {
-			randDirZ = Random.Range(0, 180);
-			speed *= -1;
+		if ((transform.position - target).magnitude < 1) {
+			updateTarget();
 		}
 
-		GetComponent<Rigidbody>().velocity = Quaternion.Euler(randDirX, randDirY, randDirZ) * Vector3.right * speed;
+		transform.position = Vector3.Lerp(transform.position, target, .05f);
 	}
 
 	void OnTriggerEnter(Collider col) {
