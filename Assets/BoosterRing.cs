@@ -5,7 +5,6 @@ public class BoosterRing : MonoBehaviour {
 
     GameObject firstShip;
     public GameObject nextRing;
-    [HideInInspector] public GameObject asteroid;
 
     void OnTriggerEnter(Collider coll)
     {
@@ -15,18 +14,12 @@ public class BoosterRing : MonoBehaviour {
             if(firstShip == null)
             {
                 firstShip = coll.gameObject;
-                //Spawn asteroids 2 rings ahead
-                if(nextRing != null && nextRing.GetComponent<BoosterRing>() != null)
-                {
-                    Transform area = nextRing.GetComponent<BoosterRing>().nextRing.transform;
-                    GameObject a = Instantiate(asteroid);
-                    a.transform.position = area.position;
-                }
+                sc.StartBoost(false);
             }
+            else sc.StartBoost(true);
             sc.curRing = nextRing;
             if (nextRing != null && nextRing.GetComponent<BoosterRing>() != null) sc.nextRing = nextRing.GetComponent<BoosterRing>().nextRing;
             else sc.nextRing = null;
-            sc.StartBoost();
         }
     }
 }

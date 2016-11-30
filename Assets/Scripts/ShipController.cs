@@ -38,6 +38,9 @@ public class ShipController : MonoBehaviour {
     public float turnSpeed;
     float hullDamage;
 
+    float warningTimer;
+    bool superboost;
+
     private Vector3 moveDir;
     private Vector3 lookDir;
     private Rigidbody rb;
@@ -52,8 +55,8 @@ public class ShipController : MonoBehaviour {
         get; private set;
     }
 
-	CanvasGroup[] warnings;
-	Queue<int> activeWarnings = new Queue<int>();
+	CanvasGroup warning;
+	Queue<string> activeWarnings = new Queue<string>();
 
 	Slider powerbar;
 	int power = 50;
@@ -70,6 +73,8 @@ public class ShipController : MonoBehaviour {
     void Awake() {
         boostTimer = 0f;
         boostVal = 0f;
+        warningTimer = 0f;
+        superboost = false;
         shield = transform.FindChild("Shield").GetComponent<MeshRenderer>();
         shoot = GetComponent<AudioSource>();
 		mypitch = shoot.pitch;
@@ -92,19 +97,31 @@ public class ShipController : MonoBehaviour {
         }
 
         powerbar = GetComponentInChildren<Slider>();
-        warnings = GetComponentsInChildren<CanvasGroup>();
+        warning = GetComponentInChildren<CanvasGroup>();
     }
 
-    void DisableShield()
-    {
-        shield.enabled = false;
-    }
-
-    public void StartBoost()
+    public void StartBoost(bool sup)
     {
         boostTimer = boostDur;
+        superboost = sup;
     }
     void FixedUpdate() {
+        //Show warnings
+        warningTimer -= Time.deltaTime;
+        if (warningTimer < 0) warningTimer = 0;
+        if(warningTimer == 0)
+        {
+            if (activeWarnings.Count > 0)
+            {
+                warningTimer = 1.5f;
+                warning.GetComponentInChildren<Text>().text = activeWarnings.Dequeue();
+                warning.alpha = 1f;
+            }
+            else
+            {
+                warning.alpha = 0f;
+            }
+        }
         //Handle rings
         if(nextRing != null && Vector3.SqrMagnitude(transform.position - curRing.transform.position) > Vector3.SqrMagnitude(transform.position - nextRing.transform.position))
         {
@@ -120,11 +137,9 @@ public class ShipController : MonoBehaviour {
         // }
 
         //Shield
-        if(sController.Action2.WasPressed && !shield.enabled && power >= 40)
+        if(sController.Action2.WasPressed && !commandCenterBroken)
         {
-            shield.enabled = true;
-            Invoke("DisableShield", 3f);
-            power -= 40;
+            shield.enabled = !shield.enabled;
         }
 
         //Boost
@@ -148,7 +163,7 @@ public class ShipController : MonoBehaviour {
         }*/
 
         //Fire
-        if (sController.Action1.IsPressed && timer > cooldownLimit) {
+        if (sController.Action1.IsPressed && timer > cooldownLimit && !commandCenterBroken) {
 			shoot.pitch = mypitch + Random.Range (-0.1f, 0);
             shoot.Play();
             //sController.Vibrate(100.0f);
@@ -168,7 +183,7 @@ public class ShipController : MonoBehaviour {
         rb.AddRelativeTorque(sController.LeftStickY.Value * turnSpeed, 0, 0); // W key or the up arrow to turn upwards, S or the down arrow to turn downwards. 
         rb.AddRelativeTorque(0, sController.LeftStickX.Value * turnSpeed, 0); // A or left arrow to turn left, D or right arrow to turn right. 
 
-        rb.AddForce(transform.forward * Mathf.Max(0f, speed - hullDamage + boostVal), ForceMode.VelocityChange);
+        rb.AddForce(transform.forward * Mathf.Max(0f, speed - hullDamage + boostVal + (superboost ? 0 : 3.5f)) * (shield.enabled ? 0.9f : 1f), ForceMode.VelocityChange);
 
         Quaternion q = transform.rotation;
         q = Quaternion.Euler(q.eulerAngles.x, q.eulerAngles.y, -sController.LeftStickX.Value * rollAngle);
@@ -183,30 +198,31 @@ public class ShipController : MonoBehaviour {
     }
 
     public void HullBreach() {
-        hullDamage += maxSpeed * .1f;
-        ShowWarning((int)EWarning.Hullbreach);
+        hullDamage += maxSpeed * .075f;
+        ShowWarning("Hull breached!");
     }
 
     public void FixBreach() {
-        hullDamage -= maxSpeed * .1f;
+        hullDamage -= maxSpeed * .075f;
     }
 
     public void BreakEngine() {
         speed = maxSpeed * .5f;
-
-        ShowWarning((int)EWarning.Engine);
+        foreach (ParticleSystem ps in GetComponentsInChildren<ParticleSystem>()) ps.Stop();
+        ShowWarning("Engine offline!");
     }
 
     public void FixEngine() {
         speed = maxSpeed;
+        foreach (ParticleSystem ps in GetComponentsInChildren<ParticleSystem>()) ps.Play();
     }
 
     public void BreakCommandCenter() {
         commandCenterBroken = true;
         rollAngle /= 3;
         turnSpeed /= 3;
-
-        ShowWarning((int)EWarning.CommandCenter);
+        shield.enabled = false;
+        ShowWarning("Command center broken!");
     }
 
     public void FixedCommandCeneter() {
@@ -216,24 +232,10 @@ public class ShipController : MonoBehaviour {
     }
 
     public void BreakGravityGenerator() {
-        ShowWarning((int)EWarning.GravityGenerator);
+        ShowWarning("Gravity generator damaged!");
     }
 
-    void ShowWarning(int warningNum) {
-		if (activeWarnings.Count == 0) {
-			warnings [warningNum].alpha = 1f;
-		}
-		activeWarnings.Enqueue (warningNum);
-        StartCoroutine(RemoveWarning(warningNum));
-    }
-
-    IEnumerator RemoveWarning(int warningNum) {
-        yield return new WaitForSeconds(1.5f);
-		warnings[activeWarnings.Peek()].alpha = 0f;
-		activeWarnings.Dequeue ();
-		if (activeWarnings.Count != 0) {
-			warnings [activeWarnings.Peek ()].alpha = 1f;
-			StartCoroutine (RemoveWarning (activeWarnings.Peek ()));
-		}
+    void ShowWarning(string msg) {
+        activeWarnings.Enqueue(msg);
     }
 }

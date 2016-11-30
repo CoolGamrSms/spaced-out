@@ -3,16 +3,13 @@ using System.Collections;
 
 public class TurretBullet : MonoBehaviour {
     public float speed = 1f;
-    public float timer = 10f;
+    public float timer = 4f;
     [HideInInspector] public bool bounce = false;
+    [HideInInspector]
+    public Vector3 shipV;
 
     void Start() {
-        //GetComponent<Rigidbody>().AddForce(transform.forward * speed, ForceMode.Impulse);
-    }
-
-    void Update()
-    {
-        transform.position += transform.forward * speed * Time.deltaTime;
+        GetComponent<Rigidbody>().velocity = shipV + transform.forward * speed;
     }
 
     void FixedUpdate()

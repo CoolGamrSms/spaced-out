@@ -73,6 +73,7 @@ public class EngineerController : Engineer {
         moveSpeed *= .5f;
         strafeSpeed *= .5f;
         gravity = false;
+        sc.BreakGravityGenerator();
     }
 
     public void ResumeGravity() {
