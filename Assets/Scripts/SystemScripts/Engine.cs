@@ -10,11 +10,13 @@ public class Engine : ShipSystem {
     Material m;
 
     public GameObject title;
+    public Image engineImg;
 
     protected override void Start() {
         base.Start();
         health = engineHealth;
         m = GetComponent<Renderer>().material;
+        engineImg.enabled = false;
     }
 
 	protected override void Break () {
@@ -22,6 +24,7 @@ public class Engine : ShipSystem {
 		sc.BreakEngine ();
         GetComponent<Renderer>().material = m2;
         title.GetComponent<TextMesh>().color = Color.red;
+        engineImg.enabled = true;
 	}
 
     protected override void ResetHealth() {
@@ -29,5 +32,6 @@ public class Engine : ShipSystem {
         health = engineHealth;
         GetComponent<Renderer>().material = m;
         title.GetComponent<TextMesh>().color = Color.green;
+        engineImg.enabled = false;
     }
 }

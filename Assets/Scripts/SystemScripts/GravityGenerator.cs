@@ -10,11 +10,13 @@ public class GravityGenerator : ShipSystem {
 	Rigidbody rb;
 
 	public GameObject title;
+	public Image gravityImg;
 
     protected override void Start() {
         rb = GetComponent<Rigidbody>();
         base.Start();
         health = generatorHealth;
+        gravityImg.enabled = false;
     }
 
 	protected override void Break () {
@@ -23,6 +25,7 @@ public class GravityGenerator : ShipSystem {
 		rb.useGravity = false;
 		ec.LoseGravity ();
 		title.GetComponent<TextMesh>().color = Color.red;
+		gravityImg.enabled = true;
 	}
 
     protected override void ResetHealth() {
@@ -30,5 +33,6 @@ public class GravityGenerator : ShipSystem {
 		ec.ResumeGravity ();
         health = generatorHealth;
         title.GetComponent<TextMesh>().color = Color.green;
+        gravityImg.enabled = false;
     }
 }

@@ -12,6 +12,7 @@ public class CommandCenter : ShipSystem {
 	MeshRenderer mr;
 
     public GameObject title;
+    public Image cmdImg;
 
     protected override void Start() {
         base.Start();
@@ -19,6 +20,7 @@ public class CommandCenter : ShipSystem {
 
 		mr = GetComponent<MeshRenderer> ();
 		normalMat = mr.material;
+        cmdImg.enabled = false;
     }
 
     protected override void Break() {
@@ -26,6 +28,7 @@ public class CommandCenter : ShipSystem {
         sc.BreakCommandCenter();
 		mr.material = brokenMat;
         title.GetComponent<TextMesh>().color = Color.red;
+        cmdImg.enabled = true;
     }
 
     protected override void ResetHealth() {
@@ -33,5 +36,6 @@ public class CommandCenter : ShipSystem {
         sc.FixedCommandCeneter();
 		mr.material = normalMat;
         title.GetComponent<TextMesh>().color = Color.green;
+        cmdImg.enabled = false;
     }
 }

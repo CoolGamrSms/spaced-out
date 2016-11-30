@@ -8,6 +8,10 @@ public class Hull : ShipSystem {
 	const int hullHealth = 3;
     bool fixonce;
 
+    public Image hullImg;
+
+    public int numHull = 0;
+
     protected override void Start() {
         breachSprite = GetComponent<SpriteRenderer>();
         particles = GetComponentInChildren<ParticleSystem>();
@@ -16,6 +20,7 @@ public class Hull : ShipSystem {
 		breachSprite.enabled = false;
         particles.Stop();
         fixonce = true;
+        hullImg.enabled = false;
     }
 
     // Enabled when Engineer in range
@@ -34,9 +39,15 @@ public class Hull : ShipSystem {
 		breachSprite.enabled = true;
         particles.Play();
 		sc.HullBreach ();
+        hullImg.enabled = true;
+        numHull++;
 	}
 
     protected override void ResetHealth() {
         health = hullHealth;
+        numHull--;
+        if (numHull == 0) {
+            hullImg.enabled = false;
+        }
     }
 }
