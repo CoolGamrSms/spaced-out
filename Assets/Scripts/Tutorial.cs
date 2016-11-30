@@ -12,10 +12,7 @@ public class Tutorial : MonoBehaviour {
 	int x = 0;
 
 	void Update() {
-		if (PlayerInputManager.Instance.controllers[0].Action1.WasPressed
-			|| PlayerInputManager.Instance.controllers[1].Action1.WasPressed
-			|| PlayerInputManager.Instance.controllers[2].Action1.WasPressed
-			|| PlayerInputManager.Instance.controllers[3].Action1.WasPressed) {
+		if (InputManager.ActiveDevice.Action1.WasPressed) {
 			ChangeIntro ();
 		}
 	}

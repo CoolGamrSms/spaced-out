@@ -132,7 +132,7 @@ public class ShipController : MonoBehaviour {
             else nextRing = null;
         }
         //Lerp power bar
-        powerbar.value = Mathf.MoveTowards(powerbar.value, power, 1);
+        //powerbar.value = Mathf.MoveTowards(powerbar.value, power, 1);
 
         //if (sController.DPadUp.WasPressed) {
         //    gameObject.GetComponent<DamageController>().BreakAll();
