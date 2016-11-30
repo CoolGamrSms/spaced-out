@@ -10,7 +10,7 @@ public class Hull : ShipSystem {
 
     public Image hullImg;
 
-    public int numHull = 0;
+    static int numHull = 0;
 
     protected override void Start() {
         breachSprite = GetComponent<SpriteRenderer>();
