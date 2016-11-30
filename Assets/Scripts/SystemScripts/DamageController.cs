@@ -1,18 +1,20 @@
 using UnityEngine;
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class DamageController : MonoBehaviour {
+
     public GameObject shipInterior;
 
     List<ShipSystem> systems;
+
     void Awake() {
         systems = shipInterior.GetComponentsInChildren<ShipSystem>().ToList();
         foreach (ShipSystem ss in systems) ss.sc = GetComponent<ShipController>();
     }
 
-    //For testing
+    // Test
     public void BreakAll() {
         Debug.LogWarning("Breaking all");
         foreach (ShipSystem ss in systems) {
@@ -23,19 +25,23 @@ public class DamageController : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider col) {
-        if (GetComponent<ShipController>().shield.enabled)
-        {
-            if(col.gameObject.GetComponent<TurretBullet>() != null)
-            {
-                if (col.gameObject.GetComponent<TurretBullet>().bounce) return;
+        if (GetComponent<ShipController>().shield.enabled) {
+            if(col.gameObject.GetComponent<TurretBullet>() != null) {
+                if (col.gameObject.GetComponent<TurretBullet>().bounce) {
+                    return;
+                }
+
                 col.gameObject.GetComponent<TurretBullet>().bounce = true;
                 col.gameObject.GetComponent<TurretBullet>().speed *= -.7f;
                 col.transform.Rotate(col.transform.up, Random.Range(-30f, 30f));
                 col.transform.Rotate(col.transform.right, Random.Range(-30f, 30f));
             }
+
             return;
         }
+
         int damageDealt = 0;
+
         switch (col.gameObject.tag) {
             case "Bullet":
             case "Bullet1":
@@ -43,26 +49,30 @@ public class DamageController : MonoBehaviour {
                 damageDealt = 4;
                 Destroy(col.gameObject);
                 break;
-
             default:
                 damageDealt = 0;
                 break;
         }
+
         systems.Shuffle().First().TakeDamage(damageDealt);
     }
 
     void OnCollisionEnter(Collision col) {
-        if (GetComponent<ShipController>().shield.enabled) return;
+        if (GetComponent<ShipController>().shield.enabled) {
+            return;
+        }
+
         int damageDealt = 0;
+
         switch (col.gameObject.tag) {
             case "Asteroid":
                 damageDealt = 2;
                 break;
-
             default:
                 damageDealt = 0;
                 break;
         }
+
         systems.Shuffle().First().TakeDamage(damageDealt);
     }
 }

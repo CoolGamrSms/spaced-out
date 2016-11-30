@@ -12,7 +12,6 @@ public class ButtonHold : Repair {
     ShipSystem system;
     bool fixing;
 
-    // Use this for initialization
     void Start() {
         system = GetComponentInParent<ShipSystem>();
         timer = GetComponentInChildren<Slider>();
@@ -21,13 +20,14 @@ public class ButtonHold : Repair {
         canvas.enabled = false;
     }
 
-    // Only enabled when Engineer in range
     void FixedUpdate() {
         canvas.enabled = system.interacting && system.broken;
-        if (system.interacting && eController.Action3.WasPressed) fixing = true;
 
-        if (fixing)
-        {
+        if (system.interacting && eController.Action3.WasPressed) {
+            fixing = true;
+        }
+
+        if (fixing) {
             if (eController.Action3.WasReleased) fixing = false;
             if (!system.interacting) fixing = false;
         }
