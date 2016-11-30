@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Asteroid : MonoBehaviour {
 
-	public float speed;
-	public float radius;
+	public float speed = 30f;
+	public float radius = 50f;
 	Vector3 startPos;
 
 	int randDirX;
@@ -16,6 +16,7 @@ public class Asteroid : MonoBehaviour {
 		randDirX = Random.Range(0, 180);
 		randDirY = Random.Range(0, 180);
 		randDirZ = Random.Range(0, 180);
+        speed = 0;
 	}
 
 	void FixedUpdate() {

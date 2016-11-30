@@ -21,8 +21,13 @@ public class ShipController : MonoBehaviour {
 
     public float speed;
     float maxSpeed;
-    bool boost;
 
+
+    //Rings
+    public GameObject curRing;
+    public GameObject nextRing;
+
+    //Controls
     public float rollBack;
     public float rollAngle;
     public float turnSpeed;
@@ -35,6 +40,8 @@ public class ShipController : MonoBehaviour {
 
     [HideInInspector]
     public MeshRenderer shield;
+
+    bool boost;
 
     public bool commandCenterBroken {
         get; private set;
@@ -65,6 +72,7 @@ public class ShipController : MonoBehaviour {
     }
 
     void Start() {
+        nextRing = curRing.GetComponent<BoosterRing>().nextRing;
         maxSpeed = speed;
         rb = GetComponent<Rigidbody>();
         hullDamage = 0f;
@@ -90,7 +98,19 @@ public class ShipController : MonoBehaviour {
         boost = false;
     }
 
+    public void StartBoost()
+    {
+        boost = true;
+        Invoke("DisableBoost", 1f);
+    }
     void FixedUpdate() {
+        //Handle rings
+        if(nextRing != null && Vector3.SqrMagnitude(transform.position - curRing.transform.position) > Vector3.SqrMagnitude(transform.position - nextRing.transform.position))
+        {
+            curRing = nextRing;
+            if (curRing.GetComponent<BoosterRing>() != null) nextRing = curRing.GetComponent<BoosterRing>().nextRing;
+            else nextRing = null;
+        }
         //Lerp power bar
         powerbar.value = Mathf.MoveTowards(powerbar.value, power, 1);
 
@@ -143,13 +163,7 @@ public class ShipController : MonoBehaviour {
         transform.rotation = rot;
     }
 
-	void OnTriggerEnter(Collider coll){
-		print ("powering");
-		if (coll.CompareTag ("Ring")) {
-            power += powerup;
-            if (power > maxPower) power = maxPower;
-		}
-	}
+	
 
     public void BreakVibration() {
         //sController.Vibrate(100.0f);
