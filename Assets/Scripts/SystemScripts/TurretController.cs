@@ -10,7 +10,6 @@ public class TurretController : Engineer {
 
     float timer = 1f;
     public float cooldownLimit = 1f;
-    public float cooldownVibration = .1f;
     public Transform tilt;
     public float turnRate;
     public float tiltRate;
@@ -37,7 +36,6 @@ public class TurretController : Engineer {
             foreach (Transform pos in bulletSpawns) {
 				shoot.pitch = mypitch + Random.Range (-0.1f, 0f);
                 shoot.Play();
-                //eController.Vibrate(50.0f);
                 GameObject bullet = Instantiate(pBullet);
                 bullet.transform.rotation = pos.rotation;
                 bullet.transform.position = pos.position;
@@ -49,9 +47,6 @@ public class TurretController : Engineer {
         }
 
         timer += Time.deltaTime;
-        if (timer > cooldownVibration) {
-            //eController.StopVibration();
-        }
 
         if (sc.commandCenterBroken) return;
 
