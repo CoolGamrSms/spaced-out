@@ -24428,6 +24428,16 @@ Prefab:
       propertyPath: gravityImg
       value: 
       objectReference: {fileID: 659700333}
+    - target: {fileID: 114000010828630056, guid: a7e48660f74ebcc45ba946d391ab66fb,
+        type: 2}
+      propertyPath: lookSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010828630056, guid: a7e48660f74ebcc45ba946d391ab66fb,
+        type: 2}
+      propertyPath: strafeSpeed
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a7e48660f74ebcc45ba946d391ab66fb, type: 2}
   m_IsPrefabParent: 0
@@ -34516,6 +34526,16 @@ Prefab:
       propertyPath: gravityImg
       value: 
       objectReference: {fileID: 1425476321}
+    - target: {fileID: 114000010828630056, guid: a7e48660f74ebcc45ba946d391ab66fb,
+        type: 2}
+      propertyPath: strafeSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010828630056, guid: a7e48660f74ebcc45ba946d391ab66fb,
+        type: 2}
+      propertyPath: lookSpeed
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a7e48660f74ebcc45ba946d391ab66fb, type: 2}
   m_IsPrefabParent: 0
