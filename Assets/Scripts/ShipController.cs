@@ -15,6 +15,11 @@ public class ShipController : MonoBehaviour {
     float timer = 1f;
     public float cooldownLimit = 1f;
     public float cooldownVibration = .3f;
+    public float boostDur = 3f;
+    public float boostSpeed = 15f;
+
+    float boostVal;
+
 	float mypitch;
 
     List<Transform> bulletSpawns = new List<Transform>();
@@ -41,7 +46,7 @@ public class ShipController : MonoBehaviour {
     [HideInInspector]
     public MeshRenderer shield;
 
-    bool boost;
+    float boostTimer;
 
     public bool commandCenterBroken {
         get; private set;
@@ -63,7 +68,8 @@ public class ShipController : MonoBehaviour {
     }
 
     void Awake() {
-        boost = false;
+        boostTimer = 0f;
+        boostVal = 0f;
         shield = transform.FindChild("Shield").GetComponent<MeshRenderer>();
         shoot = GetComponent<AudioSource>();
 		mypitch = shoot.pitch;
@@ -93,15 +99,10 @@ public class ShipController : MonoBehaviour {
     {
         shield.enabled = false;
     }
-    void DisableBoost()
-    {
-        boost = false;
-    }
 
     public void StartBoost()
     {
-        boost = true;
-        Invoke("DisableBoost", 1f);
+        boostTimer = boostDur;
     }
     void FixedUpdate() {
         //Handle rings
@@ -127,12 +128,24 @@ public class ShipController : MonoBehaviour {
         }
 
         //Boost
+        if (boostTimer > 0)
+        {
+            boostTimer -= Time.deltaTime;
+            boostVal += Time.deltaTime * boostSpeed;
+            if (boostVal > boostSpeed) boostVal = boostSpeed;
+        }
+        else {
+            boostTimer = 0;
+            boostVal -= Time.deltaTime * boostSpeed / 3f;
+            if (boostVal < 0) boostVal = 0;
+        }
+        /*
         if (sController.Action3.WasPressed && !boost && power >= 20)
         {
             boost = true;
             Invoke("DisableBoost", 1f);
             power -= 25;
-        }
+        }*/
 
         //Fire
         if (sController.Action1.IsPressed && timer > cooldownLimit) {
@@ -155,7 +168,7 @@ public class ShipController : MonoBehaviour {
         rb.AddRelativeTorque(sController.LeftStickY.Value * turnSpeed, 0, 0); // W key or the up arrow to turn upwards, S or the down arrow to turn downwards. 
         rb.AddRelativeTorque(0, sController.LeftStickX.Value * turnSpeed, 0); // A or left arrow to turn left, D or right arrow to turn right. 
 
-        rb.AddForce(transform.forward * Mathf.Max(0f, speed - hullDamage + (boost ? maxSpeed * .8f : 0f)), ForceMode.VelocityChange);
+        rb.AddForce(transform.forward * Mathf.Max(0f, speed - hullDamage + boostVal), ForceMode.VelocityChange);
 
         Quaternion q = transform.rotation;
         q = Quaternion.Euler(q.eulerAngles.x, q.eulerAngles.y, -sController.LeftStickX.Value * rollAngle);
