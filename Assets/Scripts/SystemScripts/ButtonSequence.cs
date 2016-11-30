@@ -94,7 +94,6 @@ public class ButtonSequence : Repair {
 
 	override public void SetBroken () {
 		Reset ();
-        Debug.LogWarning("breaking: " + transform.parent.name);
 	}
 
     void Reset() {

@@ -104,7 +104,7 @@ public class ShipController : MonoBehaviour {
         shield.enabled = false;
     }
 
-    public void StartBoost() {
+    public void StartBoost(bool sup) {
         boostTimer = boostDur;
         superboost = sup;
     }
@@ -249,7 +249,6 @@ public class ShipController : MonoBehaviour {
 
     void ShowWarning(string msg) {
         activeWarnings.Enqueue(msg);
-        ShowWarning((int)EWarning.GravityGenerator);
     }
 
 }

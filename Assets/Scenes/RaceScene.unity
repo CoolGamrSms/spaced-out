@@ -4374,7 +4374,6 @@ MonoBehaviour:
   playerNumber: 2
   pBullet: {fileID: 1000013300093652, guid: 8a5fa9e19c395c941bf8db1d4f9e874c, type: 2}
   cooldownLimit: 1
-  cooldownVibration: 0.3
   boostDur: 3
   boostSpeed: 15
   speed: 20
@@ -4434,7 +4433,6 @@ MonoBehaviour:
   playerNumber: 3
   pBullet: {fileID: 1000013300093652, guid: 8a5fa9e19c395c941bf8db1d4f9e874c, type: 2}
   cooldownLimit: 0.2
-  cooldownVibration: 0.1
   tilt: {fileID: 930300870}
   turnRate: 2
   tiltRate: 1.5
@@ -8176,7 +8174,6 @@ MonoBehaviour:
   playerNumber: 1
   pBullet: {fileID: 1000013300093652, guid: d066bbdf12c3aaa48b64e13bf179e199, type: 2}
   cooldownLimit: 0.2
-  cooldownVibration: 0.1
   tilt: {fileID: 2034830204}
   turnRate: 2
   tiltRate: 1.5
@@ -8768,8 +8765,8 @@ Transform:
   m_LocalScale: {x: 0.10000009, y: 0.1, z: 0.10000009}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_Children: []
-  m_Father: {fileID: 1734280246}
-  m_RootOrder: 15
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
 --- !u!114 &669401531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8781,7 +8778,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03988596e08b18247a63e1cb3521fa97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  face: {fileID: 1734280247}
+  face: {fileID: 0}
   isEngineText: 1
 --- !u!102 &669401532
 TextMesh:
@@ -18900,6 +18897,11 @@ Prefab:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012189228488, guid: a7e48660f74ebcc45ba946d391ab66fb,
+        type: 2}
+      propertyPath: face
+      value: 
+      objectReference: {fileID: 1252712402}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a7e48660f74ebcc45ba946d391ab66fb, type: 2}
   m_IsPrefabParent: 0
@@ -18995,6 +18997,11 @@ GameObject:
 --- !u!1 &1252712401 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000010800941214, guid: a7e48660f74ebcc45ba946d391ab66fb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1252712396}
+--- !u!1 &1252712402 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000011239795286, guid: a7e48660f74ebcc45ba946d391ab66fb,
     type: 2}
   m_PrefabInternal: {fileID: 1252712396}
 --- !u!4 &1267074035 stripped
@@ -26380,9 +26387,19 @@ Prefab:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012189228488, guid: a7e48660f74ebcc45ba946d391ab66fb,
+        type: 2}
+      propertyPath: face
+      value: 
+      objectReference: {fileID: 1734280246}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a7e48660f74ebcc45ba946d391ab66fb, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1734280246 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000011239795286, guid: a7e48660f74ebcc45ba946d391ab66fb,
+    type: 2}
+  m_PrefabInternal: {fileID: 1734280245}
 --- !u!1 &1745103365 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000013827640002, guid: cc0b4103189514f27a56694d088b54c4,
@@ -26897,7 +26914,6 @@ MonoBehaviour:
   playerNumber: 0
   pBullet: {fileID: 1000013300093652, guid: d066bbdf12c3aaa48b64e13bf179e199, type: 2}
   cooldownLimit: 1
-  cooldownVibration: 0.3
   boostDur: 3
   boostSpeed: 15
   speed: 20
