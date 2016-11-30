@@ -7994,6 +7994,16 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 224000012586714834, guid: 866212333cb646246abc1207f9a64528,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010108752184, guid: 866212333cb646246abc1207f9a64528,
+        type: 2}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 866212333cb646246abc1207f9a64528, type: 2}
   m_IsPrefabParent: 0
@@ -8169,6 +8179,16 @@ Prefab:
       propertyPath: cam
       value: 
       objectReference: {fileID: 209146827}
+    - target: {fileID: 224000012586714834, guid: 866212333cb646246abc1207f9a64528,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010108752184, guid: 866212333cb646246abc1207f9a64528,
+        type: 2}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 866212333cb646246abc1207f9a64528, type: 2}
   m_IsPrefabParent: 0
@@ -10789,7 +10809,7 @@ Canvas:
   serializedVersion: 2
   m_RenderMode: 1
   m_Camera: {fileID: 100713393}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 0.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -11688,7 +11708,7 @@ Canvas:
   serializedVersion: 2
   m_RenderMode: 1
   m_Camera: {fileID: 277840595}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 0.5
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0

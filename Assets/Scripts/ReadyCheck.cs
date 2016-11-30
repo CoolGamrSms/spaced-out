@@ -8,8 +8,6 @@ public class ReadyCheck : MonoBehaviour {
     public GameObject player2;
     public GameObject player3;
 
-
-
     Color readyGreen;
 
     void Awake() {
