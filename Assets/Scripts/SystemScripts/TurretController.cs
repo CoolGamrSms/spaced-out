@@ -59,9 +59,11 @@ public class TurretController : Engineer
         if (sc.commandCenterBroken) return;
 
         transform.RotateAround(transform.position, transform.up, eController.LeftStickX.Value * turnRate);
-		/*float xRot = transform.localRotation.eulerAngles.x;
-		xRot = Mathf.Clamp(xRot, 85f, 275f);
-		transform.localRotation = Quaternion.Euler(xRot, transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);*/
+		float xRot = transform.localRotation.eulerAngles.x;
+		xRot -= (xRot > 90) ? 360f : 0f; // Euler angles doesn't like negatives
+		xRot = Mathf.Clamp(xRot, -90f, 90f);
+		xRot += (xRot < 0) ? 360f : 0f;
+		transform.localRotation = Quaternion.Euler(xRot, transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);
 		Debug.Log (transform.localRotation.eulerAngles.x);
 
         tilt.transform.RotateAround(tilt.transform.position, tilt.transform.right, -eController.LeftStickY.Value * tiltRate);
