@@ -3,9 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class CommandCenter : ShipSystem {
-
-    [Range(0, 100)]
-    public int commandHealth = 5;
+    [Range(0, 10)]
+    public int commandHealth = 10;
 
 	public Material brokenMat;
 	Material normalMat;

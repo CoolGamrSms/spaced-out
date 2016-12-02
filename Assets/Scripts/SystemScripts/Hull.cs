@@ -3,9 +3,12 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Hull : ShipSystem {
-	SpriteRenderer breachSprite;
+    [Range(0, 10)]
+    public int hullHealth = 5;
+
+    SpriteRenderer breachSprite;
     ParticleSystem particles;
-	const int hullHealth = 3;
+    
     bool fixonce;
 
     public Image hullImg;

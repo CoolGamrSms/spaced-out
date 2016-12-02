@@ -4,6 +4,7 @@ using System.Linq;
 
 public class DamageController : MonoBehaviour {
 
+    ShipController shipController;
     public GameObject shipInterior;
 
     Hull[] hulls;
@@ -11,14 +12,22 @@ public class DamageController : MonoBehaviour {
     ShipSystem target;
     ShipSystem[] systems;
 
+
+    [Range(0, 10)]
+    public int bulletDamage = 1;
+    [Range(0, 10)]
+    public int asteroidDamage = 2;
+
     [Range(0, 1)]
     public float breachProbability = 0;
 
     void Awake() {
         hulls = shipInterior.GetComponentsInChildren<Hull>();
         systems = shipInterior.GetComponentsInChildren<ShipSystem>();
-        foreach (ShipSystem ss in systems) ss.sc = GetComponent<ShipController>();
         target = systems.OrderBy(x => System.Guid.NewGuid()).First();
+
+        shipController = GetComponent<ShipController>();
+        foreach (ShipSystem ss in systems) ss.sc = shipController;
     }
 
     public void BreakAll() {
@@ -31,32 +40,33 @@ public class DamageController : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider col) {
-        if (GetComponent<ShipController>().shield.enabled) {
-            if (col.gameObject.GetComponent<TurretBullet>() != null) {
-                if (col.gameObject.GetComponent<TurretBullet>().bounce) {
+        if (shipController.shield.enabled) {
+            TurretBullet bullet = col.gameObject.GetComponent<TurretBullet>();
+            if (bullet != null) {
+                if (bullet.bounce) {
                     return;
                 }
 
-                if (GetComponent<ShipController>().power > ShipController.reflectDrain) {
-                    GetComponent<ShipController>().power -= ShipController.reflectDrain;
-                    col.gameObject.GetComponent<TurretBullet>().bounce = true;
-                    col.gameObject.GetComponent<TurretBullet>().speed *= -.7f;
+                if (shipController.power > ShipController.reflectDrain) {
+                    shipController.power -= ShipController.reflectDrain;
+                    bullet.bounce = true;
+                    bullet.speed *= -.7f;
                     col.transform.Rotate(col.transform.up, Random.Range(-30f, 30f));
                     col.transform.Rotate(col.transform.right, Random.Range(-30f, 30f));
                 }
                 else {
-                    GetComponent<ShipController>().shield.enabled = false;
+                    shipController.shield.enabled = false;
                 }
             }
         }
-        DealDamage(col.gameObject);
+        DamageDistribution(col.gameObject);
     }
 
     void OnCollisionEnter(Collision col) {
-        DealDamage(col.gameObject);
+        DamageDistribution(col.gameObject);
     }
 
-    void DealDamage(GameObject go) {
+    void DamageDistribution(GameObject go) {
         if (Random.value <= breachProbability) {
             foreach (Hull hull in hulls) {
                 if (!hull.broken) {
@@ -66,24 +76,24 @@ public class DamageController : MonoBehaviour {
             }
         }
 
-        int damage = 0;
         switch (go.tag) {
             case "Asteroid":
-                damage = 4;
+                DealDamage(asteroidDamage);
                 break;
 
             case "Bullet":
             case "Bullet1":
             case "Bullet2":
-                damage = 2;
                 Destroy(go);
+                DealDamage(bulletDamage);
                 break;
 
             default:
-                damage = 0;
                 break;
         }
+    }
 
+    void DealDamage(int damage) {
         target.TakeDamage(damage);
         if (target.broken) {
             foreach (ShipSystem ss in systems.OrderBy(x => System.Guid.NewGuid())) {

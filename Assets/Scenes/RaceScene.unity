@@ -5842,6 +5842,7 @@ MonoBehaviour:
   rollAngle: 20
   turnSpeed: 16
   shield: {fileID: 0}
+  power: 0
 --- !u!20 &277840595
 Camera:
   m_ObjectHideFlags: 0
@@ -5932,6 +5933,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipInterior: {fileID: 1252712397}
+  bulletDamage: 1
+  asteroidDamage: 2
+  breachProbability: 0.15
 --- !u!54 &277840599
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8460,7 +8464,7 @@ Prefab:
     - target: {fileID: 224000012586714834, guid: 866212333cb646246abc1207f9a64528,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.01
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224000012586714834, guid: 866212333cb646246abc1207f9a64528,
         type: 2}
@@ -13438,9 +13442,17 @@ Prefab:
       propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 177748, guid: 2f10587b487eaaf4189a448c20654e00, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f10587b487eaaf4189a448c20654e00, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &810406471 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 177748, guid: 2f10587b487eaaf4189a448c20654e00, type: 2}
+  m_PrefabInternal: {fileID: 810406470}
 --- !u!1001 &811457099
 Prefab:
   m_ObjectHideFlags: 0
@@ -20481,9 +20493,21 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 730d28b41d29795488ba4db4e3c7f351, type: 2}
+    - target: {fileID: 177748, guid: 2f10587b487eaaf4189a448c20654e00, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 177748, guid: 2f10587b487eaaf4189a448c20654e00, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2f10587b487eaaf4189a448c20654e00, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &925995404 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 177748, guid: 2f10587b487eaaf4189a448c20654e00, type: 2}
+  m_PrefabInternal: {fileID: 925995403}
 --- !u!1 &930300869
 GameObject:
   m_ObjectHideFlags: 0
@@ -25622,6 +25646,11 @@ Prefab:
       propertyPath: spreadCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010828630056, guid: a7e48660f74ebcc45ba946d391ab66fb,
+        type: 2}
+      propertyPath: wrench
+      value: 
+      objectReference: {fileID: 810406471}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a7e48660f74ebcc45ba946d391ab66fb, type: 2}
   m_IsPrefabParent: 0
@@ -36012,6 +36041,11 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 1.51
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010828630056, guid: a7e48660f74ebcc45ba946d391ab66fb,
+        type: 2}
+      propertyPath: wrench
+      value: 
+      objectReference: {fileID: 925995404}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a7e48660f74ebcc45ba946d391ab66fb, type: 2}
   m_IsPrefabParent: 0
@@ -37239,6 +37273,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipInterior: {fileID: 1930019068}
+  bulletDamage: 1
+  asteroidDamage: 2
+  breachProbability: 0.15
 --- !u!54 &1816448788
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -37279,6 +37316,7 @@ MonoBehaviour:
   rollAngle: 20
   turnSpeed: 16
   shield: {fileID: 0}
+  power: 0
 --- !u!82 &1816448790
 AudioSource:
   m_ObjectHideFlags: 0
