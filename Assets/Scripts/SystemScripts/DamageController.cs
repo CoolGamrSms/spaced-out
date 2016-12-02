@@ -24,7 +24,7 @@ public class DamageController : MonoBehaviour {
     void Awake() {
         hulls = shipInterior.GetComponentsInChildren<Hull>();
         systems = shipInterior.GetComponentsInChildren<ShipSystem>();
-        target = systems.OrderBy(x => System.Guid.NewGuid()).First();
+        target = systems.First();
 
         shipController = GetComponent<ShipController>();
         foreach (ShipSystem ss in systems) ss.sc = shipController;
@@ -40,6 +40,7 @@ public class DamageController : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider col) {
+        if (col.tag == "Ring") return;
         if (shipController.shield.enabled) {
             TurretBullet bullet = col.gameObject.GetComponent<TurretBullet>();
             if (bullet != null) {
@@ -96,9 +97,11 @@ public class DamageController : MonoBehaviour {
     void DealDamage(int damage) {
         target.TakeDamage(damage);
         if (target.broken) {
-            foreach (ShipSystem ss in systems.OrderBy(x => System.Guid.NewGuid())) {
+            foreach (ShipSystem ss in systems) {
+                if (ss.unbreakable) continue;
                 if (!ss.broken) {
                     target = ss;
+                    Debug.LogWarning(target.gameObject.name);
                     return;
                 }
             }

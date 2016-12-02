@@ -13,7 +13,7 @@ public class ShipController : MonoBehaviour {
     public GameObject pBullet;
 
     float timer = 1f;
-    public float cooldownLimit = .75f;
+    public float cooldownLimit = .55f;
 
     public float boostDur = 3f;
     public float boostSpeed = 15f;
@@ -61,11 +61,11 @@ public class ShipController : MonoBehaviour {
     Slider powerbar;
     float maxPower = 1000;
     public float power = 0;
-    public const float powerRegen = 1.2f;
-    public const float shieldDrain = 1.3f;
-    public const float reflectDrain = 100f;
-    public const float shootDrain = 25f;
-    public const float engineerShootDrain = 5f;
+    public const float powerRegen = 1.8f;
+    public const float shieldDrain = 2.0f;
+    public const float reflectDrain = 150f;
+    public const float shootDrain = 50f;
+    public const float engineerShootDrain = 30f;
 
     enum EWarning {
         Hullbreach,
