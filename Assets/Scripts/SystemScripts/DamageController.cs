@@ -25,20 +25,27 @@ public class DamageController : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider col) {
+        //terrible shield code
         if (GetComponent<ShipController>().shield.enabled) {
             if(col.gameObject.GetComponent<TurretBullet>() != null) {
                 if (col.gameObject.GetComponent<TurretBullet>().bounce) {
                     return;
                 }
 
-                col.gameObject.GetComponent<TurretBullet>().bounce = true;
-                col.gameObject.GetComponent<TurretBullet>().speed *= -.7f;
-                col.transform.Rotate(col.transform.up, Random.Range(-30f, 30f));
-                col.transform.Rotate(col.transform.right, Random.Range(-30f, 30f));
+                if(GetComponent<ShipController>().power > ShipController.reflectDrain) {
+                    GetComponent<ShipController>().power -= ShipController.reflectDrain;
+                    col.gameObject.GetComponent<TurretBullet>().bounce = true;
+                    col.gameObject.GetComponent<TurretBullet>().speed *= -.7f;
+                    col.transform.Rotate(col.transform.up, Random.Range(-30f, 30f));
+                    col.transform.Rotate(col.transform.right, Random.Range(-30f, 30f));
+                }
+                else
+                {
+                    GetComponent<ShipController>().shield.enabled = false;
+                }
             }
-
-            return;
         }
+        //shield code ends here
 
         int damageDealt = 0;
 
@@ -46,7 +53,7 @@ public class DamageController : MonoBehaviour {
             case "Bullet":
             case "Bullet1":
             case "Bullet2":
-                damageDealt = 4;
+                damageDealt = 2;
                 Destroy(col.gameObject);
                 break;
             default:
@@ -58,15 +65,12 @@ public class DamageController : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision col) {
-        if (GetComponent<ShipController>().shield.enabled) {
-            return;
-        }
 
         int damageDealt = 0;
 
         switch (col.gameObject.tag) {
             case "Asteroid":
-                damageDealt = 2;
+                damageDealt = 4;
                 break;
             default:
                 damageDealt = 0;

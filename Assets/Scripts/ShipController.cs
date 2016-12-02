@@ -13,7 +13,7 @@ public class ShipController : MonoBehaviour {
     public GameObject pBullet;
 
     float timer = 1f;
-    public float cooldownLimit = 1f;
+    public float cooldownLimit = .75f;
 
     public float boostDur = 3f;
     public float boostSpeed = 15f;
@@ -59,9 +59,13 @@ public class ShipController : MonoBehaviour {
 	Queue<string> activeWarnings = new Queue<string>();
 
     Slider powerbar;
-    int power = 50;
-    int maxPower = 100;
-    int powerup = 25;
+    float maxPower = 1000;
+    public float power = 0;
+    public const float powerRegen = 1.2f;
+    public const float shieldDrain = 1.3f;
+    public const float reflectDrain = 100f;
+    public const float shootDrain = 25f;
+    public const float engineerShootDrain = 5f;
 
     enum EWarning {
         Hullbreach,
@@ -71,6 +75,7 @@ public class ShipController : MonoBehaviour {
     }
 
     void Awake() {
+        //power = maxPower;
         boostTimer = 0f;
         boostVal = 0f;
         warningTimer = 0f;
@@ -97,6 +102,7 @@ public class ShipController : MonoBehaviour {
         }
 
         powerbar = GetComponentInChildren<Slider>();
+        powerbar.maxValue = maxPower;
         warning = GetComponentInChildren<CanvasGroup>();
     }
 
@@ -109,6 +115,14 @@ public class ShipController : MonoBehaviour {
         superboost = sup;
     }
     void FixedUpdate() {
+        power += powerRegen;
+        if (shield.enabled) power -= shieldDrain;
+        if (power > maxPower) power = maxPower;
+        if (power < 0) power = 0;
+
+        //Lerp power bar
+        powerbar.value = Mathf.MoveTowards(powerbar.value, power, 5f);
+
         //Show warnings
         warningTimer -= Time.deltaTime;
         if (warningTimer < 0) warningTimer = 0;
@@ -131,8 +145,6 @@ public class ShipController : MonoBehaviour {
             if (curRing.GetComponent<BoosterRing>() != null) nextRing = curRing.GetComponent<BoosterRing>().nextRing;
             else nextRing = null;
         }
-        //Lerp power bar
-        //powerbar.value = Mathf.MoveTowards(powerbar.value, power, 1);
 
         //if (sController.DPadUp.WasPressed) {
         //    gameObject.GetComponent<DamageController>().BreakAll();
@@ -167,6 +179,7 @@ public class ShipController : MonoBehaviour {
         if (sController.Action1.IsPressed && timer > cooldownLimit && !commandCenterBroken) {
 			shoot.pitch = mypitch + Random.Range (-0.1f, 0);
             shoot.Play();
+            power -= shootDrain;
             foreach (Transform pos in bulletSpawns) {
                 GameObject bullet = Instantiate(pBullet);
                 bullet.transform.rotation = pos.rotation;

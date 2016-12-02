@@ -35,7 +35,7 @@ public class EngineerController : Engineer {
                    + Vector3.up * gravityValue;
 
         float xRot = transform.eulerAngles.x;
-        xRot -= (xRot > 35) ? 360f : 0f; // Euler angles doesn't like negatives
+        xRot -= (xRot > 50) ? 360f : 0f; // Euler angles doesn't like negatives
         xRot = Mathf.Clamp(xRot, -30f, 30f);
         xRot += (xRot < 0) ? 360f : 0f;
         transform.rotation = Quaternion.Euler(xRot, transform.eulerAngles.y, transform.eulerAngles.z);

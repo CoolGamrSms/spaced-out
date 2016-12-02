@@ -18,6 +18,6 @@ public class TurretBullet : MonoBehaviour {
         if (timer < 0) Destroy(gameObject);
     }
     void OnTriggerEnter(Collider col) {
-            if(col.gameObject.tag != "Ship1" && col.gameObject.tag != "Ship2") Destroy(gameObject);
+            if(col.gameObject.tag != "Ship1" && col.gameObject.tag != "Ship2" && col.gameObject.tag!="Ring") Destroy(gameObject);
     }
 }
