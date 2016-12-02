@@ -33,6 +33,10 @@ public class Hull : ShipSystem {
         }
     }
 
+    public void BreakSelf() {
+        Break();
+    }
+
 	protected override void Break () {
 		base.Break ();
         fixonce = false;

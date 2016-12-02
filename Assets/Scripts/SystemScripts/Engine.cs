@@ -4,7 +4,8 @@ using System.Collections;
 
 public class Engine : ShipSystem {
 
-    const int engineHealth = 5;
+    [Range(0, 100)]
+    public int engineHealth = 5;
 
     public Material m2;
     Material m;

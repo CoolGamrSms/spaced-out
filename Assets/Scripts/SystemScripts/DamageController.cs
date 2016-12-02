@@ -1,20 +1,26 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 
 public class DamageController : MonoBehaviour {
 
     public GameObject shipInterior;
 
-    List<ShipSystem> systems;
+    Hull[] hulls;
+
+    ShipSystem target;
+    ShipSystem[] systems;
+
+    [Range(0, 1)]
+    public float breachProbability = 0;
 
     void Awake() {
-        systems = shipInterior.GetComponentsInChildren<ShipSystem>().ToList();
+        hulls = shipInterior.GetComponentsInChildren<Hull>();
+        systems = shipInterior.GetComponentsInChildren<ShipSystem>();
         foreach (ShipSystem ss in systems) ss.sc = GetComponent<ShipController>();
+        target = systems.OrderBy(x => System.Guid.NewGuid()).First();
     }
 
-    // Test
     public void BreakAll() {
         Debug.LogWarning("Breaking all");
         foreach (ShipSystem ss in systems) {
@@ -25,58 +31,67 @@ public class DamageController : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider col) {
-        //terrible shield code
         if (GetComponent<ShipController>().shield.enabled) {
-            if(col.gameObject.GetComponent<TurretBullet>() != null) {
+            if (col.gameObject.GetComponent<TurretBullet>() != null) {
                 if (col.gameObject.GetComponent<TurretBullet>().bounce) {
                     return;
                 }
 
-                if(GetComponent<ShipController>().power > ShipController.reflectDrain) {
+                if (GetComponent<ShipController>().power > ShipController.reflectDrain) {
                     GetComponent<ShipController>().power -= ShipController.reflectDrain;
                     col.gameObject.GetComponent<TurretBullet>().bounce = true;
                     col.gameObject.GetComponent<TurretBullet>().speed *= -.7f;
                     col.transform.Rotate(col.transform.up, Random.Range(-30f, 30f));
                     col.transform.Rotate(col.transform.right, Random.Range(-30f, 30f));
                 }
-                else
-                {
+                else {
                     GetComponent<ShipController>().shield.enabled = false;
                 }
             }
         }
-        //shield code ends here
-
-        int damageDealt = 0;
-
-        switch (col.gameObject.tag) {
-            case "Bullet":
-            case "Bullet1":
-            case "Bullet2":
-                damageDealt = 2;
-                Destroy(col.gameObject);
-                break;
-            default:
-                damageDealt = 0;
-                break;
-        }
-
-        systems.Shuffle().First().TakeDamage(damageDealt);
+        DealDamage(col.gameObject);
     }
 
     void OnCollisionEnter(Collision col) {
+        DealDamage(col.gameObject);
+    }
 
-        int damageDealt = 0;
+    void DealDamage(GameObject go) {
+        if (Random.value <= breachProbability) {
+            foreach (Hull hull in hulls) {
+                if (!hull.broken) {
+                    hull.BreakSelf();
+                    return;
+                }
+            }
+        }
 
-        switch (col.gameObject.tag) {
+        int damage = 0;
+        switch (go.tag) {
             case "Asteroid":
-                damageDealt = 4;
+                damage = 4;
                 break;
+
+            case "Bullet":
+            case "Bullet1":
+            case "Bullet2":
+                damage = 2;
+                Destroy(go);
+                break;
+
             default:
-                damageDealt = 0;
+                damage = 0;
                 break;
         }
 
-        systems.Shuffle().First().TakeDamage(damageDealt);
+        target.TakeDamage(damage);
+        if (target.broken) {
+            foreach (ShipSystem ss in systems.OrderBy(x => System.Guid.NewGuid())) {
+                if (!ss.broken) {
+                    target = ss;
+                    return;
+                }
+            }
+        }
     }
 }

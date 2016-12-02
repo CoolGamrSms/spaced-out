@@ -4,7 +4,8 @@ using System.Collections;
 
 public class CommandCenter : ShipSystem {
 
-    const int commandHealth = 5;
+    [Range(0, 100)]
+    public int commandHealth = 5;
 
 	public Material brokenMat;
 	Material normalMat;
