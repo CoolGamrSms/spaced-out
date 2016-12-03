@@ -11,16 +11,16 @@ public class End : MonoBehaviour {
     public GameObject ship2;
     float dist1, dist2;
 
-    void Start()
-    {
+    void Start() {
         dist1 = Vector3.Distance(transform.position, ship1.transform.position);
         dist2 = Vector3.Distance(transform.position, ship2.transform.position);
     }
-    void FixedUpdate()
-    {
+
+    void FixedUpdate() {
         slider1.value = 1f - (Vector3.Distance(transform.position, ship1.transform.position) - 250) / dist1;
         slider2.value = 1f - (Vector3.Distance(transform.position, ship2.transform.position) - 250) / dist2;
     }
+
 	void OnCollisionEnter(Collision col) {
 		if (col.gameObject.tag == "Ship1") {
 			SceneManager.LoadScene("Gameover1");

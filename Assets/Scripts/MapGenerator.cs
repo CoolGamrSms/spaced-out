@@ -39,8 +39,7 @@ public class MapGenerator : MonoBehaviour {
         }
         GetComponentInChildren<BoosterRing>().nextRing = prev;
     }
-	
-	// Update is called once per frame
+
 	void Update () {
 	
 	}

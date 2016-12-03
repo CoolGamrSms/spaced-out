@@ -7,8 +7,8 @@ public class Asteroid : MonoBehaviour {
     float myMassLoss;
     public GameObject parRing;
     int hitsToKill;
-    void Start()
-    {
+
+    void Start() {
         float speed = Random.Range(0f, 8f);
         speed /= GetComponent<Rigidbody>().mass;
         GetComponent<Rigidbody>().velocity = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f))*speed;
@@ -18,34 +18,11 @@ public class Asteroid : MonoBehaviour {
         myScaleLoss = transform.localScale / hitsToKill;
     }
 
-    void FixedUpdate()
-    {
-        if(Vector3.SqrMagnitude(parRing.transform.position - transform.position) > 6000f)
-        {
+    void FixedUpdate() {
+        if(Vector3.SqrMagnitude(parRing.transform.position - transform.position) > 6000f) {
             GetComponent<Rigidbody>().velocity *= -1f;
         }
     }
-	/*void Awake() {
-		startPos = transform.position;
-
-		updateTarget();
-	}
-
-	void updateTarget() {
-		target = startPos + (Random.insideUnitSphere * radius);
-	}
-
-	void FixedUpdate() {
-		Move();
-	}
-
-	void Move() {
-		if ((transform.position - target).magnitude < 1) {
-			updateTarget();
-		}
-
-		transform.position = Vector3.Lerp(transform.position, target, .05f);
-	}*/
 
 	void OnTriggerEnter(Collider col) {
 		if (col.gameObject.tag == "Bullet1" || col.gameObject.tag == "Bullet2") {
