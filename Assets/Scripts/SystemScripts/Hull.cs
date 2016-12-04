@@ -13,8 +13,6 @@ public class Hull : ShipSystem {
 
     public Image hullImg;
 
-    static int numHull = 0;
-
     protected override void Start() {
         breachSprite = GetComponent<SpriteRenderer>();
         particles = GetComponentInChildren<ParticleSystem>();
@@ -47,13 +45,11 @@ public class Hull : ShipSystem {
         particles.Play();
 		sc.HullBreach ();
         hullImg.enabled = true;
-        numHull++;
 	}
 
     protected override void ResetHealth() {
         health = hullHealth;
-        numHull--;
-        if (numHull == 0) {
+        if (sc.numHullBreaches == 0) {
             hullImg.enabled = false;
         }
     }
