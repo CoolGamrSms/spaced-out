@@ -13,7 +13,7 @@ public class ShipController : MonoBehaviour {
     public GameObject pBullet;
 
     float timer = 1f;
-    public float cooldownLimit = .55f;
+    public float cooldownLimit = .4f;
 
     public float boostDur = 3f;
     public float boostSpeed = 10f;
@@ -64,8 +64,8 @@ public class ShipController : MonoBehaviour {
     float maxPower = 1000;
     public float power = 0;
     public const float powerRegen = 1.8f;
-    public const float shieldDrain = 2.0f;
-    public const float reflectDrain = 10f;
+    public const float shieldDrain = 1.5f;
+    public const float reflectDrain = 200f;
     public const float shootDrain = 50f;
     public const float engineerShootDrain = 30f;
 
@@ -187,6 +187,7 @@ public class ShipController : MonoBehaviour {
                 GameObject bullet = Instantiate(pBullet);
                 bullet.transform.rotation = pos.rotation;
                 bullet.transform.position = pos.position;
+				bullet.GetComponent<TurretBullet>().shipV = GetComponent<Rigidbody>().velocity;
             }
             timer = 0f;
         }

@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3b5f48ad0510a64d977fd9ca2eb4a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 150
   timer: 10
   bounce: 0
   shipV: {x: 0, y: 0, z: 0}
