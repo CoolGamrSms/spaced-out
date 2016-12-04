@@ -54,6 +54,7 @@ public class DamageController : MonoBehaviour {
                     bullet.speed *= -.7f;
                     col.transform.Rotate(col.transform.up, Random.Range(-30f, 30f));
                     col.transform.Rotate(col.transform.right, Random.Range(-30f, 30f));
+					return;
                 }
                 else {
                     shipController.shield.enabled = false;
