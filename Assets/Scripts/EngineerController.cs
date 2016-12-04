@@ -14,13 +14,15 @@ public class EngineerController : Engineer {
     bool gravity = true;
     float gravityValue = 0f;
 
+    public GameObject wrench;
+
     void Update() {
         CharacterController cc = GetComponent<CharacterController>();
         transform.Rotate(-eController.RightStickY.Value * lookSpeed, eController.RightStickX.Value * lookSpeed, 0);
-        
+
         if (gravity) transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
         else transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, (sc.transform.rotation.eulerAngles.z) % 360);
-        
+
         if (cc.isGrounded || !gravity) gravityValue = 0f;
         else gravityValue -= 9.8f * Time.deltaTime;
 
@@ -35,38 +37,45 @@ public class EngineerController : Engineer {
                    + Vector3.up * gravityValue;
 
         float xRot = transform.eulerAngles.x;
-        xRot -= (xRot > 35) ? 360f : 0f; // Euler angles doesn't like negatives
+        xRot -= (xRot > 50) ? 360f : 0f; // Euler angles doesn't like negatives
         xRot = Mathf.Clamp(xRot, -30f, 30f);
         xRot += (xRot < 0) ? 360f : 0f;
         transform.rotation = Quaternion.Euler(xRot, transform.eulerAngles.y, transform.eulerAngles.z);
         cc.Move(speed * Time.deltaTime);
     }
 
-    void FixedUpdate() { 
-        Debug.DrawRay(transform.position + Vector3.up * 0.75f, transform.forward * 4f, Color.red);
+    void FixedUpdate() {
+        Debug.DrawRay(transform.position + Vector3.up * 0.75f, transform.forward * 6f, Color.red);
         RaycastHit hit;
-        
-        if(Physics.Raycast(transform.position + Vector3.up * 0.75f, transform.forward, out hit, 4f)) {
+
+        if (Physics.Raycast(transform.position + Vector3.up * 0.75f, transform.forward, out hit, 6f)) {
             if (hit.collider.gameObject == interaction) return;
-            
+
             if (hit.collider.gameObject.GetComponent<ShipSystem>() != null) {
                 if (interaction != null) {
-                    interaction.GetComponent<ShipSystem>().EndInteraction();
-                    interaction = null;
+                    EndInteracting();
                 }
+                StartInteracting(hit.collider.gameObject);
+            }
+            else if (interaction != null) {
+                EndInteracting();
+            }
+        }
+        else if (interaction != null) {
+            EndInteracting();
+        }
+    }
 
-                interaction = hit.collider.gameObject;
-                interaction.GetComponent<ShipSystem>().StartInteraction();
-            }
-            else if(interaction != null) {
-                interaction.GetComponent<ShipSystem>().EndInteraction();
-                interaction = null;
-            }
-        }
-        else if(interaction != null) {
-            interaction.GetComponent<ShipSystem>().EndInteraction();
-            interaction = null;
-        }
+    void StartInteracting(GameObject go) {
+        interaction = go;
+        interaction.GetComponent<ShipSystem>().StartInteraction();
+        wrench.SetActive(true);
+    }
+
+    void EndInteracting() {
+        interaction.GetComponent<ShipSystem>().EndInteraction();
+        interaction = null;
+        wrench.SetActive(false);
     }
 
     public void LoseGravity() {
@@ -82,7 +91,3 @@ public class EngineerController : Engineer {
         gravity = true;
     }
 }
-//Mass:1 Drag:10 Speed:1.5
-//float strafe = Input.GetAxisRaw("Horizontal") * speed;
-//float translation = Input.GetAxisRaw("Vertical") * speed;
-//rb.AddRelativeForce(strafe, 0, translation, ForceMode.VelocityChange);

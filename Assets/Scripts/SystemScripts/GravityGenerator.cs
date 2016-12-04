@@ -3,8 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class GravityGenerator : ShipSystem {
-
-	const int generatorHealth = 5;
+    [Range(0, 10)]
+    public int generatorHealth = 10;
     
 	public EngineerController ec;
 	Rigidbody rb;

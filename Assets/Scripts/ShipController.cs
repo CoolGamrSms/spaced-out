@@ -13,10 +13,10 @@ public class ShipController : MonoBehaviour {
     public GameObject pBullet;
 
     float timer = 1f;
-    public float cooldownLimit = 1f;
+    public float cooldownLimit = .55f;
 
     public float boostDur = 3f;
-    public float boostSpeed = 15f;
+    public float boostSpeed = 10f;
 
     float boostVal;
 
@@ -61,9 +61,13 @@ public class ShipController : MonoBehaviour {
 	public int numHullBreaches = 0;
 
     Slider powerbar;
-    int power = 50;
-    int maxPower = 100;
-    int powerup = 25;
+    float maxPower = 1000;
+    public float power = 0;
+    public const float powerRegen = 1.8f;
+    public const float shieldDrain = 2.0f;
+    public const float reflectDrain = 10f;
+    public const float shootDrain = 50f;
+    public const float engineerShootDrain = 30f;
 
     enum EWarning {
         Hullbreach,
@@ -73,6 +77,7 @@ public class ShipController : MonoBehaviour {
     }
 
     void Awake() {
+        //power = maxPower;
         boostTimer = 0f;
         boostVal = 0f;
         warningTimer = 0f;
@@ -99,6 +104,7 @@ public class ShipController : MonoBehaviour {
         }
 
         powerbar = GetComponentInChildren<Slider>();
+        powerbar.maxValue = maxPower;
         warning = GetComponentInChildren<CanvasGroup>();
     }
 
@@ -111,6 +117,14 @@ public class ShipController : MonoBehaviour {
         superboost = sup;
     }
     void FixedUpdate() {
+        power += powerRegen;
+        if (shield.enabled) power -= shieldDrain;
+        if (power > maxPower) power = maxPower;
+        if (power < 0) power = 0;
+
+        //Lerp power bar
+        powerbar.value = Mathf.MoveTowards(powerbar.value, power, 5f);
+
         //Show warnings
         warningTimer -= Time.deltaTime;
         if (warningTimer < 0) warningTimer = 0;
@@ -133,8 +147,6 @@ public class ShipController : MonoBehaviour {
             if (curRing.GetComponent<BoosterRing>() != null) nextRing = curRing.GetComponent<BoosterRing>().nextRing;
             else nextRing = null;
         }
-        //Lerp power bar
-        //powerbar.value = Mathf.MoveTowards(powerbar.value, power, 1);
 
         //if (sController.DPadUp.WasPressed) {
         //    gameObject.GetComponent<DamageController>().BreakAll();
@@ -154,6 +166,7 @@ public class ShipController : MonoBehaviour {
         }
         else {
             boostTimer = 0;
+			superboost = false;
             boostVal -= Time.deltaTime * boostSpeed / 3f;
             if (boostVal < 0) boostVal = 0;
         }
@@ -169,6 +182,7 @@ public class ShipController : MonoBehaviour {
         if (sController.Action1.IsPressed && timer > cooldownLimit && !commandCenterBroken) {
 			shoot.pitch = mypitch + Random.Range (-0.1f, 0);
             shoot.Play();
+            power -= shootDrain;
             foreach (Transform pos in bulletSpawns) {
                 GameObject bullet = Instantiate(pBullet);
                 bullet.transform.rotation = pos.rotation;
@@ -181,7 +195,7 @@ public class ShipController : MonoBehaviour {
         rb.AddRelativeTorque(sController.LeftStickY.Value * turnSpeed, 0, 0); // W key or the up arrow to turn upwards, S or the down arrow to turn downwards. 
         rb.AddRelativeTorque(0, sController.LeftStickX.Value * turnSpeed, 0); // A or left arrow to turn left, D or right arrow to turn right. 
 
-        rb.AddForce(transform.forward * Mathf.Max(0f, speed - hullDamage + boostVal + (superboost ? 0 : 3.5f)) * (shield.enabled ? 0.9f : 1f), ForceMode.VelocityChange);
+        rb.AddForce(transform.forward * Mathf.Max(0f, speed - hullDamage + boostVal + (superboost ? 5f : 0f)) * (shield.enabled ? 0.9f : 1f), ForceMode.VelocityChange);
 
         Quaternion q = transform.rotation;
         q = Quaternion.Euler(q.eulerAngles.x, q.eulerAngles.y, -sController.LeftStickX.Value * rollAngle);

@@ -3,8 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Engine : ShipSystem {
-
-    const int engineHealth = 5;
+    [Range(0, 10)]
+    public int engineHealth = 10;
 
     public Material m2;
     Material m;
