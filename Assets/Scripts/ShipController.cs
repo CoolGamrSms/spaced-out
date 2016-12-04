@@ -16,7 +16,7 @@ public class ShipController : MonoBehaviour {
     public float cooldownLimit = .55f;
 
     public float boostDur = 3f;
-    public float boostSpeed = 15f;
+    public float boostSpeed = 10f;
 
     float boostVal;
 
@@ -63,7 +63,7 @@ public class ShipController : MonoBehaviour {
     public float power = 0;
     public const float powerRegen = 1.8f;
     public const float shieldDrain = 2.0f;
-    public const float reflectDrain = 150f;
+    public const float reflectDrain = 10f;
     public const float shootDrain = 50f;
     public const float engineerShootDrain = 30f;
 
@@ -164,6 +164,7 @@ public class ShipController : MonoBehaviour {
         }
         else {
             boostTimer = 0;
+			superboost = false;
             boostVal -= Time.deltaTime * boostSpeed / 3f;
             if (boostVal < 0) boostVal = 0;
         }
@@ -192,7 +193,7 @@ public class ShipController : MonoBehaviour {
         rb.AddRelativeTorque(sController.LeftStickY.Value * turnSpeed, 0, 0); // W key or the up arrow to turn upwards, S or the down arrow to turn downwards. 
         rb.AddRelativeTorque(0, sController.LeftStickX.Value * turnSpeed, 0); // A or left arrow to turn left, D or right arrow to turn right. 
 
-        rb.AddForce(transform.forward * Mathf.Max(0f, speed - hullDamage + boostVal + (superboost ? 0 : 3.5f)) * (shield.enabled ? 0.9f : 1f), ForceMode.VelocityChange);
+        rb.AddForce(transform.forward * Mathf.Max(0f, speed - hullDamage + boostVal + (superboost ? 5f : 0f)) * (shield.enabled ? 0.9f : 1f), ForceMode.VelocityChange);
 
         Quaternion q = transform.rotation;
         q = Quaternion.Euler(q.eulerAngles.x, q.eulerAngles.y, -sController.LeftStickX.Value * rollAngle);

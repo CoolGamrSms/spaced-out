@@ -45,10 +45,10 @@ public class EngineerController : Engineer {
     }
 
     void FixedUpdate() {
-        Debug.DrawRay(transform.position + Vector3.up * 0.75f, transform.forward * 4f, Color.red);
+        Debug.DrawRay(transform.position + Vector3.up * 0.75f, transform.forward * 6f, Color.red);
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position + Vector3.up * 0.75f, transform.forward, out hit, 4f)) {
+        if (Physics.Raycast(transform.position + Vector3.up * 0.75f, transform.forward, out hit, 6f)) {
             if (hit.collider.gameObject == interaction) return;
 
             if (hit.collider.gameObject.GetComponent<ShipSystem>() != null) {

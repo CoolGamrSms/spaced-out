@@ -69,7 +69,7 @@ public class DamageController : MonoBehaviour {
 
     void DamageDistribution(GameObject go) {
         if (Random.value <= breachProbability) {
-            foreach (Hull hull in hulls) {
+			foreach (Hull hull in hulls.OrderBy(x => System.Guid.NewGuid())) {
                 if (!hull.broken) {
                     hull.BreakSelf();
                     return;
@@ -97,7 +97,7 @@ public class DamageController : MonoBehaviour {
     void DealDamage(int damage) {
         target.TakeDamage(damage);
         if (target.broken) {
-            foreach (ShipSystem ss in systems) {
+			foreach (ShipSystem ss in systems.OrderBy(x => System.Guid.NewGuid())) {
                 if (ss.unbreakable) continue;
                 if (!ss.broken) {
                     target = ss;

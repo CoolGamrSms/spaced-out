@@ -67,8 +67,7 @@ public class TurretController : Engineer
 		//xRot += (xRot < 0) ? 360f : 0f;
 		transform.localRotation = Quaternion.Euler(xRot, transform.localEulerAngles.y, transform.localEulerAngles.z);
 
-		Debug.Log (transform.localEulerAngles);
         tilt.transform.RotateAround(tilt.transform.position, tilt.transform.right, -eController.LeftStickY.Value * tiltRate);
-		tilt.transform.localRotation = Quaternion.Euler (Mathf.Clamp (tilt.transform.localEulerAngles.x, 180f, 300f), tilt.transform.localEulerAngles.y, tilt.transform.localEulerAngles.z);
+		tilt.transform.localRotation = Quaternion.Euler (Mathf.Clamp (tilt.transform.localEulerAngles.x, 180f, 330f), tilt.transform.localEulerAngles.y, tilt.transform.localEulerAngles.z);
     }
 }

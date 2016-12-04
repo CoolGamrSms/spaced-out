@@ -17,7 +17,7 @@ RenderSettings:
   m_Fog: 1
   m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.004
+  m_FogDensity: 0.002
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -666,7 +666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spacing: 180
-  rings: 20
+  rings: 32
   frequency: 1.5
   amp: 150
   ring: {fileID: 1000014215713574, guid: 852aefa897b047a49b4892597da390da, type: 2}
@@ -5934,8 +5934,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipInterior: {fileID: 1252712397}
   bulletDamage: 1
-  asteroidDamage: 2
-  breachProbability: 0.15
+  asteroidDamage: 10
+  breachProbability: 0.25
 --- !u!54 &277840599
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22381,7 +22381,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1059644105}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 103.1326, y: 0, z: 4250}
+  m_LocalPosition: {x: 103.1326, y: 128, z: 6224}
   m_LocalScale: {x: 400, y: 400, z: 400}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -25544,7 +25544,7 @@ Prefab:
     - target: {fileID: 114000010828630056, guid: a7e48660f74ebcc45ba946d391ab66fb,
         type: 2}
       propertyPath: lookSpeed
-      value: 7
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 114000010828630056, guid: a7e48660f74ebcc45ba946d391ab66fb,
         type: 2}
@@ -29546,7 +29546,7 @@ RectTransform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1452407397}
-  m_LocalRotation: {x: -0, y: -0.0017453429, z: -0, w: 0.9999985}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 25}
   m_LocalScale: {x: 0.20000017, y: 0.20000002, z: 0.20000017}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -35936,7 +35936,7 @@ Prefab:
     - target: {fileID: 114000010828630056, guid: a7e48660f74ebcc45ba946d391ab66fb,
         type: 2}
       propertyPath: lookSpeed
-      value: 7
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 20000013449865388, guid: a7e48660f74ebcc45ba946d391ab66fb,
         type: 2}
@@ -37274,8 +37274,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipInterior: {fileID: 1930019068}
   bulletDamage: 1
-  asteroidDamage: 2
-  breachProbability: 0.15
+  asteroidDamage: 10
+  breachProbability: 0.25
 --- !u!54 &1816448788
 Rigidbody:
   m_ObjectHideFlags: 0
