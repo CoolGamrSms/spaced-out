@@ -31,6 +31,9 @@ public class Hull : ShipSystem {
             particles.Stop();
             sc.FixBreach ();
             fixonce = true;
+			if (sc.numHullBreaches == 0) {
+				hullImg.enabled = false;
+			}
         }
     }
 
@@ -49,8 +52,6 @@ public class Hull : ShipSystem {
 
     protected override void ResetHealth() {
         health = hullHealth;
-        if (sc.numHullBreaches == 0) {
-            hullImg.enabled = false;
-        }
+        
     }
 }
