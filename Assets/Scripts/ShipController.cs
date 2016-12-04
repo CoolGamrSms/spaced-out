@@ -58,6 +58,8 @@ public class ShipController : MonoBehaviour {
 	CanvasGroup warning;
 	Queue<string> activeWarnings = new Queue<string>();
 
+	public int numHullBreaches = 0;
+
     Slider powerbar;
     int power = 50;
     int maxPower = 100;
@@ -212,10 +214,12 @@ public class ShipController : MonoBehaviour {
     public void HullBreach() {
         hullDamage += maxSpeed * .075f;
         ShowWarning("Hull breached!");
+		++numHullBreaches;
     }
 
     public void FixBreach() {
         hullDamage -= maxSpeed * .075f;
+		--numHullBreaches;
     }
 
     public void BreakEngine() {
