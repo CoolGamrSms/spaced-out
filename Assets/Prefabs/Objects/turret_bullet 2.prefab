@@ -189,6 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 100
   timer: 10
+  explosion: {fileID: 100000, guid: 13266a9cf8da28e41bfa61b378dfabc5, type: 2}
   bounce: 0
   shipV: {x: 0, y: 0, z: 0}
 --- !u!136 &136000013228835226

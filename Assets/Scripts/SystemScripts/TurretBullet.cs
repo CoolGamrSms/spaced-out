@@ -4,6 +4,7 @@ using System.Collections;
 public class TurretBullet : MonoBehaviour {
     public float speed = 1f;
     public float timer = 4f;
+	public GameObject explosion;
     [HideInInspector] public bool bounce = false;
     [HideInInspector]
     public Vector3 shipV;
@@ -20,4 +21,8 @@ public class TurretBullet : MonoBehaviour {
     void OnTriggerEnter(Collider col) {
             if(col.gameObject.tag != "Ship1" && col.gameObject.tag != "Ship2" && col.gameObject.tag!="Ring") Destroy(gameObject);
     }
+
+	void OnDestroy(){
+		Instantiate (explosion, transform.position, Quaternion.identity);
+	}
 }
