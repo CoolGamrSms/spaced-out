@@ -37,7 +37,7 @@ public class MapGenerator : MonoBehaviour {
                 ast.GetComponent<Asteroid>().parRing = prev;
             }
         }
-        GetComponentInChildren<BoosterRing>().nextRing = prev;
+        GameObject.Find("TheRing").GetComponent<BoosterRing>().nextRing = prev;
     }
 
 	void Update () {
