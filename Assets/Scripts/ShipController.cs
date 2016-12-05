@@ -14,7 +14,7 @@ public class ShipController : MonoBehaviour {
 
     float timer = 1f;
     float shieldTimer;
-    public float cooldownLimit = .4f;
+    public float cooldownLimit = .5f;
 
     public float boostDur = 3f;
     public float boostSpeed = 10f;
@@ -68,8 +68,10 @@ public class ShipController : MonoBehaviour {
     public float power = 0;
     public const float powerRegen = 2f;
     public const float shieldCost = 50f; //Startup cost
-    public const float shieldDrain = 2f; //Use cost
+    public const float shieldDrain = 1.2f; //Use cost
     public const float shieldCooldown = 2.5f; //Cooldown on regen
+	public const float shootCostEngineer = 25f;
+	public const float shootCostShip = 50f;
     /*public const float reflectDrain = 200f;
     public const float shootDrain = 50f;
     public const float engineerShootDrain = 30f;*/
@@ -212,7 +214,8 @@ public class ShipController : MonoBehaviour {
         }
 
         // Fire
-        if (sController.Action1.IsPressed && timer > cooldownLimit && !commandCenterBroken) {
+		if (sController.Action1.IsPressed && timer > cooldownLimit && !commandCenterBroken && power > shootCostShip) {
+			power -= shootCostShip;
 			shoot.pitch = mypitch + Random.Range (-0.1f, 0);
             shoot.Play();
 
