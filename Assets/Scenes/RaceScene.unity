@@ -5840,6 +5840,10 @@ MonoBehaviour:
   boostDur: 3
   boostSpeed: 15
   speed: 20
+  fire1: {fileID: 1719565515}
+  fire2: {fileID: 897497558}
+  fire3: {fileID: 293507613}
+  fire4: {fileID: 1338173912}
   curRing: {fileID: 11556034}
   nextRing: {fileID: 0}
   rollBack: 0.5
@@ -37560,6 +37564,10 @@ MonoBehaviour:
   boostDur: 3
   boostSpeed: 15
   speed: 20
+  fire1: {fileID: 1993349302}
+  fire2: {fileID: 1540180543}
+  fire3: {fileID: 853297264}
+  fire4: {fileID: 881902808}
   curRing: {fileID: 11556034}
   nextRing: {fileID: 0}
   rollBack: 0.5

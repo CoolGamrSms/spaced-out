@@ -17,8 +17,9 @@ public class ShipController : MonoBehaviour {
 
     public float boostDur = 3f;
     public float boostSpeed = 10f;
-
     float boostVal;
+    float boostTimer;
+    bool superboost;
 
     float mypitch;
 
@@ -27,19 +28,20 @@ public class ShipController : MonoBehaviour {
     public float speed;
     float maxSpeed;
 
+    // Engine Fire
+    public GameObject fire1;
+    public GameObject fire2;
+    public GameObject fire3;
+    public GameObject fire4;
 
-    //Rings
+    // Rings
     public GameObject curRing;
     public GameObject nextRing;
 
-    //Controls
+    // Controls
     public float rollBack;
     public float rollAngle;
     public float turnSpeed;
-    float hullDamage;
-
-    float warningTimer;
-    bool superboost;
 
     private Vector3 moveDir;
     private Vector3 lookDir;
@@ -49,16 +51,16 @@ public class ShipController : MonoBehaviour {
     [HideInInspector]
     public MeshRenderer shield;
 
-    float boostTimer;
-
-    public bool commandCenterBroken {
-        get; private set;
-    }
-
 	CanvasGroup warning;
 	Queue<string> activeWarnings = new Queue<string>();
+    float warningTimer;
 
 	public int numHullBreaches = 0;
+    float hullDamage;
+
+    bool isVibrating = false;
+    float timerVibration = 0f;
+    float cooldownVibration = .5f;
 
     Slider powerbar;
     float maxPower = 1000;
@@ -116,35 +118,39 @@ public class ShipController : MonoBehaviour {
         boostTimer = boostDur;
         superboost = sup;
     }
+
     void FixedUpdate() {
         power += powerRegen;
         if (shield.enabled) power -= shieldDrain;
         if (power > maxPower) power = maxPower;
         if (power < 0) power = 0;
 
-        //Lerp power bar
+        // Lerp power bar
         powerbar.value = Mathf.MoveTowards(powerbar.value, power, 5f);
 
-        //Show warnings
+        // Show warnings
         warningTimer -= Time.deltaTime;
+
         if (warningTimer < 0) warningTimer = 0;
-        if(warningTimer == 0)
-        {
-            if (activeWarnings.Count > 0)
-            {
+
+        if (warningTimer == 0) {
+            if (activeWarnings.Count > 0) {
                 warningTimer = 1.5f;
                 warning.GetComponentInChildren<Text>().text = activeWarnings.Dequeue();
                 warning.alpha = 1f;
             }
-            else
-            {
+            else {
                 warning.alpha = 0f;
             }
         }
-        //Handle rings
+
+        // Handle rings
         if (nextRing != null && Vector3.SqrMagnitude(transform.position - curRing.transform.position) > Vector3.SqrMagnitude(transform.position - nextRing.transform.position)) {
             curRing = nextRing;
-            if (curRing.GetComponent<BoosterRing>() != null) nextRing = curRing.GetComponent<BoosterRing>().nextRing;
+
+            if (curRing.GetComponent<BoosterRing>() != null) {
+                nextRing = curRing.GetComponent<BoosterRing>().nextRing;
+            }
             else nextRing = null;
         }
 
@@ -152,45 +158,51 @@ public class ShipController : MonoBehaviour {
         //    gameObject.GetComponent<DamageController>().BreakAll();
         //}
 
-        //Shield
+        // Shield
         if(sController.Action2.WasPressed && !commandCenterBroken)
         {
             shield.enabled = !shield.enabled;
         }
 
-        //Boost
+        // Boost
         if (boostTimer > 0) {
             boostTimer -= Time.deltaTime;
             boostVal += Time.deltaTime * boostSpeed;
             if (boostVal > boostSpeed) boostVal = boostSpeed;
+
+            fire1.transform.localScale = new Vector3(2, 2, 2);
+            fire2.transform.localScale = new Vector3(2, 2, 2);
+            fire3.transform.localScale = new Vector3(2, 2, 2);
+            fire4.transform.localScale = new Vector3(2, 2, 2);
         }
         else {
             boostTimer = 0;
 			superboost = false;
             boostVal -= Time.deltaTime * boostSpeed / 3f;
             if (boostVal < 0) boostVal = 0;
-        }
-        /*
-        if (sController.Action3.WasPressed && !boost && power >= 20)
-        {
-            boost = true;
-            Invoke("DisableBoost", 1f);
-            power -= 25;
-        }*/
 
-        //Fire
+            fire1.transform.localScale = new Vector3(1, 1, 1);
+            fire2.transform.localScale = new Vector3(1, 1, 1);
+            fire3.transform.localScale = new Vector3(1, 1, 1);
+            fire4.transform.localScale = new Vector3(1, 1, 1);
+        }
+
+        // Fire
         if (sController.Action1.IsPressed && timer > cooldownLimit && !commandCenterBroken) {
 			shoot.pitch = mypitch + Random.Range (-0.1f, 0);
             shoot.Play();
             power -= shootDrain;
+
             foreach (Transform pos in bulletSpawns) {
                 GameObject bullet = Instantiate(pBullet);
                 bullet.transform.rotation = pos.rotation;
                 bullet.transform.position = pos.position;
 				bullet.GetComponent<TurretBullet>().shipV = GetComponent<Rigidbody>().velocity;
             }
+
             timer = 0f;
         }
+
         timer += Time.deltaTime;
 
         rb.AddRelativeTorque(sController.LeftStickY.Value * turnSpeed, 0, 0); // W key or the up arrow to turn upwards, S or the down arrow to turn downwards. 
@@ -206,19 +218,16 @@ public class ShipController : MonoBehaviour {
         HandleVibration();
     }
 
-
-    bool isVibrating = false;
     public void BreakVibration() {
         isVibrating = true;
     }
 
-    float timerVibration = 0f;
-    float cooldownVibration = .5f;
     void HandleVibration() {
         if (isVibrating) {
             sController.Vibrate(100.0f);
             timerVibration += Time.deltaTime;
         }
+
         if (timerVibration > cooldownVibration) {
             sController.StopVibration();
             timerVibration = 0f;
@@ -239,13 +248,17 @@ public class ShipController : MonoBehaviour {
 
     public void BreakEngine() {
         speed = maxSpeed * .5f;
-        foreach (ParticleSystem ps in GetComponentsInChildren<ParticleSystem>()) ps.Stop();
+        foreach (ParticleSystem ps in GetComponentsInChildren<ParticleSystem>()) {
+            ps.Stop();
+        }
         ShowWarning("Engine offline!");
     }
 
     public void FixEngine() {
         speed = maxSpeed;
-        foreach (ParticleSystem ps in GetComponentsInChildren<ParticleSystem>()) ps.Play();
+        foreach (ParticleSystem ps in GetComponentsInChildren<ParticleSystem>()) {
+            ps.Play();
+        }
     }
 
     public void BreakCommandCenter() {
@@ -256,10 +269,14 @@ public class ShipController : MonoBehaviour {
         ShowWarning("Command center broken!");
     }
 
-    public void FixedCommandCeneter() {
+    public void FixCommandCenter() {
         commandCenterBroken = false;
         rollAngle *= 3;
         turnSpeed *= 3;
+    }
+
+    public bool commandCenterBroken {
+        get; private set;
     }
 
     public void BreakGravityGenerator() {

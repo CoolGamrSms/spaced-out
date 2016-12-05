@@ -33,7 +33,7 @@ public class CommandCenter : ShipSystem {
 
     protected override void ResetHealth() {
         health = commandHealth;
-        sc.FixedCommandCeneter();
+        sc.FixCommandCenter();
 		mr.material = normalMat;
         title.GetComponent<TextMesh>().color = Color.green;
         cmdImg.enabled = false;
