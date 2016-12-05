@@ -353,7 +353,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Shane Shulte
+  m_Text: Shane Schulte
 --- !u!222 &733053679
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -659,7 +659,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: b988ecfb5cf55b14489f80247aab5456, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
@@ -687,7 +687,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1221251007}
   - 114: {fileID: 1221251006}
-  - 114: {fileID: 1221251005}
   m_Layer: 0
   m_Name: InControl
   m_TagString: Untagged
@@ -695,17 +694,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1221251005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1221251004}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39690cf87dc0c004cbc95ee73bf32901, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1221251006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,7 +708,7 @@ MonoBehaviour:
   logDebugInfo: 0
   invertYAxis: 0
   useFixedUpdate: 1
-  dontDestroyOnLoad: 1
+  dontDestroyOnLoad: 0
   suspendInBackground: 0
   enableICade: 0
   enableXInput: 1
@@ -1172,7 +1160,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: b988ecfb5cf55b14489f80247aab5456, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
