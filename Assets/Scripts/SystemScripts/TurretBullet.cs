@@ -9,6 +9,8 @@ public class TurretBullet : MonoBehaviour {
     [HideInInspector]
     public Vector3 shipV;
 
+	static bool shuttingDown = false;
+
     void Start() {
         GetComponent<Rigidbody>().velocity = shipV + transform.forward * speed;
     }
@@ -23,6 +25,11 @@ public class TurretBullet : MonoBehaviour {
     }
 
 	void OnDestroy(){
-		Instantiate (explosion, transform.position, Quaternion.identity);
+		if(!shuttingDown)
+			Instantiate (explosion, transform.position, Quaternion.identity);
+	}
+
+	void OnApplicationQuit(){
+		shuttingDown = true;
 	}
 }
