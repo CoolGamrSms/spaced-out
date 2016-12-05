@@ -26,7 +26,7 @@ public class ShipController : MonoBehaviour {
 
     List<Transform> bulletSpawns = new List<Transform>();
 
-    public float speed;
+    public float speed = 20f;
     float maxSpeed;
 
     // Engine Fire
@@ -73,6 +73,8 @@ public class ShipController : MonoBehaviour {
     /*public const float reflectDrain = 200f;
     public const float shootDrain = 50f;
     public const float engineerShootDrain = 30f;*/
+
+	public bool started = false;
 
     enum EWarning {
         Hullbreach,
@@ -123,7 +125,10 @@ public class ShipController : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        //Power
+		if (!started)
+			return;
+
+		//Power
         shieldTimer = Mathf.Max(shieldTimer - Time.deltaTime, 0f);
         if(!shield.enabled && shieldTimer == 0f) power += powerRegen;
         else if(shield.enabled) power -= shieldDrain;

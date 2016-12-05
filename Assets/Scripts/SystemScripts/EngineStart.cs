@@ -7,19 +7,36 @@ public class EngineStart : ShipSystem {
 
     AudioSource open;
 
+	static int numReady = 0;
+
     [Range(0,100)]
-    public float shipSpeed = 40;
+    public float shipSpeed = 20;
     
     protected override void Start() {
         base.Start();
         open = GetComponent<AudioSource>();
         unbreakable = true;
+		foreach (ParticleSystem ps in ship.GetComponentsInChildren<ParticleSystem>()) {
+			ps.Stop();
+		}
         BreakSilently();
     }
 
     protected override void ResetHealth() {
         Destroy(cap);
-        ship.GetComponent<ShipController>().speed = shipSpeed;
+		++numReady;
+        //ship.GetComponent<ShipController>().speed = shipSpeed;
+		foreach (ParticleSystem ps in ship.GetComponentsInChildren<ParticleSystem>()) {
+			ps.Play();
+		}
         open.Play();
     }
+
+	void FixedUpdate(){
+		if (numReady == 2) {
+			ship.GetComponent<ShipController> ().started = true;
+		}
+	}
+
+
 }
