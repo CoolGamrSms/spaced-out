@@ -19,6 +19,7 @@ public class Turret : ShipSystem {
         tc.enabled = false;
         cam.enabled = false;
         turretEngaged = false;
+        unbreakable = true;
     }
 
     // Update is called once per frame
@@ -31,10 +32,8 @@ public class Turret : ShipSystem {
                 cam.enabled = true;
             }
         }
-        if(eController.Action2.WasPressed)
-        {
-            if (turretEngaged)
-            {
+        if (eController.Action2.WasPressed) {
+            if (turretEngaged) {
                 ec.enabled = true;
                 tc.enabled = false;
                 cam.enabled = false;

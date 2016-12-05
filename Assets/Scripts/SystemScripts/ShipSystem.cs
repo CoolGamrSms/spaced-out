@@ -11,7 +11,7 @@ public class ShipSystem : Engineer {
     public ShipController sc;
     public bool broken { get; private set; }
     public bool interacting { get; private set; }
-    public bool unbreakable;
+    public bool unbreakable = false;
 
     // Use this for initialization
     virtual protected void Start() {
@@ -42,6 +42,12 @@ public class ShipSystem : Engineer {
         repairScript.SetBroken();
         breakStuff.Play();
         isVibrating = true;
+        sc.BreakVibration();
+    }
+
+    virtual protected void BreakSilently() {
+        broken = true;
+        repairScript.SetBroken();
         sc.BreakVibration();
     }
 
