@@ -13,6 +13,7 @@ public class ShipController : MonoBehaviour {
     public GameObject pBullet;
 
     float timer = 1f;
+    float shieldTimer;
     public float cooldownLimit = .4f;
 
     public float boostDur = 3f;
@@ -65,11 +66,13 @@ public class ShipController : MonoBehaviour {
     Slider powerbar;
     float maxPower = 1000;
     public float power = 0;
-    public const float powerRegen = 1.8f;
-    public const float shieldDrain = 1.5f;
-    public const float reflectDrain = 200f;
+    public const float powerRegen = 2f;
+    public const float shieldCost = 50f; //Startup cost
+    public const float shieldDrain = 2f; //Use cost
+    public const float shieldCooldown = 2.5f; //Cooldown on regen
+    /*public const float reflectDrain = 200f;
     public const float shootDrain = 50f;
-    public const float engineerShootDrain = 30f;
+    public const float engineerShootDrain = 30f;*/
 
     enum EWarning {
         Hullbreach,
@@ -120,10 +123,20 @@ public class ShipController : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        power += powerRegen;
-        if (shield.enabled) power -= shieldDrain;
+        //Power
+        shieldTimer = Mathf.Max(shieldTimer - Time.deltaTime, 0f);
+        if(!shield.enabled && shieldTimer == 0f) power += powerRegen;
+        else if(shield.enabled) power -= shieldDrain;
         if (power > maxPower) power = maxPower;
-        if (power < 0) power = 0;
+        if (power <= 0)
+        {
+            power = 0;
+            if (shield.enabled)
+            {
+                shield.enabled = false;
+                shieldTimer = shieldCooldown;
+            }
+        }
 
         // Lerp power bar
         powerbar.value = Mathf.MoveTowards(powerbar.value, power, 5f);
@@ -161,7 +174,13 @@ public class ShipController : MonoBehaviour {
         // Shield
         if(sController.Action2.WasPressed && !commandCenterBroken)
         {
+            if(!shield.enabled)
+            {
+                if (power <= shieldCost) return;
+                power -= shieldCost;
+            }
             shield.enabled = !shield.enabled;
+            if (!shield.enabled) shieldTimer = shieldCooldown;
         }
 
         // Boost
@@ -191,7 +210,6 @@ public class ShipController : MonoBehaviour {
         if (sController.Action1.IsPressed && timer > cooldownLimit && !commandCenterBroken) {
 			shoot.pitch = mypitch + Random.Range (-0.1f, 0);
             shoot.Play();
-            power -= shootDrain;
 
             foreach (Transform pos in bulletSpawns) {
                 GameObject bullet = Instantiate(pBullet);
@@ -265,7 +283,11 @@ public class ShipController : MonoBehaviour {
         commandCenterBroken = true;
         rollAngle /= 3;
         turnSpeed /= 3;
-        shield.enabled = false;
+        if (shield.enabled)
+        {
+            shield.enabled = false;
+            shieldTimer = shieldCooldown;
+        }
         ShowWarning("Command center broken!");
     }
 
