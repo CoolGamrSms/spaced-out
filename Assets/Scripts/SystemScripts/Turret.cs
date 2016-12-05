@@ -9,6 +9,7 @@ public class Turret : ShipSystem {
     public EngineerController ec;
     public TurretController tc;
     public Camera cam;
+    public Canvas canvas;
 
     bool turretEngaged;
 
@@ -24,6 +25,8 @@ public class Turret : ShipSystem {
 
     // Update is called once per frame
     void FixedUpdate() {
+        canvas.enabled = interacting;
+
         if (interacting && eController.Action1.WasPressed) {
             if (!turretEngaged) {
                 turretEngaged = true;
