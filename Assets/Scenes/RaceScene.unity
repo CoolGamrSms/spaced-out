@@ -26590,6 +26590,21 @@ Prefab:
       propertyPath: m_Text
       value: 'Tell Pilot:'
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012913146402, guid: a7e48660f74ebcc45ba946d391ab66fb,
+        type: 2}
+      propertyPath: commandHealth
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012247451404, guid: a7e48660f74ebcc45ba946d391ab66fb,
+        type: 2}
+      propertyPath: generatorHealth
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010683767390, guid: a7e48660f74ebcc45ba946d391ab66fb,
+        type: 2}
+      propertyPath: engineHealth
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a7e48660f74ebcc45ba946d391ab66fb, type: 2}
   m_IsPrefabParent: 0
@@ -37074,6 +37089,21 @@ Prefab:
         type: 2}
       propertyPath: m_AnchoredPosition.x
       value: 8.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010683767390, guid: a7e48660f74ebcc45ba946d391ab66fb,
+        type: 2}
+      propertyPath: engineHealth
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012913146402, guid: a7e48660f74ebcc45ba946d391ab66fb,
+        type: 2}
+      propertyPath: commandHealth
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012247451404, guid: a7e48660f74ebcc45ba946d391ab66fb,
+        type: 2}
+      propertyPath: generatorHealth
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a7e48660f74ebcc45ba946d391ab66fb, type: 2}
