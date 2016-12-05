@@ -37,8 +37,9 @@ public class TurretController : Engineer
 
     void FixedUpdate()
     {
-        if (eController.Action1.IsPressed && timer > cooldownLimit)
+		if (eController.Action1.IsPressed && timer > cooldownLimit && sc.power > ShipController.shootCostEngineer)
         {
+			sc.power -= ShipController.shootCostEngineer;
             foreach (Transform pos in bulletSpawns)
             {
                 shoot.pitch = mypitch + Random.Range(-0.1f, 0f);
