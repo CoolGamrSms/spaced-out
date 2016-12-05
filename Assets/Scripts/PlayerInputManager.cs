@@ -21,52 +21,34 @@ public class PlayerInputManager : MonoBehaviour {
             gameStarted = true;
             SceneManager.LoadScene("Tutorial");
         }
-        
+
         if (ActiveDevice.Action1.WasPressed && !gameStarted) {
             foreach (InputDevice controller in controllers) {
-                if (controller == ActiveDevice)
-                    return;
+                if (controller == ActiveDevice) return;
             }
             controllers[0] = ActiveDevice;
         }
 
         if (ActiveDevice.Action2.WasPressed && !gameStarted) {
             foreach (InputDevice controller in controllers) {
-                if (controller == ActiveDevice)
-                    return;
+                if (controller == ActiveDevice) return;
             }
-
             controllers[1] = ActiveDevice;
         }
 
         if (ActiveDevice.Action3.WasPressed && !gameStarted) {
             foreach (InputDevice controller in controllers) {
-                if (controller == ActiveDevice)
-                    return;
+                if (controller == ActiveDevice) return;
             }
-
             controllers[2] = ActiveDevice;
         }
 
         if (ActiveDevice.Action4.WasPressed && !gameStarted) {
             foreach (InputDevice controller in controllers) {
-                if (controller == ActiveDevice) {
-                    return;
-                }
+                if (controller == ActiveDevice) return;
             }
-
             controllers[3] = ActiveDevice;
         }
-
-//         if (ActiveDevice.RightBumper.IsPressed && ActiveDevice.LeftBumper.IsPressed) {
-// #if UNITY_EDITOR
-//             // Application.Quit() does not work in the editor so
-//             // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
-//             UnityEditor.EditorApplication.isPlaying = false;
-// #else
-//             Application.Quit();
-// #endif
-//         }
     }
 
     public static PlayerInputManager Instance = null;
@@ -90,8 +72,8 @@ public class PlayerInputManager : MonoBehaviour {
         }
     }
 
-	public void Clear(){
-		controllers = new InputDevice[4];
-		gameStarted = false;
-	}
+    public void Clear() {
+        controllers = new InputDevice[4];
+        gameStarted = false;
+    }
 }
