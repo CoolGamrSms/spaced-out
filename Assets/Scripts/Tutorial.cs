@@ -6,6 +6,7 @@ using InControl;
 
 public class Tutorial : MonoBehaviour {
 
+	public Sprite intro1;
 	public Sprite intro2;
 	public Sprite intro3;
 
@@ -13,21 +14,41 @@ public class Tutorial : MonoBehaviour {
 
 	void Update() {
 		if (InputManager.ActiveDevice.Action1.WasPressed) {
-			ChangeIntro ();
+			ChangeIntroForward();
+		}
+		else if (InputManager.ActiveDevice.Action2.WasPressed) {
+			ChangeIntroBack();
 		}
 	}
 
-	public void ChangeIntro() {
-		if (x == 0) {
+	public void ChangeIntroForward() {
+		x++;
+
+		if (x == 1) {
 			GetComponentInChildren<Image>().sprite = intro2;
 		}
-		else if (x == 1) {
+		else if (x == 2) {
 			GetComponentInChildren<Image>().sprite = intro3;
 		}
-		else if (x == 2) {
+		else if (x == 3) {
 			SceneManager.LoadScene("RaceScene");
 		}
+	}
 
-		x++;
+	public void ChangeIntroBack() {
+		x--;
+
+		if (x == -1) {
+			SceneManager.LoadScene("ReadyCheck");
+		}
+		else if (x == 0) {
+			GetComponentInChildren<Image>().sprite = intro1;
+		}
+		else if (x == 1) {
+			GetComponentInChildren<Image>().sprite = intro2;
+		}
+		else if (x == 2) {
+			GetComponentInChildren<Image>().sprite = intro3;
+		}
 	}
 }
