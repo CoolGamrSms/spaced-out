@@ -13,6 +13,7 @@ public class EngineStart : ShipSystem {
     public float shipSpeed = 20;
     
     protected override void Start() {
+        numReady = 0;
         base.Start();
         open = GetComponent<AudioSource>();
         unbreakable = true;
