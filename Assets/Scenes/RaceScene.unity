@@ -6243,7 +6243,7 @@ Animator:
   m_GameObject: {fileID: 277840593}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3e67b035b2109ac4fac7a9e421a3f0de, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3b3671106f4b20a46be4b069e8ac540e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -8259,7 +8259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 1, b: 0.19607843, a: 0}
+  m_Color: {r: 0, g: 1, b: 0.029411793, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -8956,6 +8956,21 @@ Prefab:
         type: 2}
       propertyPath: m_Color.b
       value: 0.58823526
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012853394544, guid: 866212333cb646246abc1207f9a64528,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000013767760272, guid: 866212333cb646246abc1207f9a64528,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000013806391882, guid: 866212333cb646246abc1207f9a64528,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 866212333cb646246abc1207f9a64528, type: 2}
@@ -11979,7 +11994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 1, b: 0.19607843, a: 0}
+  m_Color: {r: 0, g: 1, b: 0.029411793, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -12083,7 +12098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 1, b: 0.19607843, a: 0}
+  m_Color: {r: 0, g: 1, b: 0.029411793, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -12867,7 +12882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 1, b: 0.19607843, a: 0}
+  m_Color: {r: 0, g: 1, b: 0.029411793, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -21962,8 +21977,8 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 902271501}
-  m_LocalRotation: {x: -0, y: -0.86602527, z: -0, w: -0.5000001}
-  m_LocalPosition: {x: 0, y: 0, z: -80988.53}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -21972,10 +21987,10 @@ RectTransform:
   - {fileID: 296528268}
   - {fileID: 538316430}
   m_Father: {fileID: 432635611}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 46758.77, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &902271503
