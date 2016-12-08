@@ -24,7 +24,7 @@ public class DamageController : MonoBehaviour {
     void Awake() {
         hulls = shipInterior.GetComponentsInChildren<Hull>();
         systems = shipInterior.GetComponentsInChildren<ShipSystem>();
-        target = systems.First();
+        target = systems.OrderBy(x => System.Guid.NewGuid()).First();
 
         shipController = GetComponent<ShipController>();
         foreach (ShipSystem ss in systems) ss.sc = shipController;
