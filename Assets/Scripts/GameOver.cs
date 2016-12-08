@@ -15,6 +15,9 @@ public class GameOver : MonoBehaviour {
 	void Update () {
 		if (visible) {
 			ui.alpha += .05f;
+			if (ui.alpha == 1f) {
+				Destroy (this);
+			}
 		}
 	}
 

@@ -25,7 +25,6 @@ public class EngineStart : ShipSystem {
     protected override void ResetHealth() {
         Destroy(cap);
 		++numReady;
-        //ship.GetComponent<ShipController>().speed = shipSpeed;
 		foreach (ParticleSystem ps in ship.GetComponentsInChildren<ParticleSystem>()) {
 			ps.Play();
 		}
@@ -34,9 +33,11 @@ public class EngineStart : ShipSystem {
 
 	void FixedUpdate(){
 		if (numReady == 2) {
-			ship.GetComponent<ShipController> ().started = true;
+			//ship.GetComponent<ShipController> ().started = true;
+			ship.GetComponent<Animator>().SetTrigger("start");
 		}
 	}
+
 
 
 }

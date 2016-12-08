@@ -317,4 +317,8 @@ public class ShipController : MonoBehaviour {
         activeWarnings.Enqueue(msg);
     }
 
+	public void StartRace(){
+		started = true;
+	}
+
 }
