@@ -36,6 +36,7 @@ public class ShipController : MonoBehaviour {
     public GameObject fire4;
 
     // Rings
+    public GameObject lastRing;
     public GameObject curRing;
     public GameObject nextRing;
 
@@ -162,6 +163,24 @@ public class ShipController : MonoBehaviour {
             else {
                 warning.alpha = 0f;
             }
+        }
+
+        // respawn
+        if (sController.CommandWasPressed) {
+            Collider[] hitColliders = Physics.OverlapSphere(curRing.transform.position, 200f);
+
+            foreach (Collider hit in hitColliders) {
+                Debug.Log(hit.tag);
+
+                if (hit.tag == "Asteroid") {
+                    Destroy(hit.gameObject);
+                }
+            }
+
+            transform.Rotate(0, 0, 0);
+            transform.position = curRing.transform.position;
+            // transform.position = curRing.GetComponent<BoosterRing>().lastRing.transform.position;
+            speed = 0;
         }
 
         // Handle rings
@@ -291,8 +310,8 @@ public class ShipController : MonoBehaviour {
         commandCenterBroken = true;
         rollAngle /= 3;
         turnSpeed /= 3;
-        if (shield.enabled)
-        {
+
+        if (shield.enabled) {
             shield.enabled = false;
             shieldTimer = shieldCooldown;
         }
@@ -317,7 +336,7 @@ public class ShipController : MonoBehaviour {
         activeWarnings.Enqueue(msg);
     }
 
-	public void StartRace(){
+	public void StartRace() {
 		started = true;
 	}
 

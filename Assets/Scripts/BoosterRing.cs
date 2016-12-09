@@ -6,6 +6,8 @@ public class BoosterRing : MonoBehaviour {
     GameObject firstShip;
     public GameObject nextRing;
 
+    public GameObject lastRing;
+
     void OnTriggerEnter(Collider coll) {
         ShipController sc = coll.gameObject.GetComponentInParent<ShipController>();
 
@@ -18,6 +20,7 @@ public class BoosterRing : MonoBehaviour {
             else sc.StartBoost(true);
 
             sc.curRing = nextRing;
+            sc.lastRing = sc.curRing;
             
             if (nextRing != null && nextRing.GetComponent<BoosterRing>() != null) {
                 sc.nextRing = nextRing.GetComponent<BoosterRing>().nextRing;
