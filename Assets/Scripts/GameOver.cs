@@ -22,6 +22,7 @@ public class GameOver : MonoBehaviour {
 	}
 
 	public void Gameover(){
+		ui.gameObject.SetActive (true);
 		visible = true;
 	}
 }
