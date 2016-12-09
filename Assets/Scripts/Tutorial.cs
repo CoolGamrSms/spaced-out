@@ -11,17 +11,23 @@ public class Tutorial : MonoBehaviour {
 	public Sprite intro3;
 
 	int x = 0;
+	float waitTime = 2;
 
 	void Update() {
-		if (InputManager.ActiveDevice.Action1.WasPressed) {
-			ChangeIntroForward();
-		}
-		else if (InputManager.ActiveDevice.Action2.WasPressed) {
-			ChangeIntroBack();
+		waitTime -= Time.deltaTime;
+
+		if (waitTime <= 0.0f) {
+			if (InputManager.ActiveDevice.Action1.WasPressed) {
+				ChangeIntroForward();
+			}
+			else if (InputManager.ActiveDevice.Action2.WasPressed) {
+				ChangeIntroBack();
+			}
 		}
 	}
 
 	public void ChangeIntroForward() {
+		waitTime = 2;
 		x++;
 
 		if (x == 1) {
@@ -36,6 +42,7 @@ public class Tutorial : MonoBehaviour {
 	}
 
 	public void ChangeIntroBack() {
+		waitTime = 2;
 		x--;
 
 		if (x == -1) {
