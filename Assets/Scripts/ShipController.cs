@@ -166,7 +166,10 @@ public class ShipController : MonoBehaviour {
         }
 
         // respawn
-        if (sController.CommandWasPressed) {
+        if (transform.position.x > curRing.transform.position.x + 300
+            || transform.position.x < curRing.transform.position.x - 300
+            || transform.position.y > curRing.transform.position.x + 300
+            || transform.position.y < curRing.transform.position.x - 300) {
             Collider[] hitColliders = Physics.OverlapSphere(curRing.transform.position, 200f);
 
             foreach (Collider hit in hitColliders) {
@@ -180,7 +183,8 @@ public class ShipController : MonoBehaviour {
             transform.Rotate(0, 0, 0);
             transform.position = curRing.transform.position;
             // transform.position = curRing.GetComponent<BoosterRing>().lastRing.transform.position;
-            speed = 0;
+            started = false;
+            StartRace();
         }
 
         // Handle rings

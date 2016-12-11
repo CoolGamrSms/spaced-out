@@ -25,12 +25,10 @@ public class PlayerInputManager : MonoBehaviour {
     public ControllerInterface[] controllerInterfaces;
     //0 - pilot1, 1 - engineer1, 2-pilot2, 3-engineer2
 
-    int GetSlot(ControllerInterface.ContState cont)
-    {
+    int GetSlot(ControllerInterface.ContState cont) {
         bool slot0 = false;
         bool slot1 = false;
-        foreach (ControllerInterface i in controllerInterfaces)
-        {
+        foreach (ControllerInterface i in controllerInterfaces) {
             if (i.cont == cont && i.mySlot == 0) slot0 = true;
             else if (i.cont == cont && i.mySlot == 1) slot1 = true;
         }
@@ -39,39 +37,31 @@ public class PlayerInputManager : MonoBehaviour {
         return 1;
     }
 
-    bool CheckRole(ControllerInterface.ContState cont, ControllerInterface.RoleState role)
-    {
-        foreach (ControllerInterface i in controllerInterfaces)
-        {
+    bool CheckRole(ControllerInterface.ContState cont, ControllerInterface.RoleState role) {
+        foreach (ControllerInterface i in controllerInterfaces) {
             if (i.role == role && i.cont == cont) return true;
         }
         return false;
     }
 
-    bool CheckDevice(InputDevice id)
-    {
-        foreach(ControllerInterface i in controllerInterfaces)
-        {
+    bool CheckDevice(InputDevice id) {
+        foreach(ControllerInterface i in controllerInterfaces) {
             if (i.ind == id) return true;
         }
         return false;
     }
 
-    bool CheckAllReady()
-    {
-        foreach (ControllerInterface i in controllerInterfaces)
-        {
+    bool CheckAllReady() {
+        foreach (ControllerInterface i in controllerInterfaces) {
             if (!i.isActiveAndEnabled) return false;
             if (i.role == ControllerInterface.RoleState.NONE) return false;
         }
         return true;
     }
 
-    void FormatControllers()
-    {
+    void FormatControllers() {
         //Format the controllers array properly
-        foreach (ControllerInterface i in controllerInterfaces)
-        {
+        foreach (ControllerInterface i in controllerInterfaces) {
             if (i.role == ControllerInterface.RoleState.PILOT && i.cont == ControllerInterface.ContState.BLUE) controllers[0] = i.ind;
             if (i.role == ControllerInterface.RoleState.ENG && i.cont == ControllerInterface.ContState.BLUE) controllers[1] = i.ind;
             if (i.role == ControllerInterface.RoleState.PILOT && i.cont == ControllerInterface.ContState.RED) controllers[2] = i.ind;
@@ -79,96 +69,81 @@ public class PlayerInputManager : MonoBehaviour {
         }
     }
 
-    void SetBottomString()
-    {
+    void SetBottomString() {
         if (CheckAllReady()) bottomText.text = starts;
         else if (joined == 4) bottomText.text = select;
         else bottomText.text = join;
     }
 
     void FixedUpdate() {
-
-        if(!gameStarted)
-        {
+        if(!gameStarted) {
             //Process start press
-            if(ActiveDevice.CommandWasPressed && CheckAllReady())
-            {
+            if(ActiveDevice.CommandWasPressed && CheckAllReady()) {
                 FormatControllers();
                 gameStarted = true;
                 SceneManager.LoadScene("Tutorial");
             }
             //Go back to main menu
-            if(ActiveDevice.Action2.WasPressed)
-            {
+            if(ActiveDevice.Action2.WasPressed) {
                 Destroy(gameObject);
                 SceneManager.LoadScene("start");
             }
             //New controller registering
-            if(ActiveDevice.Action1.WasPressed && !CheckDevice(ActiveDevice))
-            {
+            if(ActiveDevice.Action1.WasPressed && !CheckDevice(ActiveDevice)) {
                 controllerInterfaces[joined].ind = ActiveDevice;
                 controllerInterfaces[joined++].gameObject.SetActive(true);
                 SetBottomString();
             }
             //Handle input from all controllers
-            foreach (ControllerInterface i in controllerInterfaces)
-            {
+            foreach (ControllerInterface i in controllerInterfaces) {
                 if (!i.isActiveAndEnabled) continue;
                 if (!i.ind.LeftStickX.WasPressed && !i.ind.LeftStickY.WasPressed) continue;
-                if (Mathf.Abs(i.ind.LeftStickX.Value) > Mathf.Abs(i.ind.LeftStickY.Value) && i.role == ControllerInterface.RoleState.NONE) //Horizontal Input + no role
-                {
+                //Horizontal Input + no role
+                if (Mathf.Abs(i.ind.LeftStickX.Value) > Mathf.Abs(i.ind.LeftStickY.Value) && i.role == ControllerInterface.RoleState.NONE) {
                     //Move from main to blue
-                    if (i.cont == ControllerInterface.ContState.MAIN && i.ind.LeftStickX.Value < 0f)
-                    {
+                    if (i.cont == ControllerInterface.ContState.MAIN && i.ind.LeftStickX.Value < 0f) {
                         int slot = GetSlot(ControllerInterface.ContState.BLUE);
                         if (slot < 0) continue;
                         i.cont = ControllerInterface.ContState.BLUE;
                         i.MoveTeam(-200f, slot);
                     }
                     //Move from main to red
-                    else if (i.cont == ControllerInterface.ContState.MAIN && i.ind.LeftStickX.Value > 0f)
-                    {
+                    else if (i.cont == ControllerInterface.ContState.MAIN && i.ind.LeftStickX.Value > 0f) {
                         int slot = GetSlot(ControllerInterface.ContState.RED);
                         if (slot < 0) continue;
                         i.cont = ControllerInterface.ContState.RED;
                         i.MoveTeam(200f, slot);
                     }
                     //Move back to main
-                    else if (i.cont == ControllerInterface.ContState.BLUE && i.ind.LeftStickX.Value > 0f)
-                    {
+                    else if (i.cont == ControllerInterface.ContState.BLUE && i.ind.LeftStickX.Value > 0f) {
                         i.Home();
                     }
-                    else if (i.cont == ControllerInterface.ContState.RED && i.ind.LeftStickX.Value < 0f)
-                    {
+                    else if (i.cont == ControllerInterface.ContState.RED && i.ind.LeftStickX.Value < 0f) {
                         i.Home();
                     }
                 }
-                else if (Mathf.Abs(i.ind.LeftStickY.Value) > Mathf.Abs(i.ind.LeftStickX.Value) && i.cont != ControllerInterface.ContState.MAIN) //Vertical Input + has team
-                {
+                //Vertical Input + has team 
+                else if (Mathf.Abs(i.ind.LeftStickY.Value) > Mathf.Abs(i.ind.LeftStickX.Value) && i.cont != ControllerInterface.ContState.MAIN) {
                     //Move to engineer
-                    if(i.ind.LeftStickY.Value < 0 && i.role == ControllerInterface.RoleState.NONE)
-                    {
+                    if(i.ind.LeftStickY.Value < 0 && i.role == ControllerInterface.RoleState.NONE) {
                         if (CheckRole(i.cont, ControllerInterface.RoleState.ENG)) continue;
                         i.role = ControllerInterface.RoleState.ENG;
                         i.Move(-80f);
                         SetBottomString();
                     }
                     //Move to pilot
-                    else if (i.ind.LeftStickY.Value > 0 && i.role == ControllerInterface.RoleState.NONE)
-                    {
+                    else if (i.ind.LeftStickY.Value > 0 && i.role == ControllerInterface.RoleState.NONE) {
                         if (CheckRole(i.cont, ControllerInterface.RoleState.PILOT)) continue;
                         i.role = ControllerInterface.RoleState.PILOT;
                         i.Move(80f);
                         SetBottomString();
                     }
                     //Move to team home
-                    else if (i.ind.LeftStickY.Value < 0 && i.role == ControllerInterface.RoleState.PILOT)
-                    {
+                    else if (i.ind.LeftStickY.Value < 0 && i.role == ControllerInterface.RoleState.PILOT) {
                         i.TeamHome();
                         SetBottomString();
                     }
-                    else if (i.ind.LeftStickY.Value > 0 && i.role == ControllerInterface.RoleState.ENG)
-                    {
+                    else if (i.ind.LeftStickY.Value > 0 && i.role == ControllerInterface.RoleState.ENG) {
                         i.TeamHome();
                         SetBottomString();
                     }

@@ -6,30 +6,29 @@ using UnityEngine.UI;
 public class Fade : MonoBehaviour {
 	CanvasGroup panel;
 	static GameObject fadingCanvas = null;
-	// Use this for initialization
-	void Awake () {
+
+	void Awake() {
 		if (fadingCanvas == null) {
 			DontDestroyOnLoad (gameObject);
 			fadingCanvas = gameObject;
 		}
 		panel = GetComponentInChildren<CanvasGroup> ();
-
 	}
 
-	void OnEnable(){
+	void OnEnable() {
 		SceneManager.sceneUnloaded += FadeScreen;
 	}
 
-	void OnDisable(){
+	void OnDisable() {
 		SceneManager.sceneUnloaded -= FadeScreen;
 	}
 
-	void FadeScreen(Scene scene){
+	void FadeScreen(Scene scene) {
 		panel.alpha = 1f;
 		StartCoroutine ("FadeIn");	
 	}
 
-	IEnumerator FadeOut(){
+	IEnumerator FadeOut() {
 		while (panel.alpha < 1f) {
 			panel.alpha += .2f;
 			yield return new WaitForSeconds(.1f);
@@ -39,7 +38,7 @@ public class Fade : MonoBehaviour {
 		StartCoroutine ("FadeIn");
 	}
 
-	IEnumerator FadeIn(){
+	IEnumerator FadeIn() {
 		while (panel.alpha > 0f) {
 			panel.alpha -= .1f;
 			yield return new WaitForSeconds (.1f);

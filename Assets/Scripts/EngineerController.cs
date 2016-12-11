@@ -49,13 +49,16 @@ public class EngineerController : Engineer {
         RaycastHit hit;
 
         if (Physics.Raycast(transform.position + Vector3.up * 0.75f, transform.forward, out hit, 6f)) {
-            if (hit.collider.gameObject == interaction) return;
+            if (hit.collider.gameObject == interaction) 
+                return;
 
             ShipSystem shipSystem = hit.collider.gameObject.GetComponent<ShipSystem>();
+            
             if (shipSystem != null) {
                 if (interaction != null) {
                     EndInteracting();
                 }
+                
                 if (!shipSystem.GetType().Equals(typeof(Turret)) && shipSystem.broken)
                     StartInteractingWrench(hit.collider.gameObject);
                 else
@@ -81,7 +84,7 @@ public class EngineerController : Engineer {
         wrench.SetActive(true);
     }
 
-        void EndInteracting() {
+    void EndInteracting() {
         interaction.GetComponent<ShipSystem>().EndInteraction();
         interaction = null;
         wrench.SetActive(false);

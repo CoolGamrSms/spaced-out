@@ -11,12 +11,14 @@ public class Start : MonoBehaviour {
 	}
 
 	public void StartGame() {
-        if (PlayerInputManager.Instance != null) Destroy(PlayerInputManager.Instance.gameObject);
+        if (PlayerInputManager.Instance != null) 
+        	Destroy(PlayerInputManager.Instance.gameObject);
 		SceneManager.LoadScene("ReadyCheck");
 	}
 
     public void MainMenu() {
-        if (PlayerInputManager.Instance != null) Destroy(PlayerInputManager.Instance.gameObject);
+        if (PlayerInputManager.Instance != null) 
+        	Destroy(PlayerInputManager.Instance.gameObject);
         SceneManager.LoadScene("Start");
     }
 

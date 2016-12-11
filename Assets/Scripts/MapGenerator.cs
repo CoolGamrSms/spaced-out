@@ -12,19 +12,17 @@ public class MapGenerator : MonoBehaviour {
     public GameObject asteroidPrefab;
     public Mesh[] asteroids;
 
-	// Use this for initialization
-	void Start () {
+	void Start() {
         GameObject prev = goal;
-	    for(int i = rings-1; i >= 0; --i)
-        {
+	    for(int i = rings-1; i >= 0; --i) {
             GameObject go = Instantiate(ring);
             go.transform.position = transform.position + new Vector3((i > (rings / 3)) ? amp * Mathf.Sin((i - (rings / 3)) / frequency) : 0f, amp *Mathf.Sin(i / frequency),  i* spacing);
             go.transform.LookAt(prev.transform);
             go.GetComponent<BoosterRing>().nextRing = prev;
             prev = go;
             int asteroidCount = Random.Range(6, 14);
-            for (int j = 0; j < asteroidCount; ++j)
-            {
+            
+            for (int j = 0; j < asteroidCount; ++j) {
                 GameObject ast = Instantiate(asteroidPrefab);
                 int x = Random.Range(0, 21);
                 ast.GetComponent<MeshFilter>().sharedMesh = asteroids[x];
@@ -39,8 +37,4 @@ public class MapGenerator : MonoBehaviour {
         }
         GameObject.Find("TheRing").GetComponent<BoosterRing>().nextRing = prev;
     }
-
-	void Update () {
-	
-	}
 }

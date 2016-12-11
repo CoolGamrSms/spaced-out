@@ -6,11 +6,11 @@ public class RotateToFace : MonoBehaviour {
     public GameObject face;
     public bool isEngineText = false;
 
-    void Start()
-    {
+    void Start() {
         if (face == null) gameObject.SetActive(false);
     }
-	void Update () {
+
+	void Update() {
         var targetPosition = face.transform.position;
 
         targetPosition.y = transform.position.y;
