@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 public class DamageController : MonoBehaviour {
@@ -12,7 +13,6 @@ public class DamageController : MonoBehaviour {
     ShipSystem target;
     ShipSystem[] systems;
 
-
     [Range(0, 10)]
     public int bulletDamage = 1;
     [Range(0, 10)]
@@ -24,7 +24,17 @@ public class DamageController : MonoBehaviour {
     void Awake() {
         hulls = shipInterior.GetComponentsInChildren<Hull>();
         systems = shipInterior.GetComponentsInChildren<ShipSystem>();
-        target = systems.OrderBy(x => System.Guid.NewGuid()).First();
+
+        List<ShipSystem> options = new List<ShipSystem>();
+        foreach (ShipSystem ss in systems)
+        {
+            if (!ss.broken && !ss.unbreakable && !hulls.Contains(ss))
+            {
+                options.Add(ss);
+            }
+        }
+        if (options.Count > 0) target = options[Random.Range(0, options.Count)];
+        Debug.Log(target.gameObject.name);
 
         shipController = GetComponent<ShipController>();
         foreach (ShipSystem ss in systems) ss.sc = shipController;
@@ -64,10 +74,10 @@ public class DamageController : MonoBehaviour {
 
     void DamageDistribution(GameObject go) {
         if (Random.value <= breachProbability) {
-			foreach (Hull hull in hulls.OrderBy(x => System.Guid.NewGuid())) {
+			foreach (Hull hull in hulls) {
                 if (!hull.broken) {
                     hull.BreakSelf();
-                    return;
+                    break;
                 }
             }
         }
@@ -90,16 +100,18 @@ public class DamageController : MonoBehaviour {
     }
 
     void DealDamage(int damage) {
-        target.TakeDamage(damage);
+        
         if (target.broken) {
-			foreach (ShipSystem ss in systems.OrderBy(x => System.Guid.NewGuid())) {
-                if (ss.unbreakable) continue;
-                if (!ss.broken) {
-                    target = ss;
-                    Debug.LogWarning(target.gameObject.name);
-                    return;
+            //Select a new target (if possible)
+            List<ShipSystem> options = new List<ShipSystem>();
+            foreach (ShipSystem ss in systems) { 
+                if (!ss.broken && !ss.unbreakable && !hulls.Contains(ss)) {
+                    options.Add(ss);
                 }
             }
+            if(options.Count > 0) target = options[Random.Range(0, options.Count)];
         }
+
+        target.TakeDamage(damage);
     }
 }

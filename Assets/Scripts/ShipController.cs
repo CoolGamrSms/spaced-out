@@ -53,7 +53,10 @@ public class ShipController : MonoBehaviour {
     [HideInInspector]
     public MeshRenderer shield;
 
-	CanvasGroup warning;
+    CanvasGroup respawn;
+    bool canRespawn;
+
+    CanvasGroup warning;
 	Queue<string> activeWarnings = new Queue<string>();
     float warningTimer;
 
@@ -67,12 +70,12 @@ public class ShipController : MonoBehaviour {
     Slider powerbar;
     float maxPower = 1000;
     public float power = 0;
-    public const float powerRegen = 2f;
+    public const float powerRegen = 3f;
     public const float shieldCost = 50f; //Startup cost
-    public const float shieldDrain = 1.2f; //Use cost
-    public const float shieldCooldown = 2.5f; //Cooldown on regen
-	public const float shootCostEngineer = 25f;
-	public const float shootCostShip = 50f;
+    public const float shieldDrain = 1.5f; //Use cost
+    public const float shieldCooldown = 1.5f; //Cooldown on regen
+	public const float shootCostEngineer = 15f;
+	public const float shootCostShip = 25f;
     /*public const float reflectDrain = 200f;
     public const float shootDrain = 50f;
     public const float engineerShootDrain = 30f;*/
@@ -88,6 +91,7 @@ public class ShipController : MonoBehaviour {
 
     void Awake() {
         //power = maxPower;
+        canRespawn = false;
         boostTimer = 0f;
         boostVal = 0f;
         warningTimer = 0f;
@@ -101,6 +105,7 @@ public class ShipController : MonoBehaviour {
 
     void Start() {
         nextRing = curRing.GetComponent<BoosterRing>().nextRing;
+        lastRing = curRing;
         maxSpeed = speed;
         rb = GetComponent<Rigidbody>();
         hullDamage = 0f;
@@ -115,7 +120,8 @@ public class ShipController : MonoBehaviour {
 
         powerbar = GetComponentInChildren<Slider>();
         powerbar.maxValue = maxPower;
-        warning = GetComponentInChildren<CanvasGroup>();
+        warning = transform.FindChild("ShipWarnings").FindChild("Warning").GetComponent<CanvasGroup>();
+        respawn = transform.FindChild("ShipWarnings").FindChild("Respawn").GetComponent<CanvasGroup>();
     }
 
     void DisableShield() {
@@ -166,29 +172,38 @@ public class ShipController : MonoBehaviour {
         }
 
         // respawn
-        if (transform.position.x > curRing.transform.position.x + 300
-            || transform.position.x < curRing.transform.position.x - 300
-            || transform.position.y > curRing.transform.position.x + 300
-            || transform.position.y < curRing.transform.position.x - 300) {
-            Collider[] hitColliders = Physics.OverlapSphere(curRing.transform.position, 200f);
+        if (Vector3.Distance(transform.position, curRing.transform.position) > 370f) {
+            canRespawn = true;
+            respawn.alpha = 1f;
+        }
+        else
+        {
+            canRespawn = false;
+            respawn.alpha = 0f;
+        }
 
-            foreach (Collider hit in hitColliders) {
-                Debug.Log(hit.tag);
+        if(sController.Action4.WasPressed && canRespawn)
+        {
+            canRespawn = false;
+            respawn.alpha = 0f;
+            Collider[] hitColliders = Physics.OverlapSphere(lastRing.transform.position, 200f);
+            Debug.Log("RESPAWNING A SHIP");
+            foreach (Collider hit in hitColliders)
+            {
 
-                if (hit.tag == "Asteroid") {
+                if (hit.tag == "Asteroid")
+                {
                     Destroy(hit.gameObject);
                 }
             }
 
-            transform.Rotate(0, 0, 0);
-            transform.position = curRing.transform.position;
-            // transform.position = curRing.GetComponent<BoosterRing>().lastRing.transform.position;
-            started = false;
-            StartRace();
+            transform.position = lastRing.transform.position;
+            transform.rotation = lastRing.transform.rotation;
         }
 
         // Handle rings
-        if (nextRing != null && Vector3.SqrMagnitude(transform.position - curRing.transform.position) > Vector3.SqrMagnitude(transform.position - nextRing.transform.position)) {
+        if (curRing.GetComponent<BoosterRing>().plane.GetSide(transform.position)) {
+            lastRing = curRing;
             curRing = nextRing;
 
             if (curRing.GetComponent<BoosterRing>() != null) {
