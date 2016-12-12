@@ -34,8 +34,9 @@ public class EngineStart : ShipSystem {
 
 	void FixedUpdate(){
 		if (numReady == 2) {
-			//ship.GetComponent<ShipController> ().started = true;
-			ship.GetComponent<Animator>().SetTrigger("start");
+			//ship.GetComponent<Animator>().SetTrigger("start");
+			ship.GetComponent<Animator>().SetBool("startCount", true);
+			Destroy (this);
 		}
 	}
 

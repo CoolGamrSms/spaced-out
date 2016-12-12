@@ -204,11 +204,12 @@ public class ShipController : MonoBehaviour {
             transform.position = lastRing.transform.position;
             transform.rotation = lastRing.transform.rotation;
 
-			//started = false;
+			started = false;
 			rb.velocity = Vector3.zero;
 			rb.rotation = Quaternion.Euler (0f, 0f, 0f);
-			anim.ResetTrigger ("start");
-			anim.SetTrigger ("start");
+			anim.SetBool ("startCount", true);
+			//anim.ResetTrigger ("start");
+			//anim.SetTrigger ("start");
         }
 
         // Handle rings
@@ -367,6 +368,7 @@ public class ShipController : MonoBehaviour {
 
 	public void StartRace() {
 		started = true;
+		anim.SetBool ("startCount", false);
 	}
 
 }
