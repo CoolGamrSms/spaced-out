@@ -82,6 +82,9 @@ public class ShipController : MonoBehaviour {
 
 	public bool started = false;
 
+	Animator anim;
+
+
     enum EWarning {
         Hullbreach,
         CommandCenter,
@@ -108,6 +111,7 @@ public class ShipController : MonoBehaviour {
         lastRing = curRing;
         maxSpeed = speed;
         rb = GetComponent<Rigidbody>();
+		anim = GetComponent<Animator> ();
         hullDamage = 0f;
         commandCenterBroken = false;
 
@@ -199,6 +203,12 @@ public class ShipController : MonoBehaviour {
 
             transform.position = lastRing.transform.position;
             transform.rotation = lastRing.transform.rotation;
+
+			//started = false;
+			rb.velocity = Vector3.zero;
+			rb.rotation = Quaternion.Euler (0f, 0f, 0f);
+			anim.ResetTrigger ("start");
+			anim.SetTrigger ("start");
         }
 
         // Handle rings
