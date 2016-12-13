@@ -14,10 +14,15 @@ public class EngineerController : Engineer {
     bool gravity = true;
     float gravityValue = 0f;
 
-    public GameObject wrench;
+	private Animator anim;
+	private CharacterController cc;
+
+	void Start(){
+		anim = GetComponent<Animator> ();
+		cc = GetComponent<CharacterController>();
+	}
 
     void Update() {
-        CharacterController cc = GetComponent<CharacterController>();
         transform.Rotate(-eController.RightStickY.Value * lookSpeed, eController.RightStickX.Value * lookSpeed, 0);
 
         if (gravity) transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
@@ -81,13 +86,13 @@ public class EngineerController : Engineer {
     void StartInteractingWrench(GameObject go) {
         interaction = go;
         interaction.GetComponent<ShipSystem>().StartInteraction();
-        wrench.SetActive(true);
+		anim.SetBool("interacting", true);
     }
 
     void EndInteracting() {
         interaction.GetComponent<ShipSystem>().EndInteraction();
         interaction = null;
-        wrench.SetActive(false);
+		anim.SetBool ("interacting", false);
     }
 
     public void LoseGravity() {
