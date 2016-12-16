@@ -16,6 +16,7 @@ public class EngineerController : Engineer {
 
 	private Animator anim;
 	private CharacterController cc;
+	private AudioSource wrenchSound;
 
 	void Start(){
 		anim = GetComponent<Animator> ();
@@ -115,4 +116,8 @@ public class EngineerController : Engineer {
         strafeSpeed *= 2f;
         gravity = true;
     }
+
+	public void PlayWrenchSFX(){
+		wrenchSound.Play ();
+	}
 }
