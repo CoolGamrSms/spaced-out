@@ -10,13 +10,21 @@ public class Tutorial : MonoBehaviour {
 	public Sprite intro2;
 	public Sprite intro3;
 
+	public GameObject a;
+	public GameObject b;
+
 	int x = 0;
 	float waitTime = 2;
 
 	void Update() {
 		waitTime -= Time.deltaTime;
+		a.SetActive(false);
+		b.SetActive(false);
 
 		if (waitTime <= 0.0f) {
+			a.SetActive(true);
+			b.SetActive(true);
+
 			if (InputManager.ActiveDevice.Action1.WasPressed) {
 				ChangeIntroForward();
 			}
