@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Engineer
+  - Asteroid
+  - ButtonImage
+  - Bullet1
+  - Bullet2
+  - Ship1
+  - Ship2
+  - Button
+  - Hull
+  - Turret
+  - CommandCenter
+  - GravityGenerator
+  - Engine
+  - LifeSupport
+  - Earth
+  - Ring
+  - Shield
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Bullet1
+  - Engineer
+  - ShipExterior1
+  - OnlyPilot1
+  - OnlyPilot2
+  - OnlyEngineer1
+  - OnlyEngineer2
+  - EngineerShield
+  - Bullet2
+  - ShipExterior2
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0

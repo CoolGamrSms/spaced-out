@@ -1,0 +1,47 @@
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using InControl;
+
+
+public class Turret : ShipSystem {
+    //Set in TurretInit
+    public EngineerController ec;
+    public TurretController tc;
+    public Camera cam;
+    public Canvas canvas;
+
+    bool turretEngaged;
+
+    // Use this for initialization
+    protected override void Start() {
+        base.Start();
+        cam.rect = ec.gameObject.GetComponentInChildren<Camera>().rect;
+        tc.enabled = false;
+        cam.enabled = false;
+        turretEngaged = false;
+        unbreakable = true;
+    }
+
+    // Update is called once per frame
+    void FixedUpdate() {
+        canvas.enabled = interacting;
+
+        if (interacting && eController.Action1.WasPressed) {
+            if (!turretEngaged) {
+                turretEngaged = true;
+                ec.enabled = false;
+                tc.enabled = true;
+                cam.enabled = true;
+            }
+        }
+        if (eController.Action2.WasPressed) {
+            if (turretEngaged) {
+                ec.enabled = true;
+                tc.enabled = false;
+                cam.enabled = false;
+                turretEngaged = false;
+            }
+        }
+    }
+}
