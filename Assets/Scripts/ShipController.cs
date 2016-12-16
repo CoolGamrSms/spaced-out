@@ -213,7 +213,7 @@ public class ShipController : MonoBehaviour {
         }
 
         // Handle rings
-        if (curRing.GetComponent<BoosterRing>().plane.GetSide(transform.position)) {
+        if (nextRing != null && curRing.GetComponent<BoosterRing>().plane.GetSide(transform.position)) {
             lastRing = curRing;
             curRing = nextRing;
 

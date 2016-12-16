@@ -11,7 +11,8 @@ public class EngineStart : ShipSystem {
 
     [Range(0,100)]
     public float shipSpeed = 20;
-    
+	bool startedOnce = false;
+
     protected override void Start() {
         numReady = 0;
         base.Start();
@@ -34,12 +35,15 @@ public class EngineStart : ShipSystem {
 
 	void FixedUpdate(){
 		if (numReady == 2) {
-			//ship.GetComponent<Animator>().SetTrigger("start");
-			ship.GetComponent<Animator>().SetBool("startCount", true);
-			Destroy (this);
+			if(!startedOnce){
+				StartCountDown ();
+			}
+			startedOnce = true;
 		}
 	}
 
-
+	void StartCountDown(){
+		ship.GetComponent<Animator>().SetBool("startCount", true);
+	}
 
 }
