@@ -9,6 +9,7 @@ public class BoosterRing : MonoBehaviour {
     public Plane plane;
 
     private bool die;
+    ShipController sc;
 
     void Start()
     {
@@ -16,7 +17,7 @@ public class BoosterRing : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider coll) {
-        ShipController sc = coll.gameObject.GetComponentInParent<ShipController>();
+        sc = coll.gameObject.GetComponentInParent<ShipController>();
 
         // Make sure it's a ship passing through
         if (sc != null) {
@@ -24,14 +25,14 @@ public class BoosterRing : MonoBehaviour {
             {
                 firstShip = coll.gameObject;
                 sc.StartBoost(false);
-                DisableRenderer(sc.gameObject.tag);
+                Invoke("DisableRendererHelper", 3);
             }
             else if (firstShip == coll.gameObject) return;
             else if (secondShip == null)
             {
                 secondShip = coll.gameObject;
                 sc.StartBoost(true);
-                DisableRenderer(sc.gameObject.tag);
+                Invoke("DisableRendererHelper", 3);
             }
             else return;
 
@@ -43,6 +44,10 @@ public class BoosterRing : MonoBehaviour {
             }
             else sc.nextRing = null;
         }
+    }
+
+    void DisableRendererHelper() {
+        DisableRenderer(sc.gameObject.tag);
     }
 
     void DisableRenderer(string tag)
