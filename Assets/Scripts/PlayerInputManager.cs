@@ -150,6 +150,16 @@ public class PlayerInputManager : MonoBehaviour {
                 }
             }
         }
+
+		//forfeits if pilot and engineer both hold the back button
+		//1 - Blue Team
+		if(controllers[0].CommandIsPressed &&  controllers[1].CommandIsPressed){
+			SceneManager.LoadScene ("Gameover2");
+		}
+		//2-Red Team
+		if (controllers [2].CommandIsPressed && controllers [3].CommandIsPressed) {
+			SceneManager.LoadScene ("Gameover1");
+		}
     }
 
     public static PlayerInputManager Instance = null;
