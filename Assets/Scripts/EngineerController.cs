@@ -21,6 +21,7 @@ public class EngineerController : Engineer {
 	void Start(){
 		anim = GetComponent<Animator> ();
 		cc = GetComponent<CharacterController>();
+		wrenchSound = GetComponent<AudioSource> ();
 	}
 
     void Update() {
