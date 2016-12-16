@@ -54,9 +54,15 @@ public class EngineerController : Engineer {
         RaycastHit hit;
 
         if (Physics.Raycast(transform.position + Vector3.up * 0.75f, transform.forward, out hit, 6f)) {
-            if (hit.collider.gameObject == interaction) 
+			if (eController.AnyButtonWasPressed) {
+				Debug.Log ("wrench swing");
+				anim.ResetTrigger ("hit");
+				anim.SetTrigger ("hit");
+			}
+			
+			if (hit.collider.gameObject == interaction){
                 return;
-
+			}
             ShipSystem shipSystem = hit.collider.gameObject.GetComponent<ShipSystem>();
             
             if (shipSystem != null) {
@@ -76,6 +82,8 @@ public class EngineerController : Engineer {
         else if (interaction != null) {
             EndInteracting();
         }
+
+
     }
 
     void StartInteracting(GameObject go) {
